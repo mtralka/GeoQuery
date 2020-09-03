@@ -1,5 +1,4 @@
 # GeoTagged Photo Search
-## WIP
 ### *Matthew Tralka*
 
 
