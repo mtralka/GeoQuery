@@ -9,7 +9,7 @@
 - Leaflet.js integration for lat / lng selection
 
 
-** Stretch Goals**
+**Stretch Goals**
 - Leaflet.js integration of results
 
 
