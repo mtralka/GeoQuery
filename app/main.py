@@ -14,3 +14,14 @@ WTF_CSRF_SECRET_KEY = 'CSRF SECRET'
 @main.route('/')
 def index():
 	return render_template('index.html')
+
+
+
+""""
+@main.route('/search')
+TODO: ADD PARAM
+def search():
+	return search results
+
+
+"""

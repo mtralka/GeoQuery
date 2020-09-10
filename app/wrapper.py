@@ -11,3 +11,25 @@
 # execute
 # parse
 # return
+
+
+
+"""
+def authenticate
+
+
+"""
+
+
+
+"""
+def search
+
+
+"""
+
+
+"""
+def parse
+
+"""
