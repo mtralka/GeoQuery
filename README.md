@@ -1,15 +1,24 @@
-# GeoTagged Photo Search
-### *Matthew Tralka*
+# Project Name
 
 
 **Main Goals**
-- Web interface (probably Flask)
-- Efficient (optimized API calls)
+- Web interface (Flask, et. al)
+- Flickr API Spatial search
 - Leaflet.js integration for lat / lng selection
+- Leaflet.js visualization of results
+- download xlsx
 
 
-**Stretch Goals**
-- Leaflet.js integration of results
+**Secondary**
+- spatial analysis Yellowstone
+	Markov, DBSCAN ??
+
+
+**TODO:**
+- API Wrapper
+- design templating
+
+
 
 
 
