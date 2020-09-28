@@ -4,16 +4,15 @@ from . import db
 # from .forms import MY FORMS
 from .model import User
 
-
 main = Blueprint('main', __name__)
 
-main.secret_key = 'SECRET KEY'
-WTF_CSRF_SECRET_KEY = 'CSRF SECRET'
+main.secret_key = 'SECRETKEY'
+WTF_CSRF_SECRET_KEY = 'CSRFSECRET'
 
 
 @main.route('/')
 def index():
-	return render_template('index.html')
+	return render_template('home.html')
 
 
 

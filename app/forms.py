@@ -7,7 +7,7 @@ from wtforms import validators, ValidationError, widgets
 # TODO adjust imports for proj
 
 
-WTF_CSRF_SECRET_KEY = 'CSRF STRING' # Todo pull from env 
+WTF_CSRF_SECRET_KEY = 'CSRFSTRING' # Todo pull from env 
 
 
 

@@ -5,7 +5,7 @@ from .model import User
 from flask_login import login_user, logout_user, login_required
 from .forms import LoginForm, SignUp
 
-WTF_CSRF_SECRET_KEY = 'CSRF STRING'
+WTF_CSRF_SECRET_KEY = 'CSRFSTRING'
 
 auth = Blueprint('auth', __name__)
 
