@@ -10,9 +10,14 @@ main.secret_key = 'SECRETKEY'
 WTF_CSRF_SECRET_KEY = 'CSRFSECRET'
 
 
-@main.route('/')
+
+@main.route('/home')
 def index():
 	return render_template('home.html')
+
+@main.route('/search')
+def search():
+	return render_template('search.html')
 
 
 

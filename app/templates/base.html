@@ -5,32 +5,59 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title> TITLE </title>
+        <title> SEARCH PAGE </title>
 
         <meta name="author" content="Matthew Tralka">
         <meta name="description"
             content="">
         <meta name="keywords" content="">
         
+        <!-- @TODO set flask friendly -->
         <link rel="stylesheet" href="../static/normalize.css"/>
         <link rel="stylesheet" href="../static/style.css" />
+        <!--
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        -->
 
     </head>
 
     <body>
         <header>
+            <div class='card nav-card'>
 
+                <nav class='nav-sub'>
 
+                    <a href="" class='nav-item'>
+
+                        home
+
+                    </a>
+
+                    <a href="search.html" class='nav-item'>
+
+                        search
+
+                    </a>
+
+                    <a href="" class='nav-item'>
+
+                        about
+
+                    </a>
+
+                </nav>
+
+            </div>
 
         </header>
+
         <main>
 
-            test here
-
-
+            {% block content %}
+            {% endblock %}
 
         </main>
+
         <footer>
 
 
