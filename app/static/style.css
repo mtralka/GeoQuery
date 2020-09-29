@@ -1,0 +1,163 @@
+
+/**************/
+/* PRIMERS */
+/**************/
+html {
+
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    background-color: grey;
+    height: 100vh;
+}
+
+main, header {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100vw;
+    height: inherit;
+
+}
+
+header {
+
+    height: unset!important;
+}
+
+/**************/
+/* BUILDERS */
+/**************/
+
+/* gemeral */
+.card {
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    
+    box-shadow: 0 2px 3px rgba(10,10,10,.1),0 0 0 2px rgba(10,10,10,.1);
+    background-color: #ffffff;
+
+    margin: 20px;
+    
+}
+
+
+/* nav */
+.card-nav {
+
+    height: auto;
+
+    flex-wrap: nowrap!important;
+    justify-content: space-between;
+    
+}
+
+.nav-sub {
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-item {
+
+    margin: 20px 40px;
+    text-decoration: none;
+    
+}
+
+.nav-brand {
+
+    margin: 20px 40px;
+    
+}
+
+
+/* form */
+
+.form-container {
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    max-width: 80%;
+
+}
+
+.form-item input{
+    
+    width: 80px;
+    height: 30px;
+}
+
+/* paramters */
+
+#parameters {
+
+    flex-direction: column!important;
+    align-content: center;
+
+}
+
+/**************/
+/* HELPERS */
+/**************/
+.height-third {
+
+    height: 33.33%;
+
+}
+.height-half {
+
+    height: 50%;
+
+}
+.height-two-thirds {
+
+    height: 66.66%;
+
+}
+.height-full {
+
+    height: 100%;
+
+}
+.width-half {
+
+    width: 50%;
+
+}
+.width-full {
+
+    width: 100%;
+}
+.width-limit-1000 {
+
+    max-width: 1000px;
+
+}
+.no-margin {
+
+    margin: 0!important;
+
+}
+.corners-round {
+
+    border-radius: 10px!important;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+}
