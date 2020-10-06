@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from flask_login import login_required, current_user
 from . import db
-# from .forms import MY FORMS
+from .forms import FlickrSearch
 from .model import User
 
 main = Blueprint('main', __name__)
@@ -17,7 +17,9 @@ def index():
 
 @main.route('/search')
 def search():
-	return render_template('search.html')
+
+	form = FlickrSearch()
+	return render_template('search.html', form= form)
 
 
 

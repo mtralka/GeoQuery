@@ -1,4 +1,13 @@
 
+/*
+klinic_slabbook
+klinic_slablight
+klinic_slabmedium
+klinicslabbold
+*/
+
+
+
 /**************/
 /* PRIMERS */
 /**************/
@@ -6,6 +15,7 @@ html {
 
     overflow-x: hidden;
     scroll-behavior: smooth;
+    font-family: klinic_slabbook;
 }
 
 
@@ -36,21 +46,33 @@ header {
 /* BUILDERS */
 /**************/
 
-/* gemeral */
+/* general */
 .card {
 
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: row!important;
     align-items: center;
     align-content: center;
     justify-content: center;
     
     box-shadow: 0 2px 3px rgba(10,10,10,.1),0 0 0 2px rgba(10,10,10,.1);
     background-color: #ffffff;
-
     margin: 20px;
-    
+
+}
+
+.card-append {
+
+    margin-top: 0px!important;
+    height: 100px;
+
+}
+
+.card h1,h2,h3 {
+
+    font-family: klinicslabbold;
+
 }
 
 
@@ -89,7 +111,7 @@ header {
 .form-container {
 
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     align-content: center;
     flex-wrap: wrap;
@@ -97,11 +119,58 @@ header {
 
 }
 
-.form-item input{
+.form-item {
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    font-family: klinic_slabmedium;
+
+}
+
+.form-item input, select{
     
     width: 80px;
     height: 30px;
+    display: block;
+    margin: 10px;
+    padding: 5px;
+
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 5px;
 }
+
+.form-item input:hover {
+
+    border-color: blue;
+    
+
+}
+
+.form-item .date {
+
+    width: 120px;
+}
+
+.form-item label {
+
+    margin-top: 10px;
+
+}
+
+.button {
+
+    margin: auto;
+    background-color: saddlebrown;
+    
+}
+
+
+
 
 /* paramters */
 
@@ -111,6 +180,7 @@ header {
     align-content: center;
 
 }
+
 
 /**************/
 /* HELPERS */
@@ -159,5 +229,29 @@ header {
     border-radius: 10px!important;
     overflow-x: hidden;
     overflow-y: hidden;
+
+}
+
+
+/* button */
+.large {
+
+    
+    width: 200px;
+    padding: 20px;
+    font-size: 1.2rem;
+    
+}
+
+.animate-scale {
+
+    border: 4px solid skyblue ;
+    
+    transition: transform .2s;
+
+}
+.animate-scale:hover {
+
+    transform: scale(1.1);
 
 }
