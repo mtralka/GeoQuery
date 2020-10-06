@@ -1,9 +1,0 @@
-imports os
- os.environ['FLASK_APP'] = 'app';
-  os.environ['FLASK_ENV'] = 'development';
-
-
-os.environ['FLASK_DEBUG'] = 'True'
-os.environ['TEMPLATES_AUTO_RELOAD'] = 'True'
-os.environ['DEBUG'] = 'True'
-os.environ['FLASK_APP'] = 'app'
