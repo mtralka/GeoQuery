@@ -13,8 +13,24 @@
             Query Parameters
 
         </h2>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% for message in form.errors %}
+            {{ message }}
+        {% endfor %}
+
+      
         
-        <form class='form-container '>
+        <form class='form-container ' action="/search" id='search-form' method='POST'>
+
+            {{ form.csrf_token }}
 
             <div class="form-item">
 
@@ -128,11 +144,7 @@
 <!-- SEARCH BUTTON-->
 <section class='card card-append width-full width-limit-1000 corners-round '>
 
-    
-
-    {{ form.search (id='search',class='button large animate-scale') }}
-
-    
+    {{ form.search (id='search',class='button large animate-scale', form='search-form') }}
 
 </section>
 
