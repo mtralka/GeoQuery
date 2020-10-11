@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextField, PasswordField, SubmitField, RadioField, IntegerField, HiddenField, BooleanField, FormField, SelectField, TextAreaField, DecimalField
 from wtforms.fields.html5 import DateField
-from wtforms.validators import DataRequired, Email, EqualTo, Length, InputRequired, NumberRange
+from wtforms.validators import DataRequired, Email, EqualTo, Length, InputRequired, NumberRange, Optional
 from wtforms.form import BaseForm, Form
 from wtforms import validators, ValidationError, widgets
 
@@ -29,6 +29,8 @@ class SignUp(FlaskForm):
 
 
 class FlickrSearch(FlaskForm):
+	 # TODO Adjust messages
+	 # TODO Create custom validator check for dates
 	"""
 	min lat
 	min long
@@ -38,11 +40,11 @@ class FlickrSearch(FlaskForm):
 	# radius search
 	lat = DecimalField('Latitude', places= 5, rounding= None, validators=[InputRequired(message= 'Input Required')])
 	lon = DecimalField('Longitude', places= 5, rounding= None, validators=[InputRequired(message= 'Input Required')])
-	radius = IntegerField('Radius')
+	radius = IntegerField('Radius', validators=[Optional()])
 	radius_units = SelectField('Radius Units', choices= [ ('km', 'KM'), ('mi', 'MI') ])
 
-	tags = StringField('Search Tags', validators=[Length(max= 50, message= 'Maximum tag length reached')])
-	min_taken = DateField('Minimum Date Taken', format='%Y-%m-%d')
-	max_taken = DateField('Maximum Date Taken', format='%Y-%m-%d')
-	accuracy = IntegerField('Accuracy', validators=[NumberRange(max= 16, message='Accuracy is defined from 1 - 16')])
+	tags = StringField('Search Tags', validators=[Length(max= 50, message= 'Maximum tag length reached'), Optional()])
+	min_taken = DateField('Minimum Date Taken', format='%Y-%m-%d', validators=[Optional()])
+	max_taken = DateField('Maximum Date Taken', format='%Y-%m-%d', validators=[Optional()])
+	accuracy = IntegerField('Accuracy', validators=[NumberRange(max= 16, min= 0, message='Accuracy is defined from 1 - 16'), Optional()])
 	search = SubmitField('Execute Search')

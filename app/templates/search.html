@@ -23,6 +23,7 @@
         {% endwith %}
 
         {% for message in form.errors %}
+            Error
             {{ message }}
         {% endfor %}
 
@@ -66,7 +67,7 @@
                 {{ form.accuracy.label }} 
 
             </div>
-
+            
             <div class="form-item">
 
                 {{ form.min_taken (class='date')}}

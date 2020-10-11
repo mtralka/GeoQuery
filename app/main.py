@@ -20,7 +20,8 @@ def search():
 
 	form = FlickrSearch()
 
-	if form.is_submitted():
+	#if form.is_submitted():
+	if form.validate_on_submit():
 
 		if form.validate() == False:
 			print('Failed Validation')
@@ -34,6 +35,11 @@ def search():
 				print(lat)
 			else:
 				print('no')
+
+			flash('Success Validation')
+			return redirect(url_for('main.search'))
+	else:
+		print('something')
 		
 
 	return render_template('search.html', form= form)
