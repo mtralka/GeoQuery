@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 from . import db
 from .forms import FlickrSearch
 from .model import User
+from .wrapper import newSearch
+import time
 
 main = Blueprint('main', __name__)
 
@@ -28,18 +30,15 @@ def search():
 			return redirect(url_for('main.search'))
 
 		else:
+
 			data = request.form
 			print(data)
-			if 'lat' in data:
-				lat = data['lat']
-				print(lat)
-			else:
-				print('no')
+			
+			user = 'test_user'
+			newSearch(data, user, time.time())
 
-			flash('Success Validation')
-			return redirect(url_for('main.search'))
-
-			# Submit to wrapper
+			#flash('Success Validation')
+			#return redirect(url_for('main.search'))
 	
 	return render_template('search.html', form= form)
 
