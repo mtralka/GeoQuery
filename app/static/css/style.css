@@ -15,7 +15,7 @@ html {
 
     overflow-x: hidden;
     scroll-behavior: smooth;
-    font-family: klinic_slabbook;
+    font-family: klinic_slabmedium;
 }
 
 
@@ -80,9 +80,11 @@ header {
 .card-nav {
 
     height: auto;
-
+    
     flex-wrap: nowrap!important;
     justify-content: space-between;
+
+    font-size: 1.2rem;
     
 }
 
@@ -94,9 +96,22 @@ header {
 
 .nav-item {
 
-    margin: 20px 40px;
+    padding: 20px 40px;
     text-decoration: none;
-    
+    margin: 10px;
+    font-size: 1.3rem;
+}
+
+.nav-item:hover {
+
+    background-color: khaki;
+
+}
+
+/* TODO Fix the random blue link */
+.nav-item:active, .nav-item:visited, .nav-item a {
+
+    text-decoration: none;
 }
 
 .nav-brand {
@@ -128,15 +143,12 @@ header {
     flex-wrap: nowrap;
     flex-direction: column;
 
-    font-family: klinic_slabmedium;
-
 }
 
 .form-item input, select{
     
     width: 80px;
     height: 30px;
-    display: block;
     margin: 10px;
     padding: 5px;
 
@@ -148,9 +160,9 @@ header {
 
     border-color: blue;
     
-
 }
 
+/* custom modifier for larger inputs */
 .form-item .date {
 
     width: 120px;
@@ -171,8 +183,8 @@ header {
 
 
 
-
-/* paramters */
+/* depreciated, SAFE DELETE? */
+/* paramters 
 
 #parameters {
 
@@ -180,7 +192,7 @@ header {
     align-content: center;
 
 }
-
+*/
 
 /**************/
 /* HELPERS */
