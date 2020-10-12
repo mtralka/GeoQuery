@@ -11,8 +11,6 @@ main = Blueprint('main', __name__)
 main.secret_key = 'SECRETKEY'
 WTF_CSRF_SECRET_KEY = 'CSRFSECRET'
 
-
-
 @main.route('/home')
 def index():
 	return render_template('home.html')
@@ -32,13 +30,16 @@ def search():
 		else:
 
 			data = request.form
-			print(data)
 			
+			# TODO pull from flask login
 			user = 'test_user'
-			newSearch(data, user, time.time())
 
-			#flash('Success Validation')
-			#return redirect(url_for('main.search'))
+			# TODO Add search to Celery que
+			newSearch(data, user, str(time.time()))
+
+			# TODO redirect to waiting page
+			flash('Success')
+			return redirect(url_for('main.search'))
 	
 	return render_template('search.html', form= form)
 
@@ -49,13 +50,3 @@ def search():
 def page_not_found(error):
 
    return render_template('404.html', title = '404'), 404
-
-
-""""
-@main.route('/search')
-TODO: ADD PARAM
-def search():
-	return search results
-
-
-"""
