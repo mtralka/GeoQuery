@@ -7,6 +7,9 @@ import requests
 from .env import SECRET, KEY
 from pathlib import Path
 
+import geopandas as gpd
+from shapely.geometry import Point
+
 URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search'
 
 DEFAULT_PARAM = { 'per_page' : '500' , 'format' : 'json', 'nojsoncallback' : '1', 'has_geo' : '1', 'api_key' : KEY, 
@@ -32,7 +35,7 @@ def formatInput(raw):
 
     return param
 
-def executeSearch(params, user, request_page= 1, search_id= 0):
+def executeSearch(params, user, request_page= 1, search_id= 0, master= False):
     """ Calls flickr flickr.photos.search API method. Store results in ../response as asigned by user and request_page
 
     Parameters:
@@ -49,11 +52,16 @@ def executeSearch(params, user, request_page= 1, search_id= 0):
 
     print(f'Status: {r}')
     
-    Path(f"./response/{user}/{search_id}").mkdir(parents= True, exist_ok= True)
-    with open(f'./response/{user}/{search_id}/{request_page}.json', 'w') as f:
-        json.dump(response, f)
-        f.close()
-    
+    #Path(f"./response/{user}/{search_id}").mkdir(parents= True, exist_ok= True)
+    #with open(f'./response/{user}/{search_id}/{request_page}.json', 'w') as f:
+    #    json.dump(response, f)
+    #    f.close()
+
+    # read to df
+    # create geodf w/ shapely
+
+    #if master:
+    #    master_df = gpd.read_file(response, geometry=)
 
     # TODO
     # Add append to master.json
@@ -84,7 +92,7 @@ def newSearch(raw_query, user, timestamp):
     query = formatInput(raw_query)
     param = {**DEFAULT_PARAM, **query}
 
-    current_page, total_page = executeSearch(param, user, search_id = timestamp)
+    current_page, total_page = executeSearch(param, user, search_id = timestamp, master=True)
 
     # walk search
     while current_page <= total_page:
