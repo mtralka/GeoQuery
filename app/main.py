@@ -38,7 +38,8 @@ def search():
 
 			# TODO Add search to Celery que
 			#newSearch.apply_async(args= [data, user, str(time.time())], countdown= 1, id= 1 )
-			newSearch.delay(data, user, str(time.time(), id= 1))
+			task = newSearch.delay(data, user, str(time.time()))
+			print(task.state)
 			#newSearch(data, user, str(time.time()))
 
 			# TODO redirect to waiting page
