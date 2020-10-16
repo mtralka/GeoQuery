@@ -15,7 +15,6 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
     # CELERY INIT
-    
     celery.conf.update(app.config)
 
     db.init_app(app)

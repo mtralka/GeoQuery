@@ -15,6 +15,7 @@ WTF_CSRF_SECRET_KEY = 'CSRFSECRET'
 
 @main.route('/')
 def index():
+	# TODO landing page
 	return render_template('home.html')
 
 
@@ -36,28 +37,33 @@ def search():
 			# TODO pull from flask login
 			user = 'test_user'
 
-			# TODO Add search to Celery que
-			#newSearch.apply_async(args= [data, user, str(time.time())], countdown= 1, id= 1 )
+			# TODO set id from time to random, asign to database as associated
+
 			task = newSearch.delay(data, user, str(time.time()))
 			print(task.state)
-			#newSearch(data, user, str(time.time()))
+			print(task.id)
 
-			# TODO redirect to waiting page
-			flash('Success')
-			return redirect(url_for('main.search'))
+			# implement flash on status
+			#flash('Success')
+			
+			return redirect(f'/status/{task.id}')
 	
 	return render_template('search.html', form= form)
 
 @main.route('/status', methods=['GET', 'POST'])
 def status_landing():
 
+	# TODO implement status landing
 	return 'status landing'
 
 @main.route('/status/<task_id>', methods=['GET'])
 def status(task_id):
 	task = newSearch.AsyncResult(task_id)
 	print(task.state)
-	"""
+	
+	# recode this
+	# used from example
+
 	if task.state == 'PENDING':
 		# job did not start yet
 		response = {
@@ -84,8 +90,7 @@ def status(task_id):
 			'status': str(task.info),  # this is the exception raised
 		}
 	return jsonify(response)
-	"""
-	pass
+	
 
 
 # TODO adjust and implement
