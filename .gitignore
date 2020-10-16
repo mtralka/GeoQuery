@@ -16,3 +16,6 @@ response/
 .vscode
 commands.txt
 admin/
+celerybeat-schedule.bak
+celerybeat.schedule.dat
+celerybeat-schedule.dir

@@ -8,7 +8,9 @@ from .env import SECRET, KEY
 from pathlib import Path
 
 import geopandas as gpd
-from shapely.geometry import Point
+#from shapely.geometry import Point
+
+from . import celery
 
 URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search'
 
@@ -79,7 +81,8 @@ def executeSearch(params, user, request_page= 1, search_id= 0, master= False):
     
     return current_page, total_page
 
-def newSearch(raw_query, user, timestamp):
+@celery.task(bind= True)
+def newSearch(self, raw_query, user, timestamp):
     """ master seach initiation
     
     Parameters:
@@ -99,5 +102,11 @@ def newSearch(raw_query, user, timestamp):
         current_page, total_page = executeSearch(param, user, request_page= current_page, search_id= timestamp)
         print(f'Page {current_page} of {total_page}')
         current_page += 1
+
+        self.update_state(state=f'PROGRESS',
+            meta={'current': current_page, 'total': total_page,'status': 'in progress'})
+
+    return {'current': current_page, 'total': total_page, 'status': 'Task completed',
+            'result': 'resulting'}
         
 

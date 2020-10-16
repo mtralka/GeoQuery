@@ -1,14 +1,22 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from celery import Celery
+from .env import CELERY_BROKER_URL
 
 db = SQLAlchemy()
+
+celery = Celery(__name__, broker= 'redis://localhost:6379/0', backend= 'redis://localhost:6379/0')
 
 def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = 'SECRETKEY'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+
+    # CELERY INIT
+    
+    celery.conf.update(app.config)
 
     db.init_app(app)
 
