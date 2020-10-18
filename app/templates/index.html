@@ -40,45 +40,47 @@
 
 
         <!-- typed.js -->
+        <!-- 
         <script src="..\static\js\typed.js"></script>
-
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
 
         
     </head>
 
     <body>
-        <header>
-            <div class='card card-nav width-full no-margin-b no-margin-t'>
+        <header class='card-nav'>
+            
 
-                <a class='nav-brand' href="/">
+            <a class='nav-brand' href="/">
 
-                    <img src='..\static\img\brand.png' alt='GeoQuery' width='70'>
+                <img src='..\static\img\brand.png' alt='GeoQuery' width='70'>
+
+            </a>
+
+            <nav class='nav-sub'>
+
+                <a href="" class='nav-item'>
+
+                    home
 
                 </a>
 
-                <nav class='nav-sub'>
+                <a href="search.html" class='nav-item'>
 
-                    <a href="" class='nav-item'>
+                    search
 
-                        home
+                </a>
 
-                    </a>
+                <a href="" class='nav-item'>
 
-                    <a href="search.html" class='nav-item'>
+                    about
 
-                        search
+                </a>
 
-                    </a>
+            </nav>
 
-                    <a href="" class='nav-item'>
-
-                        about
-
-                    </a>
-
-                </nav>
-
-            </div>
+            
 
         </header>
 
@@ -193,7 +195,7 @@
             
             var options = {
 
-                strings: ['<i>Search<i/> the World', '<i>Know<i/> the World', '<i>Own<i/> the World'],
+                strings: ['<i>Search<i/> the World', '<i>Know<i/> the World', '<i>Open Source<i/> the World'],
                 typeSpeed: 70,
                 startDelay: 100,
                 loop: true,
