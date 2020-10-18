@@ -6,23 +6,62 @@ klinic_slabmedium
 klinicslabbold
 */
 
+/*
+font-family: stolzl, sans-serif;
+font-weight: 400;
+font-style: normal;
+
+
+
+font-family: stolzl, sans-serif;
+font-weight: 700;
+font-style: normal;
+
+
+
+font-family: termina, sans-serif;
+
+font-weight: 800;
+
+font-style: normal;
+
+
+
+*/
 
 
 /**************/
 /* PRIMERS */
 /**************/
+:root {
+    --bg-color: #f1faee;
+
+    --card-bg-color: #f1faee;
+
+    --card-h1-color: #f77f00;
+    --card-h2-color: black;
+    
+    --nav-bg-color: #1d3557;
+    --nav-txt-color: #f77f00;
+
+}
+
+
+
 html {
 
     overflow-x: hidden;
     scroll-behavior: smooth;
     font-family: klinic_slabmedium;
+    
 }
 
 
 body {
 
-    background-color: grey;
+    
     height: 100vh;
+    background-color: var(--bg-color);
 }
 
 main, header {
@@ -40,7 +79,32 @@ main, header {
 header {
 
     height: unset!important;
+    font-family: stolzl, sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
+
+h1 {
+
+    /*
+    font-family: klinicslabbold;
+    */
+
+    font-family: rigid-square, sans-serif;
+    font-weight: 800;
+    font-style: normal;
+
+    
+}
+
+h2 {
+
+    font-family: stolzl, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
 
 /**************/
 /* BUILDERS */
@@ -60,6 +124,8 @@ header {
     background-color: #ffffff;
     margin: 20px;
 
+    background-color: var(--card-bg-color);
+
 }
 
 .card-append {
@@ -69,11 +135,14 @@ header {
 
 }
 
-.card h1,h2,h3 {
+.card h1 {
 
-    font-family: klinicslabbold;
+    margin-top: 0;
 
 }
+
+
+
 
 
 /* nav */
@@ -85,6 +154,7 @@ header {
     justify-content: space-between;
 
     font-size: 1.2rem;
+    background-color: var(--nav-bg-color);
     
 }
 
@@ -100,9 +170,10 @@ header {
     text-decoration: none;
     margin: 10px;
     font-size: 1.3rem;
+    color: var(--nav-txt-color);
 }
 
-.nav-item:hover {
+.nav-item:hover, .nav-brand:hover {
 
     background-color: khaki;
 
@@ -116,9 +187,85 @@ header {
 
 .nav-brand {
 
-    margin: 20px 40px;
+    padding: 15px 30px;
+    font-weight: 700;
+    margin: 10px 10px;
     
 }
+
+
+/****
+MAIN TITLE
+*****/
+
+.main-title {
+    
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.main-title h1 {
+
+    font-size: 6rem;
+    color: var(--card-h1-color);
+
+}
+
+.main-title h2 {
+
+    font-size: 2rem;
+    color: var(--card-h2-color);
+
+}
+
+.main-title h1:first-child {
+
+    margin: 10px 0px;
+
+}
+
+.main-title h2:last-child {
+
+    margin: 10px 0px;
+    
+
+}
+
+.main-body {
+
+    margin-top: 200px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+}
+
+.main-body .card {
+
+    background-color: pink!important;
+    margin: 10px 20px;
+    padding: 10px;
+    flex-shrink: 1;
+    flex-shrink: 1;
+
+    flex-direction: column!important;
+    justify-content: flex-start;
+}
+
+.main-body .card p {
+
+    align-self: center;
+    padding: 10px;
+
+}
+
+
+
+
 
 
 /* form */
@@ -183,16 +330,17 @@ header {
 
 
 
-/* depreciated, SAFE DELETE? */
-/* paramters 
 
-#parameters {
 
-    flex-direction: column!important;
-    align-content: center;
 
-}
-*/
+
+
+
+
+
+
+
+
 
 /**************/
 /* HELPERS */
@@ -236,6 +384,20 @@ header {
     margin: 0!important;
 
 }
+
+.no-margin-b {
+
+    margin-bottom: 0!important;
+
+}
+
+.no-margin-t {
+
+    margin-bottom: 0!important;
+
+}
+
+
 .corners-round {
 
     border-radius: 10px!important;
@@ -244,6 +406,21 @@ header {
 
 }
 
+
+.items-top {
+    
+    justify-content: flex-start!important;
+    flex-direction: column!important;
+    
+}
+
+
+
+
+.boxshadow-none {
+
+    box-shadow: none;
+}
 
 /* button */
 .large {
@@ -267,3 +444,4 @@ header {
     transform: scale(1.1);
 
 }
+

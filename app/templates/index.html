@@ -1,20 +1,211 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tralka Boiler</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> GeoQuery </title>
+        
+        <meta name="author" content="Matthew Tralka">
+        <meta name="description"
+            content="">
+        <meta name="keywords" content="">
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="..\static\css\normalize.css"/>
+        <link rel="stylesheet" href="..\static\css\style.css" />
 
-    <link rel="stylesheet" href="{{ url_for ('static', filename= 'style.css') }}" />
-</head>
+        <!-- FONT 
+        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslabbook-webfont.woff2') }}"/>
+        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslablight-webfont.woff2') }}"/>
+        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslabmedium-webfont.woff2') }}"/>
+        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslabbold-webfont.woff2') }}"/>
+        -->
+        <!-- LEAFLET 
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
 
-<body>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+        -->
+        <!--
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        -->
 
-Tralka Flask Boiler w/ User, Login, WSGI, SQLlite
+        <!-- ADOBE FONTS -->
+        <link rel="stylesheet" href="https://use.typekit.net/hwf2qbl.css">
 
-</body>
 
+        <!-- typed.js -->
+        <script src="..\static\js\typed.js"></script>
+
+
+        
+    </head>
+
+    <body>
+        <header>
+            <div class='card card-nav width-full no-margin-b no-margin-t'>
+
+                <a class='nav-brand' href="/">
+
+                    <img src='..\static\img\brand.png' alt='GeoQuery' width='70'>
+
+                </a>
+
+                <nav class='nav-sub'>
+
+                    <a href="" class='nav-item'>
+
+                        home
+
+                    </a>
+
+                    <a href="search.html" class='nav-item'>
+
+                        search
+
+                    </a>
+
+                    <a href="" class='nav-item'>
+
+                        about
+
+                    </a>
+
+                </nav>
+
+            </div>
+
+        </header>
+
+        <main>
+
+            <div class='card height-full width-full no-margin width-limit-1000 boxshadow-none' style='flex-direction: column!important;'>
+
+                <div class='main-title'>
+
+                    <h1 class=>
+
+                        GeoQuery
+    
+                    </h1>
+    
+    
+                    <h2 class='' id=''>
+                       
+                        <span id='typed'></span>
+    
+                    </h2>
+
+                </div>
+
+                <div style="background-color: ; width: 100px; height: 100px;
+                margin-top: 100px;margin-bottom: 0;font-size: large;">
+
+                Sign Up Now<br/>
+                
+                
+                </div>
+
+                <div class="main-body">
+
+                    
+                    <div class='card'>
+
+                        <h3>
+
+                            What is this?
+    
+                        </h3>
+                        
+                        <p>
+
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br>
+                            Quo quisquam ipsam beatae repellendus corporis temporibus,<br>
+                            suscipit facilis dicta minima quae, consequatur repudiandae <br>
+                            nesciunt fugit optio minus velit voluptas, facere sint?
+
+                        </p>
+                        
+
+
+
+                    </div>
+
+                    <div class='card'>
+
+                        <h3>
+
+                            Slightly Longer Header Here
+    
+                        </h3>
+                        
+                        <p>
+
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br>
+                            Quo quisquam ipsam beatae repellendus corporis temporibus,<br>
+                            suscipit facilis dicta minima quae, consequatur repudiandae <br>
+                            nesciunt fugit optio minus velit voluptas, facere sint?
+
+                        </p>
+                        
+
+
+
+                    </div>
+
+                   
+
+
+
+
+                </div>
+
+                
+
+
+
+
+
+
+            </div>
+
+            <!--
+            {% block content %}
+            {% endblock %}
+            -->
+            
+
+        </main>
+
+        <footer class="card boxshadow-none width-full">
+
+            Matthew Tralka
+
+        </footer>
+
+        <script>
+
+            
+            var options = {
+
+                strings: ['<i>Search<i/> the World', '<i>Know<i/> the World', '<i>Own<i/> the World'],
+                typeSpeed: 70,
+                startDelay: 100,
+                loop: true,
+                backdelay: 40,
+                fadeOut: false
+                
+            };
+
+            var typed = new Typed('#typed', options);
+
+        </script>
+
+    </body>
 
 </html>
