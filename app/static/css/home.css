@@ -1,0 +1,353 @@
+
+
+:root {
+    --bg-color: #f1faee;
+
+    --card-bg-color: #f1faee;
+
+    --card-h1-color: #f77f00;
+    --card-h2-color: black;
+    
+    --nav-bg-color: #1d3557;
+    --nav-txt-color: #f77f00;
+    
+    --btn-color: green;
+    --btn-txt: black;
+
+}
+
+html {
+
+    background-color: var(--bg-color);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+header {
+
+    font-family: stolzl, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    
+    font-size: 1.2rem;
+
+}
+
+
+
+main {
+
+    
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+
+    align-items: center;
+
+    line-height: 1.4;
+    font-size: 1.2rem;
+}
+
+h1 {
+
+    font-family: rigid-square, sans-serif;
+    font-weight: 800;
+    font-style: normal;
+
+    font-size: 3.5rem;
+
+}
+
+h2 {
+
+    font-family: stolzl, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    font-size: 1.5rem;
+}
+
+
+/*#############
+    NAV HEADER
+#############*/
+.nav {
+
+    display: block;
+    background-color: var(--nav-bg-color);
+    min-height: 125px;
+    height: auto;
+}
+
+.nav-sub {
+
+    display: none;
+}
+
+.nav-item {
+
+    display: block;
+    text-align: center;
+    padding: 20px 40px;
+    text-decoration: none;
+    margin: 10px;
+    font-size: 1.3rem;
+    color: var(--nav-txt-color);
+}
+
+.nav-item:hover, .nav-brand:hover {
+
+    background-color: khaki;
+
+}
+
+.nav-item:active, .nav-item:visited, .nav-item a {
+
+    text-decoration: none;
+}
+
+.nav-brand {
+
+    text-align: center;
+
+    padding: 15px 30px;
+    font-weight: 700;
+    
+    margin:  auto auto;
+}
+
+/*#############
+FOOTER
+#############*/
+.footer {
+
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.footer div {
+
+    padding: 20px;
+    text-decoration: inherit;
+}
+
+.footer a {
+    
+    text-decoration: inherit;
+}
+
+
+
+/*#############
+    LANDING TITLE
+#############*/
+
+.landing-title {
+
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 100px;
+}
+
+.landing-title h1:first-child{
+
+    
+    color: var(--card-h1-color);
+    margin: 10px 0px;
+
+}
+
+.landing-title h2:last-child {
+
+    
+    color: var(--card-h2-color);
+    margin: 10px 0px;
+
+}
+
+/*#############
+LANDING BUTTON GROUP
+#############*/
+
+.landing-buttons {
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    margin-top: 20vh;
+}
+
+.landing-buttons a {
+    
+    margin: 2vh 0px;
+}
+
+.landing-buttons a:visited {
+
+    text-decoration: none;
+}
+
+.button {
+
+    background-color: var(--btn-color);
+    padding: 20px;
+    border-radius: 5px;
+
+    color: var(--btn-txt);
+    text-align: center;
+    font-size: 1.1rem;
+    text-decoration: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    
+}
+
+
+/*#############
+    CARD
+#############*/
+.card-container {
+
+    width: 90vw;
+    max-width: 1000px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: flex-start;
+    justify-content: space-around;
+
+    margin-top: 200px;
+    
+
+}
+
+.card {
+
+    
+    background-color: white;
+    box-shadow: 0 2px 3px rgba(10,10,10,.1),0 0 0 2px rgba(10,10,10,.1);
+
+    min-height: 200px;
+    min-width: 350px;
+    
+    margin: 30px 20px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    text-align: center;
+    flex: 1 0;
+
+
+}
+
+.card h3 {
+
+    font-size: 1.4rem;
+
+}
+
+.card p {
+
+    padding: 10px;
+    font-size: 1.1rem;
+}
+
+
+/* 1024 */
+@media (min-width: 900px) {
+
+    h1 {
+
+        font-size: 6rem;
+    
+    }
+    
+    h2 {
+    
+        font-size: 2rem;
+
+    }
+
+    .button {
+
+        font-size: 1.3rem;
+    }
+
+    /*#############
+    NAV GROUP
+    #############*/
+    .nav {
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .nav-sub {
+
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .nav-brand {
+
+        margin: 10px 10px;
+
+    }
+
+
+
+    /*#############
+    LANDING BUTTON GROUP
+    #############*/
+    .landing-buttons {
+
+        flex-direction: row!important;
+        justify-content: center!important;
+    
+    }
+
+    .landing-buttons a {
+
+        max-width: 6rem;
+        margin: 0 4vw;
+    
+    }
+
+    .card {
+
+        margin: 20px;
+
+    }
+
+    
+
+
+
+
+}

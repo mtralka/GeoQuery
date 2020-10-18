@@ -14,26 +14,9 @@
         
         <!-- CSS -->
         <link rel="stylesheet" href="..\static\css\normalize.css"/>
-        <link rel="stylesheet" href="..\static\css\style.css" />
+        <link rel="stylesheet" href="..\static\css\home.css" />
 
-        <!-- FONT 
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslabbook-webfont.woff2') }}"/>
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslablight-webfont.woff2') }}"/>
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslabmedium-webfont.woff2') }}"/>
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslabbold-webfont.woff2') }}"/>
-        -->
-        <!-- LEAFLET 
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        crossorigin=""/>
-
-        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-        crossorigin=""></script>
-        -->
-        <!--
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        -->
+        
 
         <!-- ADOBE FONTS -->
         <link rel="stylesheet" href="https://use.typekit.net/hwf2qbl.css">
@@ -49,9 +32,9 @@
     </head>
 
     <body>
-        <header class='card-nav'>
-            
 
+        <header class='nav'>
+        
             <a class='nav-brand' href="/">
 
                 <img src='..\static\img\brand.png' alt='GeoQuery' width='70'>
@@ -80,113 +63,125 @@
 
             </nav>
 
-            
-
         </header>
 
         <main>
 
-            <div class='card height-full width-full no-margin width-limit-1000 boxshadow-none' style='flex-direction: column!important;'>
+            <div class='landing-title'>
 
-                <div class='main-title'>
+                <h1>
 
-                    <h1 class=>
+                    GeoQuery
 
-                        GeoQuery
-    
-                    </h1>
-    
-    
-                    <h2 class='' id=''>
-                       
-                        <span id='typed'></span>
-    
-                    </h2>
+                </h1>
 
-                </div>
+                <h2>
 
-                <div style="background-color: ; width: 100px; height: 100px;
-                margin-top: 100px;margin-bottom: 0;font-size: large;">
+                    <span id='typed'></span>
 
-                Sign Up Now<br/>
-                
-                
-                </div>
-
-                <div class="main-body">
-
-                    
-                    <div class='card'>
-
-                        <h3>
-
-                            What is this?
-    
-                        </h3>
-                        
-                        <p>
-
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br>
-                            Quo quisquam ipsam beatae repellendus corporis temporibus,<br>
-                            suscipit facilis dicta minima quae, consequatur repudiandae <br>
-                            nesciunt fugit optio minus velit voluptas, facere sint?
-
-                        </p>
-                        
-
-
-
-                    </div>
-
-                    <div class='card'>
-
-                        <h3>
-
-                            Slightly Longer Header Here
-    
-                        </h3>
-                        
-                        <p>
-
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. <br>
-                            Quo quisquam ipsam beatae repellendus corporis temporibus,<br>
-                            suscipit facilis dicta minima quae, consequatur repudiandae <br>
-                            nesciunt fugit optio minus velit voluptas, facere sint?
-
-                        </p>
-                        
-
-
-
-                    </div>
-
-                   
-
-
-
-
-                </div>
-
-                
-
-
-
-
-
+                </h2>
 
             </div>
 
-            <!--
-            {% block content %}
-            {% endblock %}
-            -->
-            
+            <div class='landing-buttons'>
+
+                <a href='/' class='button'> 
+
+                    Sign Up
+
+                </a>
+
+                <a href="#more-info" class='button'>
+
+                    Learn More
+
+                </a>
+
+            </div>
+
+            <div class='card-container' id='more-info'>
+
+                <div class='card'>
+
+                    <h3>
+
+                        Title Point Here
+
+                    </h3>
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia atque, dolore odio quia repellendus itaque nisi vel repudiandae fuga rem. Commodi, aut facere tempore ut est vel quo maiores soluta!
+
+                    </p>
+
+
+                </div>
+
+                <div class='card'>
+
+                    <h3>
+
+                        Title Point Here
+
+                    </h3>
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia atque, dolore odio quia repellendus itaque nisi vel repudiandae fuga rem. Commodi, aut facere tempore ut est vel quo maiores soluta!
+
+                    </p>
+
+
+                </div>
+
+                <div class='card'>
+
+                    <h3>
+
+                        Title Point Here
+
+                    </h3>
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia atque, dolore odio quia repellendus itaque nisi vel repudiandae fuga rem. Commodi, aut facere tempore ut est vel quo maiores soluta!
+
+                    </p>
+
+
+                </div>
+
+                <div class='card'>
+
+                    <h3>
+
+                        Title Point Here
+
+                    </h3>
+
+                    <p>
+
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia atque, dolore odio quia repellendus itaque nisi vel repudiandae fuga rem. Commodi, aut facere tempore ut est vel quo maiores soluta!
+
+                    </p>
+
+
+                </div>
+
+                
+
+            </div>
 
         </main>
+    
+        <footer class='footer'>
 
-        <footer class="card boxshadow-none width-full">
+            <div>
 
-            Matthew Tralka
+                &#0169;2020 <a href="https://tralka.xyz"><strong>Matthew Tralka</strong></a>
+
+            </div>
 
         </footer>
 
@@ -195,7 +190,7 @@
             
             var options = {
 
-                strings: ['<i>Search<i/> the World', '<i>Know<i/> the World', '<i>Open Source<i/> the World'],
+                strings: ['<i>Search<i/> the World', '<i>Know<i/> the World', '<i>Change<i/> the World'],
                 typeSpeed: 70,
                 startDelay: 100,
                 loop: true,
@@ -207,6 +202,7 @@
             var typed = new Typed('#typed', options);
 
         </script>
+
 
     </body>
 

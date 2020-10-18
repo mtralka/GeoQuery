@@ -53,15 +53,15 @@ html {
     overflow-x: hidden;
     scroll-behavior: smooth;
     font-family: klinic_slabmedium;
-    
+    width: 100vw;
 }
 
 
 body {
 
-    
     height: 100vh;
     background-color: var(--bg-color);
+
 }
 
 main, header {
@@ -70,9 +70,6 @@ main, header {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
-    width: 100vw;
-    height: inherit;
 
 }
 
@@ -83,22 +80,34 @@ header {
     font-weight: 400;
     font-style: normal;
 
+}
+
+footer a:visited, a:link {
+
+    text-decoration: none;
+}
+
+footer {
+
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    height: 60px;
     
-
-
+    position: absolute;
+    bottom: 0;
 }
 
 h1 {
-
-    /*
-    font-family: klinicslabbold;
-    */
 
     font-family: rigid-square, sans-serif;
     font-weight: 800;
     font-style: normal;
 
-    
 }
 
 h2 {
@@ -145,10 +154,6 @@ h2 {
 
 }
 
-
-
-
-
 /* nav */
 .card-nav {
 
@@ -160,7 +165,7 @@ h2 {
     
     font-size: 1.2rem;
     background-color: var(--nav-bg-color);
-    
+
 }
 
 .nav-sub {
@@ -197,7 +202,6 @@ h2 {
     margin: 10px 10px;
     
 }
-
 
 /****
 MAIN TITLE
@@ -254,8 +258,7 @@ MAIN TITLE
     background-color: pink!important;
     margin: 10px 20px;
     padding: 10px;
-    flex-shrink: 1;
-    flex-shrink: 1;
+
 
     flex-direction: column!important;
     justify-content: flex-start;
@@ -422,6 +425,7 @@ MAIN TITLE
 
 
 
+
 .boxshadow-none {
 
     box-shadow: none;
@@ -450,3 +454,9 @@ MAIN TITLE
 
 }
 
+.main-buttons {
+
+    
+
+
+}
