@@ -1,71 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title> GeoQuery </title>
-        
-        <meta name="author" content="Matthew Tralka">
-        <meta name="description"
-            content="">
-        <meta name="keywords" content="">
-        
-        <!-- CSS -->
-        <link rel="stylesheet" href="..\static\css\normalize.css"/>
-        <link rel="stylesheet" href="..\static\css\home.css" />
-
-        
-
-        <!-- ADOBE FONTS -->
-        <link rel="stylesheet" href="https://use.typekit.net/hwf2qbl.css">
-
-
-        <!-- typed.js -->
-        <!-- 
-        <script src="..\static\js\typed.js"></script>
-        -->
-        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-
-        
-    </head>
-
-    <body>
-
-        <header class='nav'>
-        
-            <a class='nav-brand' href="/">
-
-                <img src='..\static\img\brand.png' alt='GeoQuery' width='70'>
-
-            </a>
-
-            <nav class='nav-sub'>
-
-                <a href="" class='nav-item'>
-
-                    home
-
-                </a>
-
-                <a href="search.html" class='nav-item'>
-
-                    search
-
-                </a>
-
-                <a href="" class='nav-item'>
-
-                    about
-
-                </a>
-
-            </nav>
-
-        </header>
-
-        <main>
+{% block content %}
 
             <div class='landing-title'>
 
@@ -77,7 +12,7 @@
 
                 <h2>
 
-                    <span id='typed'></span>
+                    <span id='subtitle'></span> the World
 
                 </h2>
 
@@ -91,7 +26,7 @@
 
                 </a>
 
-                <a href="#more-info" class='button'>
+                <a href="#info" class='button'>
 
                     Learn More
 
@@ -99,6 +34,61 @@
 
             </div>
 
+            <div class='card-container' id='info'>
+
+                <div class='card no-background no-boxshadow' style="justify-content: center;align-items: center;">
+
+                    <h2>
+
+                        The world is full of data
+
+                    </h2>
+
+                </div>
+
+                <div class='card no-background no-boxshadow'>
+
+                    
+                    <img src="{{ url_for ('static', filename= 'img/globe_with_points.svg') }}">
+
+                </div>
+
+                <div class='card no-background no-boxshadow'>
+
+                   
+                    <img src="{{ url_for ('static', filename= 'img/data_processing_yrrv.svg') }}">
+
+                </div>
+
+                <div class='card no-background no-boxshadow'>
+
+                    <h2>
+
+                        But aggregating this data is <b>time-consuming</b> and <b>restrictive</b>.
+
+                    </h2>
+
+                </div>
+
+                <div class='card full-width no-background no-boxshadow height-auto'>
+
+                    <h2 class="no-margin">
+
+                        Now, with <b>GeoQuery</b>, the <span id='description' style="min-width: 7rem;display: inline-block;"></span> is at your fingertips.
+                        
+                    </h2>
+                   
+                    <img src=" {{ url_for ('static', filename= 'img/the_world_is_mine_nb0e.svg') }}" class='margin-center'>
+
+                </div>
+
+            </div>
+
+        
+
+            <!--
+
+            
             <div class='card-container' id='more-info'>
 
                 <div class='card'>
@@ -172,38 +162,37 @@
                 
 
             </div>
+            -->
 
-        </main>
-    
-        <footer class='footer'>
-
-            <div>
-
-                &#0169;2020 <a href="https://tralka.xyz"><strong>Matthew Tralka</strong></a>
-
-            </div>
-
-        </footer>
-
-        <script>
+            <script>
 
             
-            var options = {
+                var subtitleOptions = {
+    
+                    strings: ['<i>Search<i/>', '<i>Know<i/>', '<i>Change<i/>'],
+                    typeSpeed: 100,
+                    startDelay: 100,
+                    loop: true,
+                    backdelay: 40,
+                    fadeOut: false
+                    
+                };
+    
+                var descriptionOptions = {
+    
+                    strings: ['data', 'world'],
+                    typeSpeed: 200,
+                    startDelay: 100,
+                    loop: true,
+                    backdelay: 40,
+                    fadeOut: true,
+                    showCursor: false
+                    
+                };
+    
+                var typed = new Typed('#subtitle', subtitleOptions);
+                var typed = new Typed('#description', descriptionOptions);
+    
+            </script>
 
-                strings: ['<i>Search<i/> the World', '<i>Know<i/> the World', '<i>Change<i/> the World'],
-                typeSpeed: 70,
-                startDelay: 100,
-                loop: true,
-                backdelay: 40,
-                fadeOut: false
-                
-            };
-
-            var typed = new Typed('#typed', options);
-
-        </script>
-
-
-    </body>
-
-</html>
+{% endblock %}

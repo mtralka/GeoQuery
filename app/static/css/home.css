@@ -1,3 +1,6 @@
+/*
+#454545
+*/
 
 
 :root {
@@ -14,6 +17,8 @@
     --btn-color: green;
     --btn-txt: black;
 
+    --bold-text: #f77f00;
+
 }
 
 html {
@@ -21,6 +26,7 @@ html {
     background-color: var(--bg-color);
     overflow-y: scroll;
     scroll-behavior: smooth;
+    
 }
 
 header {
@@ -46,8 +52,14 @@ main {
 
     align-items: center;
 
-    line-height: 1.4;
+    line-height: 1.6;
     font-size: 1.2rem;
+}
+
+b {
+
+    color: var(--bold-text)!important;
+
 }
 
 h1 {
@@ -236,7 +248,7 @@ LANDING BUTTON GROUP
     align-items: flex-start;
     justify-content: space-around;
 
-    margin-top: 200px;
+    margin-top: 100px;
     
 
 }
@@ -247,8 +259,11 @@ LANDING BUTTON GROUP
     background-color: white;
     box-shadow: 0 2px 3px rgba(10,10,10,.1),0 0 0 2px rgba(10,10,10,.1);
 
-    min-height: 200px;
+    min-height: 400px;
     min-width: 350px;
+
+    max-height: 250px;
+    max-width: 300px;
     
     margin: 30px 20px;
 
@@ -260,7 +275,13 @@ LANDING BUTTON GROUP
     text-align: center;
     flex: 1 0;
 
+    overflow: hidden;
+    
+}
 
+.card h2 {
+
+    font-size: 2.4rem;
 }
 
 .card h3 {
@@ -273,6 +294,15 @@ LANDING BUTTON GROUP
 
     padding: 10px;
     font-size: 1.1rem;
+}
+
+.card img {
+
+    width: 70vw;
+    max-width: 350px;
+    margin:  auto;
+    
+
 }
 
 
@@ -320,8 +350,6 @@ LANDING BUTTON GROUP
 
     }
 
-
-
     /*#############
     LANDING BUTTON GROUP
     #############*/
@@ -339,10 +367,19 @@ LANDING BUTTON GROUP
     
     }
 
+
+
+    .card-container {
+
+        margin-top: 150px;
+        justify-content: space-between;
+    }
+
     .card {
 
         margin: 20px;
-
+        margin-top: 40px;
+        margin-bottom: 40px;
     }
 
     
@@ -350,4 +387,41 @@ LANDING BUTTON GROUP
 
 
 
+}
+
+/*#############
+    HELPERS
+#############*/
+.no-background {
+    
+    background-color: transparent!important;
+}
+
+.no-boxshadow {
+
+    box-shadow: none!important;
+
+}
+
+.no-margin {
+
+    margin: 0!important;
+}
+
+.full-width {
+
+    max-width: inherit!important;
+}
+
+.height-auto {
+
+    height: auto!important;
+    min-height: auto!important;
+    max-height: 500px!important;
+}
+
+.margin-center {
+
+    margin: 50px auto!important;
+   
 }

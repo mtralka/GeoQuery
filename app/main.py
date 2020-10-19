@@ -15,9 +15,13 @@ WTF_CSRF_SECRET_KEY = 'CSRFSECRET'
 
 @main.route('/')
 def index():
-	# TODO landing page
-	return render_template('home.html')
+	
+	return render_template('index.html')
 
+@main.route('/about')
+def about():
+	
+	return render_template('about.html')
 
 @main.route('/search', methods=['GET', 'POST'])
 def search():
@@ -38,10 +42,11 @@ def search():
 			user = 'test_user'
 
 			# TODO set id from time to random, asign to database as associated
-
+			# self.id?
 			task = newSearch.delay(data, user, str(time.time()))
 			print(task.state)
 			print(task.id)
+			# TODO assign id to databse primary key
 
 			# implement flash on status
 			#flash('Success')
