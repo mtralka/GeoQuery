@@ -46,6 +46,7 @@ def search():
 			task = newSearch.delay(data, user, str(time.time()))
 			print(task.state)
 			print(task.id)
+
 			# TODO assign id to databse primary key
 
 			# implement flash on status
@@ -59,10 +60,21 @@ def search():
 def status_landing():
 
 	# TODO implement status landing
-	return 'status landing'
+	return render_template('statusSarch.html')
 
-@main.route('/status/<task_id>', methods=['GET'])
-def status(task_id):
+
+# User interface about status of their task
+# TODO NEXT
+@main.route('/status/<task_id>')
+def status_dash(task_id):
+
+
+
+	return render_template('status.html', task_id = task_id)
+
+
+@main.route('/info/<task_id>', methods=['GET'])
+def status_endpoint(task_id):
 	task = newSearch.AsyncResult(task_id)
 	print(task.state)
 	
