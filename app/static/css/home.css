@@ -54,6 +54,8 @@ main {
 
     line-height: 1.6;
     font-size: 1.2rem;
+
+    min-height: 700px;
 }
 
 b {
@@ -250,6 +252,7 @@ LANDING BUTTON GROUP
 
     margin-top: 100px;
     
+    overflow: hidden;
 
 }
 
@@ -304,6 +307,127 @@ LANDING BUTTON GROUP
     
 
 }
+
+/*#############
+    SEARCH PAGE
+#############*/
+
+.search-container {
+    width: 80vw;
+    height: 70vh;
+    max-width: 1200px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border-radius: 10px;
+    
+    overflow: hidden;
+    background-color: transparent;
+    
+}
+
+.search-container div:first-child {
+
+    align-self: flex-start;
+    
+    
+}
+
+.search-container div:last-child {
+
+    align-self: flex-end;
+}
+
+.search-card {
+
+    flex: 1 0;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#execute-search {
+
+    align-self: center;
+
+    margin: 20px;
+    margin-bottom: 50px;
+    
+}
+
+#map-selection {
+
+    margin-top: 40px;
+    width: 80vw;
+    height: auto;
+}
+
+/*#############
+    FORM
+#############*/
+.form-container {
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    
+    height: 100%;
+    width: 100%;
+    
+}
+
+.form-item {
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+}
+
+.form-item input, select{
+    
+    width: 80px;
+    height: 40px;
+    margin: 10px;
+    padding: 5px;
+
+    border-color: rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    
+}
+
+.form-item input:hover {
+
+    border-color: blue;
+    
+}
+
+/* custom modifier for larger inputs */
+.form-item .date {
+
+    width: 135px;
+    
+}
+
+.form-item label {
+
+    margin-top: 10px;
+
+}
+
+
+
 
 
 /* 1024 */
@@ -380,6 +504,18 @@ LANDING BUTTON GROUP
         margin: 20px;
         margin-top: 40px;
         margin-bottom: 40px;
+    }
+
+    .search-container {
+
+        flex-direction: row;
+    }
+
+    #map-selection {
+
+        margin-top: unset;
+        width: inherit;
+        height: inherit;
     }
 
     
