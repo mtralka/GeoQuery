@@ -66,12 +66,12 @@ def search():
 @main.route('/status', methods=['GET', 'POST'])
 def status_landing():
 
-	# TODO implement status input landing
+	# TODO implement input page for manual status search
 	return render_template('statusSarch.html')
 
 
 # User interface about status of their task
-# TODO NEXT
+# TODO
 @main.route('/status/<task_id>')
 def status_dash(task_id):
 
