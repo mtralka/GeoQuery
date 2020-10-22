@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+<!-- nanobar.js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js'></script>
+
+
+<!-- Progress Updater -->
+<script type="text/javascript">
+
+    var nanobar = new Nanobar({
+                bg: '#44f',
+                target: div[0].childNodes[0]
+            });
+
+    function update(id, div_cluster, bar) {
+
+        var url = '/info/' + String(id);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send(null);
+
+        xhr.onreadystatechange = function() {
+
+            var OK = 200;
+            var DONE = 4;
+
+            if (xhr.readyState == DONE) {
+
+                if (xhr.status == OK) {
+
+                    console.log(xhr.responseText);
+
+                    // if results are done
+                        // show results
+
+                    // else
+                        // run function again in a few seconds
+                        // setTimeout
+
+                }
+                else {
+
+                    console.log('Error: ' + xhr.status);
+
+                }
+            }
+
+        }
+        
+
+
+
+    }
+    
+
+
+
+
+
+
+</script>
+
+{% endblock %}
