@@ -1,28 +1,7 @@
-# Project Name
+# GeoQuery
 
+### *Search, Know, Change*
 
-**Main Goals**
-- Web interface (Flask, et. al)
-- Flickr API Spatial search
-- Leaflet.js integration for lat / lng selection
-- Leaflet.js visualization of results
-- download xlsx
+GeoQuery aims to bring the comprehensive geospatial search abilities of [Flickr GeoSearch](https://github.com/mtralka/FLICKR-GeoSearch) online and accessible to all. Currently, GeoQuery is in an early operational-Beta mode. Estimated initial release is mid-Novemeber. Facebook and Twitter integration will follow. 
 
-
-**Secondary**
-- spatial analysis Yellowstone
-	Markov, DBSCAN ??
-
-
-**TODO:**
-- API Wrapper
-- design templating
-
-
-
-
-
-
-
-
-
+This ReadMe is a work in progress. Please check back soon or contact me for more information. 
