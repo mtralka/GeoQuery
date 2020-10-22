@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from flask_login import login_required, current_user
 from . import db
 from .forms import FlickrSearch
-from .model import User
+from .model import User, Query
 from .wrapper import newSearch
 import time
 from celery import Celery
@@ -31,8 +31,8 @@ def search():
 	if form.validate_on_submit():
 
 		if form.validate() == False:
+			
 			flash('Failed Validation')
-			print('failed validation')
 			return redirect(url_for('main.search'))
 
 		else:
@@ -48,13 +48,16 @@ def search():
 			print(task.state)
 			print(task.id)
 
-			# TODO assign id to databse primary key
-
-			# implement flash on status
-			#flash('Success')
+			# Create and Submit DB Query Entry
+			query = Query(task.id, lat= data.get('lat'), lon= data.get('lon'), min_taken= data.get('min_taken'),
+				max_taken = data.get('max_taken'), accuracy= data.get('accuracy'), radius= data.get('radius'), 
+				radius_unit= data.get('radius_units'), tags= data.get('tags') )
+			
+			db.session.add(query)
+			db.session.commit()
 			
 			return redirect(f'/status/{task.id}')
-	print('GET')
+
 	return render_template('search.html', form= form)
 
 @main.route('/status', methods=['GET', 'POST'])

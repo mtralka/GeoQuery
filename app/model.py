@@ -18,9 +18,13 @@ class Query(db.Model):
 
 	lat = db.Column(db.Float, nullable= False)
 	lon = db.Column(db.Float, nullable= False)
+	radius = db.Column(db.Integer, nullable= True)
+	radius_units = db.Column(db.String(2), nullable= False)
 	min_taken = db.Column(db.Integer, nullable= True)
 	max_taken = db.Column(db.Integer, nullable= True) 
 	accuracy = db.Column(db.Integer, nullable= True)
+	tags = db.Column(db.String(1000), nullable= True)
+	
 
 
 
