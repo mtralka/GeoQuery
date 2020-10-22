@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
 class Query(db.Model):
 	__tablename__ = 'Query'
 	id = db.Column(db.String(150), primary_key= True) # celery task ID
+	friendly_id = db.Column(db.String(10), nullable= False) # frontend ID
 	execution_time = db.Column(db.Integer, nullable= False) # SQLight has no support for DateTime
 
 	lat = db.Column(db.Float, nullable= False)
@@ -24,7 +25,7 @@ class Query(db.Model):
 	max_taken = db.Column(db.Integer, nullable= True) 
 	accuracy = db.Column(db.Integer, nullable= True)
 	tags = db.Column(db.String(1000), nullable= True)
-	
+
 
 
 

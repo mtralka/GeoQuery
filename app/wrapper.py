@@ -68,6 +68,7 @@ def executeSearch(params, user, request_page= 1, search_id= 0, master= False):
     # TODO
     # Add append to master.json
     """
+    # id is now id not timestamp, adjust accordingly
     with open(f'../response/{user}/{search_id}/{master}.json', 'w') as f:
         json.dump(MASTER, f)
         f.close()
@@ -88,7 +89,7 @@ def newSearch(self, raw_query, user, timestamp):
     Parameters:
         raw_query (dict): raw user dict
         user (string): primary key of user
-        timestampt (string): UNIX timecode of search execution
+        timestamp (string): UNIX Timestamp
     
      """
 

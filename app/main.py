@@ -4,6 +4,7 @@ from . import db
 from .forms import FlickrSearch
 from .model import User, Query
 from .wrapper import newSearch
+from .utilities import create_unique_id
 import time
 from celery import Celery
 from . import celery
@@ -31,7 +32,7 @@ def search():
 	if form.validate_on_submit():
 
 		if form.validate() == False:
-			
+
 			flash('Failed Validation')
 			return redirect(url_for('main.search'))
 
@@ -41,17 +42,24 @@ def search():
 			
 			# TODO pull from flask login
 			user = 'test_user'
+			time = str(time.time())
 
-			# TODO set id from time to random, asign to database as associated
-			# self.id?
-			task = newSearch.delay(data, user, str(time.time()))
+			# Create user friendly ID
+			friendly_id = 
+
+			# Async Task Register
+			task = newSearch.delay(data, user, time)
+
 			print(task.state)
 			print(task.id)
 
+			
+
 			# Create and Submit DB Query Entry
-			query = Query(task.id, lat= data.get('lat'), lon= data.get('lon'), min_taken= data.get('min_taken'),
+			query = Query(task.id, friendly_id= friendly_id , execution_time= time,
+				lat= data.get('lat'), lon= data.get('lon'), min_taken= data.get('min_taken'),
 				max_taken = data.get('max_taken'), accuracy= data.get('accuracy'), radius= data.get('radius'), 
-				radius_unit= data.get('radius_units'), tags= data.get('tags') )
+				radius_unit= data.get('radius_units'), tags= data.get('tags'))
 			
 			db.session.add(query)
 			db.session.commit()
