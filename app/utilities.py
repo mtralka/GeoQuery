@@ -9,7 +9,9 @@ def create_unique_id(length= 5):
 
         id = ''.join(random.choice(string.ascii_uppercase + string.digits) for i in range(length))
 
-        if Query.query.filter_by(friendly_id= id).first() is None:
+        if Query.query.filter_by(friendly_id= id).first():
+            pass
+        else:
             break
 
     return id

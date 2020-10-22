@@ -40,20 +40,15 @@ def search():
 
 			data = request.form
 			
-			# TODO pull from flask login
-			user = 'test_user'
+			user = current_user.id
 			time = str(time.time())
-
-			# Create user friendly ID
-			friendly_id = 
+			friendly_id = create_unique_id()
 
 			# Async Task Register
 			task = newSearch.delay(data, user, time)
 
 			print(task.state)
 			print(task.id)
-
-			
 
 			# Create and Submit DB Query Entry
 			query = Query(task.id, friendly_id= friendly_id , execution_time= time,
@@ -71,7 +66,7 @@ def search():
 @main.route('/status', methods=['GET', 'POST'])
 def status_landing():
 
-	# TODO implement status landing
+	# TODO implement status input landing
 	return render_template('statusSarch.html')
 
 
@@ -116,7 +111,7 @@ def status_endpoint(task_id):
 			'state': task.state,
 			'current': 1,
 			'total': 1,
-			'status': str(task.info),  # this is the exception raised
+			'status': str(task.info), 
 		}
 	return jsonify(response)
 	
