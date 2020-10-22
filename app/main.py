@@ -40,21 +40,22 @@ def search():
 
 			data = request.form
 			
-			user = current_user.id
-			time = str(time.time())
+			#user = current_user.id
+			user = 'test_user' # for testing only
+			task_time = str(time.time())
 			friendly_id = create_unique_id()
 
 			# Async Task Register
-			task = newSearch.delay(data, user, time)
+			task = newSearch.delay(data, user, task_time)
 
 			print(task.state)
 			print(task.id)
 
 			# Create and Submit DB Query Entry
-			query = Query(task.id, friendly_id= friendly_id , execution_time= time,
+			query = Query(id= str(task.id), user_id= user, friendly_id= friendly_id , execution_time= task_time,
 				lat= data.get('lat'), lon= data.get('lon'), min_taken= data.get('min_taken'),
 				max_taken = data.get('max_taken'), accuracy= data.get('accuracy'), radius= data.get('radius'), 
-				radius_unit= data.get('radius_units'), tags= data.get('tags'))
+				radius_units= data.get('radius_units'), tags= data.get('tags'))
 			
 			db.session.add(query)
 			db.session.commit()

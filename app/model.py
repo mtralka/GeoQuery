@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
 class Query(db.Model):
 	__tablename__ = 'Query'
 	id = db.Column(db.String(150), primary_key= True) # celery task ID
+	user_id = db.Column(db.Integer, db.ForeignKey('User.id'), nullable= False)
 	friendly_id = db.Column(db.String(10), nullable= False) # frontend ID
 	execution_time = db.Column(db.Integer, nullable= False) # SQLight has no support for DateTime
 
