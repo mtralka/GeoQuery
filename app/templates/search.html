@@ -91,72 +91,75 @@
 
                     <form class='form-container ' action="/search" id='search-form' method='POST'>
 
-                        <input id="csrf_token" name="csrf_token" type="hidden" value="ImNiMTIwNzU0NmEzNWZiNzhkMjc4MzIyYTI5MWQ2ZmM2ZWJjZDkyNWQi.X44vag.AMhX8cXzjV0iDlypmRyx0EiBtPw">
+                        {{ form.csrf_token }}
             
                         <div class="form-item">
             
-                            <input id="lat" name="lat" required type="text" value="">
-                            <label for="lat">Latitude</label> 
+                            {{ form.lat }}
+                            {{ form.lat.label }} 
             
                         </div>
             
                         <div class="form-item">
             
-                            <input id="lon" name="lon" required type="text" value="">
-                            <label for="lon">Longitude</label> 
+                            {{ form.lon }}
+                            {{ form.lon.label }} 
             
                         </div>
             
                         <div class="form-item">
             
-                            <input id="radius" name="radius" type="text" value="">
-                            <label for="radius">Radius</label> 
+                            {{ form.radius }}
+                            {{ form.radius.label }} 
             
                         </div>
             
                         <div class="form-item">
             
-                            <select id="radius_units" name="radius_units"><option value="km">KM</option><option value="mi">MI</option></select>
-                            <label for="radius_units">Radius Units</label> 
+                            {{ form.radius_units }}
+                            {{ form.radius_units.label }} 
             
                         </div>
             
                         <div class="form-item">
             
-                            <input id="accuracy" name="accuracy" type="text" value="">
-                            <label for="accuracy">Accuracy</label> 
+                            {{ form.accuracy }}
+                            {{ form.accuracy.label }} 
             
                         </div>
                         
                         <div class="form-item">
             
-                            <input class="date" id="min_taken" name="min_taken" type="date" value="">
-                            <label for="min_taken">Minimum Date Taken</label> 
+                            {{ form.min_taken (class='date')}}
+                            {{ form.min_taken.label }} 
             
                         </div>
             
                         <div class="form-item">
             
-                            <input class="date" id="max_taken" name="max_taken" type="date" value="">
-                            <label for="max_taken">Maximum Date Taken</label> 
+                            {{ form.max_taken (class='date') }}
+                            {{ form.max_taken.label }} 
             
                         </div>
             
                         <div class="form-item">
             
-                            <input id="tags" name="tags" type="text" value="">
-                            <label for="tags">Search Tags</label> 
+                            {{ form.tags }}
+                            {{ form.tags.label }} 
             
                         </div>
                         
                         
                     </form>
 
+                    {{ form.search (id='search',class='button', form='search-form') }}
+                    <!-- 
                     <a href='/' class='button' id='execute-search'>
                     
-                        Execute Search
+                        
                     
                     </a>
+                    -->
 
                 </div>
 

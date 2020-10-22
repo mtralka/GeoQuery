@@ -32,6 +32,7 @@ def search():
 
 		if form.validate() == False:
 			flash('Failed Validation')
+			print('failed validation')
 			return redirect(url_for('main.search'))
 
 		else:
@@ -53,7 +54,7 @@ def search():
 			#flash('Success')
 			
 			return redirect(f'/status/{task.id}')
-	
+	print('GET')
 	return render_template('search.html', form= form)
 
 @main.route('/status', methods=['GET', 'POST'])
