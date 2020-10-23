@@ -78,7 +78,7 @@ def status_dash(task_id):
 
 
 
-	return render_template('results.html', task_id = task_id)
+	return render_template('results_testing.html', task_id = task_id)
 
 
 @main.route('/info/<task_id>', methods=['GET'])

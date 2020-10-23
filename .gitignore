@@ -17,4 +17,5 @@ response/
 commands.txt
 admin/
 celerybeat-schedule.*
-.sqlite
+*.sqlite
+web-map-draft.html

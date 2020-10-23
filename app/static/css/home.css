@@ -241,7 +241,7 @@ LANDING BUTTON GROUP
 .card-container {
 
     width: 90vw;
-    max-width: 1000px;
+    
 
     display: flex;
     flex-direction: row;
@@ -254,6 +254,17 @@ LANDING BUTTON GROUP
     
     overflow: hidden;
 
+}
+
+.max-width {
+
+    max-width: 1000px;
+
+}
+
+.width-100 {
+
+    width: 100%;
 }
 
 .card {
@@ -560,4 +571,70 @@ LANDING BUTTON GROUP
 
     margin: 50px auto!important;
    
+}
+
+
+
+/*########
+    RESULTS GRID
+##########*/
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 25px 25px;
+    grid-template-areas:
+      "left right"
+      "left right"
+      "bottom bottom";
+
+    height: 100vh;
+    width: 95vw;
+
+    margin: 25px;
+  }
+
+  .left {
+      
+    grid-area: left; 
+    text-align: center;
+}
+
+.grid-card {
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: center;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 2px 3px rgba(10,10,10,.1),0 0 0 2px rgba(10,10,10,.1);
+    overflow: hidden;
+}
+
+.left h3:first-child {
+
+    margin: 10px 0;
+    font-size: 1.7rem;
+
+}
+  .right { 
+      
+    grid-area: right; 
+    
+}
+  .bottom { 
+      
+    grid-area: bottom; 
+    min-height: 500px;
+
+}
+
+
+.grid-minimum {
+
+    height: 100%;
+    width: 100%;
 }
