@@ -72,56 +72,64 @@
             
             <div class="grid-container">
 
-                <div class="left grid-minimum grid-card">
+                <div class="left grid-minimum grid-card" >
 
-                    <h3>
+                    <div id='search-info'>
 
-                        Search Criteria
+                        <div class='info-heading'>
 
-                    </h3>
+                            <h3>
 
-                    <p>
+                                Search: 
+        
+                            </h3>
+        
+                            <h4>
+        
+                                Started: 
+        
+                            </h4>
 
-                        Time: <span id='time'></span>
+                        </div>
 
-                    </p>
+                        <div class='info-info'>
 
-                    <p>
+                            <p>
+    
+                               
+        
+                            </p>
+        
+                            <p>
+        
+                                Long: <span id='lon'> </span>
+        
+                            </p>
+        
+                            <p>
+        
+                                Lat: <span id='lat'> </span>
+        
+                            </p>
 
-                        Long: <span id='lon'> </span>
 
-                    </p>
-
-                    <p>
-
-                        Lat: <span id='lat'> </span>
-
-                    </p>
-                    
+                        </div>
                         
+                    </div>
+
                 </div>
 
                 <div class="right grid-minimum grid-card progress" id='progress'>
 
-                    <h3>
+                    <p id='percent'>
+                            
+                        15 %
 
-                        Search Status
+                    </p>
 
-                    </h3>
-
-
-                    <p id='current'></p>
-
-
-                    <p id='total'> </p>
-
-                    <p id='code'> </p>
-
-                    <div style="width: 200px;height: 20px;" id='bar'>
                     
-                    </div>
-                    
-                    <button onclick="call('{{task_id}}')">UPDATE</button>
+
+
 
 
                 </div>
@@ -158,61 +166,63 @@
             integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
             crossorigin="anonymous"></script> 
         
-        <!-- Progress Updater -->
         
-<!-- Progress Updater -->
-<script type="text/javascript">
+        
+        <!-- Progress Updater -->
+        <script type="text/javascript">
 
-    
-    
-    
+            function update_progress(status_url, nanobar) {
+                
+                $.getJSON(status_url, function(data) {
+                    
+                    percent = parseInt((data['current'] - 1) * 100 / data['total']);
+
+                    nanobar.go(percent);
+
+                    $('#percent').text(percent + ' %');
+                    $('#status').text(data['status']);
+                    if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+                        if ('result' in data) {
+                            // show result
+                            $('#code').text('Code ' + data['result']);
+                            $('#total').text('Total ' + data['total']);
+                        }
+                        else {
+                            
+                            $('#code').text('Result: ' + data['state']);
+                        }
+                    }
+                    else {
+
+                        $('#current').text('Current ' + data['current']);
+                        setTimeout(function() {
+                            update_progress(status_url, nanobar);
+                        }, 2000);
+                    }
+                });
+                
+            }
+
+        </script>
+
+        <script type="text/javascript">
+
+            $(document).ready( function() {
+
+                var id = '{{ task_id }}';
+                var url = '/info/' + String(id);
+
+                var nanobar = new Nanobar({
+                        bg: '#44f',
+                        target: document.getElementById('progress')
+                    });
 
 
-    function call(id) {
+                update_progress(url, nanobar);
 
-        var barred = document.getElementById(bar)
-        var nanobar = new Nanobar({
-                bg: '#44f',
-                target: barred
             });
 
-        var url = '/info/' + String(id);
-
-        update_progress(url, nanobar);
-
-    }
-
-    function update_progress(status_url, nanobar) {
-        
-        $.getJSON(status_url, function(data) {
-            
-            percent = parseInt((data['current'] - 1) * 100 / data['total']);
-            nanobar.go(percent);
-            $('#current').text(percent + '%');
-            $('#status').text(data['status']);
-            if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
-                if ('result' in data) {
-                    // show result
-                    $('#code').text('Code ' + data['result']);
-                    $('#total').text('Total ' + data['total']);
-                }
-                else {
-                    
-                    $('#code').text('Result: ' + data['state']);
-                }
-            }
-            else {
-
-                $('#current').text('Current ' + data['current']);
-                setTimeout(function() {
-                    update_progress(status_url, nanobar);
-                }, 2000);
-            }
-        });
-    }
-
-
-</script>
+        </script>
 
     </body>
 

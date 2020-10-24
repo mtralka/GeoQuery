@@ -612,23 +612,22 @@ LANDING BUTTON GROUP
     background-color: white;
     box-shadow: 0 2px 3px rgba(10,10,10,.1),0 0 0 2px rgba(10,10,10,.1);
     overflow: hidden;
+
+    
 }
 
-.left h3:first-child {
 
-    margin: 10px 0;
-    font-size: 1.7rem;
-
-}
   .right { 
       
     grid-area: right; 
+    
     
 }
   .bottom { 
       
     grid-area: bottom; 
     min-height: 500px;
+    
 
 }
 
@@ -638,3 +637,87 @@ LANDING BUTTON GROUP
     height: 100%;
     width: 100%;
 }
+
+
+/*#####
+ SEARCH STATUS
+######*/
+.nanobar {
+
+    z-index: 9998!important;
+    
+}
+
+.bar {
+
+    z-index: 9998!important;
+
+}
+
+
+#percent {
+
+    height: 100%;
+    width: 100%;
+
+    z-index: 9999!important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+    font-size: 4rem;
+}
+
+#search-info {
+
+    margin: 15px 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+
+}
+
+.info-heading {
+
+    margin: 0;
+    text-align: left!important;
+}
+
+.info-heading h3 {
+
+    font-size: 2rem;
+    margin: 0;
+}
+
+.info-heading h4 {
+
+    font-size: 1.2rem;
+    margin: 0;
+
+    color: grey;
+
+}
+
+.info-info {
+
+    flex: 1 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+.info-info p {
+
+    font-size: 1.2rem;
+}
+
+
+
+
