@@ -6,9 +6,11 @@ import random
 import requests
 from .env import SECRET, KEY
 from pathlib import Path
+import os
 
 import geopandas as gpd
-#from shapely.geometry import Point
+import pandas as pd
+
 
 from . import celery
 
@@ -37,7 +39,7 @@ def formatInput(raw):
 
     return param
 
-def executeSearch(params, user, request_page= 1, search_id= 0, master= False):
+def executeSearch(params, user, request_page= 1, search_id= 0, master= False, df=None):
     """ Calls flickr flickr.photos.search API method. Store results in ../response as asigned by user and request_page
 
     Parameters:
@@ -53,26 +55,12 @@ def executeSearch(params, user, request_page= 1, search_id= 0, master= False):
     response = r.json()
 
     print(f'Status: {r}')
-    
-    #Path(f"./response/{user}/{search_id}").mkdir(parents= True, exist_ok= True)
-    #with open(f'./response/{user}/{search_id}/{request_page}.json', 'w') as f:
-    #    json.dump(response, f)
-    #    f.close()
 
-    # read to df
-    # create geodf w/ shapely
-
-    #if master:
-    #    master_df = gpd.read_file(response, geometry=)
-
-    # TODO
-    # Add append to master.json
-    """
-    # id is now id not timestamp, adjust accordingly
-    with open(f'../response/{user}/{search_id}/{master}.json', 'w') as f:
-        json.dump(MASTER, f)
-        f.close()
-    """
+    if master:
+        df = pd.DataFrame.from_dict(response['photos']['photo'], orient='columns')
+    else:
+        df = df.append( pd.DataFrame.from_dict(response['photos']['photo'], orient='columns') , ignore_index=True )
+   
     try:
         current_page = response['photos']['page']
         total_page = response['photos']['pages']
@@ -80,7 +68,11 @@ def executeSearch(params, user, request_page= 1, search_id= 0, master= False):
         print('Value Error')
         print(response)
     
-    return current_page, total_page
+    return current_page, total_page, df
+
+def toGeo(df):
+    """ convert dataframe to geodataframe """
+    return gpd.GeoDataFrame(df, geometry= gpd.points_from_xy(df.longitude, df.latitude))
 
 @celery.task(bind= True)
 def newSearch(self, raw_query, user, timestamp):
@@ -96,18 +88,24 @@ def newSearch(self, raw_query, user, timestamp):
     query = formatInput(raw_query)
     param = {**DEFAULT_PARAM, **query}
 
-    current_page, total_page = executeSearch(param, user, search_id = timestamp, master=True)
+    current_page, total_page, master_df = executeSearch(param, user, search_id = timestamp, master=True)
 
     # walk search
     while current_page <= total_page:
-        current_page, total_page = executeSearch(param, user, request_page= current_page, search_id= timestamp)
+        current_page, total_page, master_df = executeSearch(param, user, request_page= current_page, search_id= timestamp, df=master_df)
         print(f'Page {current_page} of {total_page}')
         current_page += 1
 
         self.update_state(state=f'IN PROGRESS',
             meta={'current': current_page, 'total': total_page,'status': 'searching...'})
 
+    # create geodf
+    master_df = toGeo(master_df)
+    print('Count' + str(master_df.count))
+    # write to file
+    file_path = f"./response/{user}/{timestamp}"
+    Path(file_path).mkdir(parents= True, exist_ok= True)
+    master_df.to_file(file_path + '/master.geojson', driver='GeoJSON')
+
     return {'current': current_page, 'total': total_page, 'status': '',
             'result': 'resulting'}
-        
-

@@ -42,7 +42,7 @@ def search():
 			data = request.form
 			
 			#user = current_user.id
-			user = 'test_user' # for testing only
+			user = 'test_user_2' # for testing only
 			task_time = str(time.time())
 			friendly_id = create_unique_id()
 

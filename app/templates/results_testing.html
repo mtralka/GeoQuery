@@ -144,11 +144,11 @@
 
                                         {% if task.min_taken %}
 
-                                            From - {{ task.min_taken }}
+                                            From:  {{ task.min_taken }}
                                         
                                         {% else %}
 
-                                            From - N/A
+                                            From:  N/A
 
                                         {% endif %}
 
@@ -164,11 +164,11 @@
                                         
                                         {% if task.max_taken %}
 
-                                            To - {{ task.max_taken }}
+                                            To:  {{ task.max_taken }}
                                         
                                         {% else %}
 
-                                            To - N/A
+                                            To:  N/A
 
                                         {% endif %}
 
@@ -299,12 +299,13 @@
 
                         if ('result' in data) {
                             
-                            console.log('Complete')
+                            console.log('Complete');
+                            $('#status').text('SUCCESS');
                         }
 
                         else {
                             
-                            console.log('Error')
+                            console.log('Error');
                             
                         }
 
