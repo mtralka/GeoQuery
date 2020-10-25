@@ -1,12 +1,17 @@
-# GeoQuery
+# :earth_americas: GeoQuery
 
 ### *Search, Know, Change*
 
-GeoQuery aims to bring the comprehensive geospatial search abilities of [Flickr GeoSearch](https://github.com/mtralka/FLICKR-GeoSearch) online and accessible to all. Currently, GeoQuery is in an early operational-Beta mode. Estimated initial release is mid-Novemeber. Facebook and Twitter integration will follow. 
+#### **Objective**
 
-
+ Create an online platform to facilitate cross-service social media spatio-temporal searches and analysis. Bringing big-data information retreival to all.
+ 
 
 #### Project Status
+
+ Currently, GeoQuery is in an early (but operational) Beta mode. Initial V1 release with Flickr integration is estimated for mid-November. Facebook and Twitter integration will follow.
+ 
+ 
 **Task**|**Description**|**Status**|**Finished**
 :-----:|:-----:|:-----:|:-----:
 Flickr Integration|validated to 200k results / 20 minutes|done| :heavy_check_mark:
@@ -21,7 +26,8 @@ Async tasking| |done| :heavy_check_mark:
 task id shortening| |done| :heavy_check_mark:
 results management|geojson implemened, need csv|in progress|  :soon:
 AJAX endpoint|fully implemented, review edge cases|in progress| :soon:
-
+scheduled searches | |not started| :heavy_minus_sign:
+email alerts | |not started| :heavy_minus_sign:
 
  
 
