@@ -26,11 +26,11 @@ DB|done|done| :heavy_check_mark:
 login / signup page|backend implemented, needs front|in progress| :soon:
 Async tasking| celery /redis (docker) |done| :heavy_check_mark:
 task id shortening| |done| :heavy_check_mark:
-results management|geojson implemened, need csv|in progress|  :soon:
+results management|geojson & csv implemened |done |  :heavy_check_mark:
 AJAX endpoint|fully implemented, review edge cases|in progress| :soon:
 scheduled searches | |not started| :heavy_minus_sign:
 email alerts | |not started| :heavy_minus_sign:
-
- 
+dynamic mapping | folium |done| :heavy_check_mark:
+results serving | |not started| :heavy_minus_sign:
 
 *this ReadMe is a work in progress. Please check back soon or contact me for more information.*
