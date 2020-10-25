@@ -1,14 +1,15 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash, jsonify, send_from_directory
 from flask_login import login_required, current_user
 from . import db
 from .forms import FlickrSearch
 from .model import User, Query
-from .wrapper import newSearch
 from .utilities import create_unique_id
 import time
 from celery import Celery
 from . import celery
 from datetime import datetime
+from .search_control import newSearch
+
 
 main = Blueprint('main', __name__)
 
@@ -47,7 +48,7 @@ def search():
 			friendly_id = create_unique_id()
 
 			# Async Task Register
-			task = newSearch.delay(data, user, task_time)
+			task = newSearch.delay(data, user, task_time, friendly_id)
 
 			print(task.state)
 			print(task.id)
@@ -82,6 +83,15 @@ def status_dash(task_id):
 
 	return render_template('results_testing.html', task_id = task_id, task=task, started=started)
 
+@main.route('/results/<task_id>/map')
+def map(task_id):
+
+	task = Query.query.filter_by(friendly_id= task_id).first()
+
+	# switch to task.user_id in production
+	# return render_template(f'maps/{task.user_id}/{task.execution_time}/master.html')
+	return render_template(f'maps/test_user_2/{task.execution_time}/master.html')
+
 
 @main.route('/info/<task_id>', methods=['GET'])
 def status_endpoint(task_id):
@@ -89,22 +99,24 @@ def status_endpoint(task_id):
 	friendly = Query.query.filter_by(friendly_id= task_id).first()
 
 	task = newSearch.AsyncResult(friendly.id)
-	print(task.state)
-	
 
+	map_results = f'/results/{task_id}/map'
+	
 	if task.state == 'PENDING':
 		response = {
 		'state': task.state,
 		'current': 'waiting',
 		'total': 'waiting',
-		'status': 'waiting'
+		'status': 'waiting',
+		'result' : map_results
 		}
 	elif task.state != 'FAILURE':
 		response = {
 		'state': task.state,
 		'current': task.info.get('current'),
 		'total': task.info.get('total'),
-		'status': task.info.get('status')
+		'status': task.info.get('status'),
+		'result' : map_results
 		}
 		
 	else:

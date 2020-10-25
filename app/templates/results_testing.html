@@ -237,7 +237,7 @@
                     </p>
                     
                 </div>
-                <iframe src='../static/web-map-draft.html'class="bottom grid-minimum" style="background-color: greenyellow;">
+                <iframe src='' id='results-map' class="bottom grid-minimum" style="background-color: greenyellow;">
                     
 
                 </iframe>
@@ -297,17 +297,14 @@
 
                     if (data['state'] != 'PENDING' && data['state'] != 'IN PROGRESS') {
 
-                        if ('result' in data) {
-                            
-                            console.log('Complete');
-                            $('#status').text('SUCCESS');
-                        }
+                        $('#results-map').attr('src', data['result'] );
+                        console.log(data['result']);
+                        nanobar.go(100);
 
-                        else {
-                            
-                            console.log('Error');
-                            
-                        }
+                        $('#percent').text('100 %');
+                        
+                        console.log('Complete');
+                        $('#status').text('finished');
 
                     }
                     

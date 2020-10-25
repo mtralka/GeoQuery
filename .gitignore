@@ -19,3 +19,4 @@ admin/
 celerybeat-schedule.*
 *.sqlite
 web-map-draft.html
+testing/
