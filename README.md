@@ -2,6 +2,8 @@
 
 ### *Search, Know, Change*
 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) ![GitHub language count](https://img.shields.io/github/languages/count/mtralka/GeoQuery) [![Generic badge](https://img.shields.io/badge/Status-Development-orange.svg)](https://shields.io/) 
+
 #### **Objective**
 
  Create an online platform to facilitate cross-service social media spatio-temporal searches and analysis. Bringing big-data information retreival to all.
@@ -22,7 +24,7 @@ home page|design could use work|usable|  :heavy_minus_sign:
 about page| |not started| :heavy_minus_sign:
 DB|done|done| :heavy_check_mark:
 login / signup page|backend implemented, needs front|in progress| :soon:
-Async tasking| |done| :heavy_check_mark:
+Async tasking| celery /redis (docker) |done| :heavy_check_mark:
 task id shortening| |done| :heavy_check_mark:
 results management|geojson implemened, need csv|in progress|  :soon:
 AJAX endpoint|fully implemented, review edge cases|in progress| :soon:
