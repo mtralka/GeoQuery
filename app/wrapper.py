@@ -104,10 +104,10 @@ def newSearch(self, raw_query, user, timestamp):
         print(f'Page {current_page} of {total_page}')
         current_page += 1
 
-        self.update_state(state=f'PROGRESS',
-            meta={'current': current_page, 'total': total_page,'status': 'in progress'})
+        self.update_state(state=f'IN PROGRESS',
+            meta={'current': current_page, 'total': total_page,'status': 'searching...'})
 
-    return {'current': current_page, 'total': total_page, 'status': 'Task completed',
+    return {'current': current_page, 'total': total_page, 'status': '',
             'result': 'resulting'}
         
 

@@ -8,6 +8,7 @@ from .utilities import create_unique_id
 import time
 from celery import Celery
 from . import celery
+from datetime import datetime
 
 main = Blueprint('main', __name__)
 
@@ -60,7 +61,7 @@ def search():
 			db.session.add(query)
 			db.session.commit()
 			
-			return redirect(f'/status/{task.id}')
+			return redirect(f'/results/{friendly_id}')
 
 	return render_template('search.html', form= form)
 
@@ -76,36 +77,36 @@ def status_landing():
 @main.route('/results/<task_id>')
 def status_dash(task_id):
 
+	task = Query.query.filter_by(friendly_id= task_id).first()
+	started = datetime.fromtimestamp(task.execution_time).strftime('%Y-%m-%d %H:%M')
 
-
-	return render_template('results_testing.html', task_id = task_id)
+	return render_template('results_testing.html', task_id = task_id, task=task, started=started)
 
 
 @main.route('/info/<task_id>', methods=['GET'])
 def status_endpoint(task_id):
-	task = newSearch.AsyncResult(task_id)
+
+	friendly = Query.query.filter_by(friendly_id= task_id).first()
+
+	task = newSearch.AsyncResult(friendly.id)
 	print(task.state)
 	
-	# recode this
-	# used from example
 
 	if task.state == 'PENDING':
-		# job did not start yet
 		response = {
 		'state': task.state,
-		'current': 0,
-		'total': 1,
-		'status': 'Pending...'
+		'current': 'waiting',
+		'total': 'waiting',
+		'status': 'waiting'
 		}
 	elif task.state != 'FAILURE':
 		response = {
 		'state': task.state,
-		'current': task.info.get('current', 0),
-		'total': task.info.get('total', 1),
-		'status': task.info.get('status', '')
+		'current': task.info.get('current'),
+		'total': task.info.get('total'),
+		'status': task.info.get('status')
 		}
-		if 'result' in task.info:
-			response['result'] = task.info['result']
+		
 	else:
 		# wrong
 		response = {

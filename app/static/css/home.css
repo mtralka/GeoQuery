@@ -668,6 +668,15 @@ LANDING BUTTON GROUP
     align-content: center;
 
     font-size: 4rem;
+
+    margin-bottom: 0%;
+}
+
+#status {
+
+    font-size: 1rem;
+    color: grey;
+
 }
 
 #search-info {
@@ -679,6 +688,7 @@ LANDING BUTTON GROUP
     justify-content: flex-start;
     align-items: flex-start;
 
+    height: 100%;
 
 }
 
@@ -703,13 +713,19 @@ LANDING BUTTON GROUP
 
 }
 
+.info-heading p {
+
+    margin: 0;
+    font-size: 1rem;
+    color:grey
+
+}
+
 .info-info {
 
-    flex: 1 0 auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    height: 60%;
+    width: 100%;
+    align-self: flex-end;
 
 }
 
@@ -719,5 +735,39 @@ LANDING BUTTON GROUP
 }
 
 
+.grid-container-results {
 
+    
+    align-self: flex-end;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px 20px;
+    grid-template-areas:
+      "t-left t-left t-mid t-mid t-right t-right"
+      "m-left m-left m-left m-right m-right m-right"
+      "b-left b-left b-left b-right b-right b-right";
+  }
+  .t-left { grid-area: t-left; }
+  .t-mid { grid-area: t-mid; }
+  .t-right { grid-area: t-right; }
+  .b-left { grid-area: b-left; }
+  .b-right { grid-area: b-right; }
+  .m-left { grid-area: m-left; }
+  .m-right { grid-area: m-right; }
 
+.info-unit {
+
+    text-align: center!important;
+    
+    font-size: 1.4rem;
+
+    
+
+}
+
+.info-unit p {
+
+    display: inline;
+    
+}

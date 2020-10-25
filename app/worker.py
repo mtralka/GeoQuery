@@ -7,6 +7,8 @@ def create_celery(app):
         app.import_name,
         backend='redis://localhost:6379/0',
         broker='redis://localhost:6379/0',
+        ignore_result = False,
+        task_ignore_result = False
     )
 
     celery.conf.update(app.config)

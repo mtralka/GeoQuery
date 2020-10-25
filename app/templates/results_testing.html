@@ -80,40 +80,143 @@
 
                             <h3>
 
-                                Search: 
+                                Search: {{ task_id }}
         
                             </h3>
         
                             <h4>
         
-                                Started: 
+                                Started: {{ started }}
         
                             </h4>
 
+                            <p id='status'>
+
+                                CODE
+
+                            </p>
+
                         </div>
 
-                        <div class='info-info'>
+                            <div class="grid-container-results info-info">
 
-                            <p>
-    
-                               
-        
-                            </p>
-        
-                            <p>
-        
-                                Long: <span id='lon'> </span>
-        
-                            </p>
-        
-                            <p>
-        
-                                Lat: <span id='lat'> </span>
-        
-                            </p>
+                                <div class="t-left info-unit">
+
+                                    <p>
+
+                                        Latitude: {{ '%0.3f'| format(task.lat|float) }}
+
+                                    </p>
+
+                                </div>
+
+                                <div class="t-mid info-unit">
+
+                                    <p>
+                                        
+                                        Longitude: {{ '%0.3f'| format(task.lon|float) }}
+
+                                    </p>
+
+                                </div>
+
+                                <div class="t-right info-unit">
+
+                                    <p>
+
+                                        {% if task.accuracy %}
+
+                                            Accuracy: {{ task.accuracy }}
+                                        
+                                        {% else %}
+
+                                            Accuracy: N/A
+
+                                        {% endif %}
+                                    </p>
+                                    
+
+                                </div>
+
+                                <div class="b-left info-unit">
+
+                                    <p>
+
+                                        {% if task.min_taken %}
+
+                                            From - {{ task.min_taken }}
+                                        
+                                        {% else %}
+
+                                            From - N/A
+
+                                        {% endif %}
+
+                                        
+                                    </p>
+
+                                </div>
+
+                                <div class="b-right info-unit">
+
+                                    <p>
+
+                                        
+                                        {% if task.max_taken %}
+
+                                            To - {{ task.max_taken }}
+                                        
+                                        {% else %}
+
+                                            To - N/A
+
+                                        {% endif %}
+
+                                    </p>
+
+                                </div>
+
+                                <div class="m-left info-unit">
+
+                                    <p>
+
+                                        {% if task.radius %}
+
+                                            Radius: {{ task.radius }} {{ task.radius_units }}
+                                        
+                                        {% else %}
+
+                                            Radius: 5 {{ task.radius_units }}
+
+                                        {% endif %}
+
+                                    </p>
+
+                                </div>
+
+                                <div class="m-right info-unit">
+
+                                    <p>
+
+                                        {% if task.tags %}
+
+                                            Tags: {{ task.tags }}
+                                        
+                                        {% else %}
+
+                                            Tags: N/A
+
+                                        {% endif %}
+
+                                    </p>
+
+                                </div>
+                              </div>
+
+                            
 
 
-                        </div>
+                        
                         
                     </div>
 
@@ -123,15 +226,16 @@
 
                     <p id='percent'>
                             
-                        15 %
+                        NULL
 
                     </p>
 
+                    <p id='total'>
+
+                        NULL
+
+                    </p>
                     
-
-
-
-
                 </div>
                 <iframe src='../static/web-map-draft.html'class="bottom grid-minimum" style="background-color: greenyellow;">
                     
@@ -174,24 +278,38 @@
             function update_progress(status_url, nanobar) {
                 
                 $.getJSON(status_url, function(data) {
-                    
+
                     percent = parseInt((data['current'] - 1) * 100 / data['total']);
+
+                    if (percent < 0) {
+
+                        percent = percent * -1;
+                    }
 
                     nanobar.go(percent);
 
                     $('#percent').text(percent + ' %');
+
                     $('#status').text(data['status']);
-                    if (data['state'] != 'PENDING' && data['state'] != 'PROGRESS') {
+                    $('#code').text(data['state']);
+
+                    $('#total').text( (data['current'] - 1) + ' of ' + data['total'] );
+
+                    if (data['state'] != 'PENDING' && data['state'] != 'IN PROGRESS') {
+
                         if ('result' in data) {
-                            // show result
-                            $('#code').text('Code ' + data['result']);
-                            $('#total').text('Total ' + data['total']);
+                            
+                            console.log('Complete')
                         }
+
                         else {
                             
-                            $('#code').text('Result: ' + data['state']);
+                            console.log('Error')
+                            
                         }
+
                     }
+                    
                     else {
 
                         $('#current').text('Current ' + data['current']);
