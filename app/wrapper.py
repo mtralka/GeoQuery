@@ -11,7 +11,6 @@ import os
 import geopandas as gpd
 import pandas as pd
 
-
 from . import celery
 
 URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search'
@@ -39,7 +38,7 @@ def formatInput(raw):
 
     return param
 
-def executeSearch(params, user, request_page= 1, search_id= 0, master= False, df=None):
+def executeSearch(params, user, request_page= 1, search_id= 0, master= False, df=None, total_page=None):
     """ Calls flickr flickr.photos.search API method. Store results in ../response as asigned by user and request_page
 
     Parameters:
@@ -58,17 +57,25 @@ def executeSearch(params, user, request_page= 1, search_id= 0, master= False, df
 
     if master:
         df = pd.DataFrame.from_dict(response['photos']['photo'], orient='columns')
+        total_page = response['photos']['pages']
+        
     else:
         df = df.append( pd.DataFrame.from_dict(response['photos']['photo'], orient='columns') , ignore_index=True )
    
     try:
         current_page = response['photos']['page']
-        total_page = response['photos']['pages']
+        
     except ValueError:
         print('Value Error')
         print(response)
+
+    if str(response['photos']['pages']) == '0':
+        print(response)
+        time.sleep(10)
+
+        current_page = current_page - 1
     
-    return current_page, total_page, df
+    return current_page, total_page, df, total_page
 
 def toGeo(df):
     """ convert dataframe to geodataframe """
@@ -88,16 +95,18 @@ def newSearch(self, raw_query, user, timestamp):
     query = formatInput(raw_query)
     param = {**DEFAULT_PARAM, **query}
 
-    current_page, total_page, master_df = executeSearch(param, user, search_id = timestamp, master=True)
+    current_page, total_page, master_df,total_page = executeSearch(param, user, search_id = timestamp, master=True)
 
     # walk search
     while current_page <= total_page:
-        current_page, total_page, master_df = executeSearch(param, user, request_page= current_page, search_id= timestamp, df=master_df)
+        current_page, total_page, master_df, total_page = executeSearch(param, user, request_page= current_page, search_id= timestamp, df=master_df, total_page= total_page)
         print(f'Page {current_page} of {total_page}')
         current_page += 1
 
         self.update_state(state=f'IN PROGRESS',
             meta={'current': current_page, 'total': total_page,'status': 'searching...'})
+
+        time.sleep(.5)
 
     # create geodf
     master_df = toGeo(master_df)
