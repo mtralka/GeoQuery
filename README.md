@@ -13,6 +13,7 @@
 
  Currently, GeoQuery is in an early (but operational) Beta mode. Initial V1 release with Flickr integration is estimated for mid-November. Facebook and Twitter integration will follow.
  
+
  
 **Task**|**Description**|**Status**|**Finished**
 :-----:|:-----:|:-----:|:-----:
@@ -27,10 +28,27 @@ login / signup page|backend implemented, needs front|in progress| :soon:
 Async tasking| celery /redis (docker) |done| :heavy_check_mark:
 task id shortening| |done| :heavy_check_mark:
 results management|geojson & csv implemened |done |  :heavy_check_mark:
-AJAX endpoint|fully implemented, review edge cases|in progress| :soon:
+AJAX endpoint|fully implemented, review edge cases|done| :heavy_check_mark:
 scheduled searches | |not started| :heavy_minus_sign:
 email alerts | |not started| :heavy_minus_sign:
 dynamic mapping | folium |done| :heavy_check_mark:
-results serving | |not started| :heavy_minus_sign:
+results serving | map done. need CSV + GeoJSON |in progress| :soon:
 
 *this ReadMe is a work in progress. Please check back soon or contact me for more information.*
+
+
+#### Examples
+
+*Current as of 10.26 - subject to change*
+
+- [CSV results](example/exampleCSV.csv)
+- [GeoJSON results](example/exampleGeoJSON.geojson)
+
+ <a href="url"><img src="example/resultsPage.PNG" align="center" height="400" width="" ></a><br/>
+*status of results page*
+
+
+ <a href="url"><img src="example/searchPage.PNG" align="center" height="400" width="" ></a><br/>
+ *status of search page*
+ 
+ 
