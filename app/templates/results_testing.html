@@ -237,7 +237,7 @@
                     </p>
                     
                 </div>
-                <iframe src='' id='results-map' class="bottom grid-minimum" style="background-color: greenyellow;">
+                <iframe src='' id='results-map' class="bottom grid-minimum" style="background-color: greenyellow;display: none;">
                     
 
                 </iframe>
@@ -297,13 +297,12 @@
 
                     if (data['state'] != 'PENDING' && data['state'] != 'IN PROGRESS') {
 
-                        $('#results-map').attr('src', data['result'] );
-                        console.log(data['result']);
                         nanobar.go(100);
-
                         $('#percent').text('100 %');
+                        $('#results-map').attr('src', data['result'] );
+                        $('#results-map').show();
                         
-                        console.log('Complete');
+                        
                         $('#status').text('finished');
 
                     }

@@ -54,7 +54,7 @@ def toMap(df, user, timestamp, lat, lon):
         attr='Mapbox | <strong>GeoQuery by Matthew Tralka</strong>',
         zoom_start= 14,
         min_zoom= 1,
-        prefer_canvas=True
+        prefer_canvas=True,
         tiles="https://api.mapbox.com/styles/v1/mapbox/satellite-v8/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibXRyYWxrYSIsImEiOiJja2VjNm5hdWEwNjQ4MnZ0cHlycXlndnN5In0.mfQAFUPzfGZeMht0EToJBA"
     )
     
