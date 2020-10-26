@@ -20,3 +20,4 @@ celerybeat-schedule.*
 *.sqlite
 web-map-draft.html
 testing/
+app/templates/maps/
