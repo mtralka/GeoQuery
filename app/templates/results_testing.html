@@ -300,7 +300,8 @@
                         nanobar.go(100);
                         $('#percent').text('100 %');
                         $('#results-map').attr('src', data['result'] );
-                        $('#results-map').show();
+
+                        setTimeout($('#results-map').show(), 500);
                         
                         
                         $('#status').text('finished');
