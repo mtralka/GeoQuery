@@ -73,16 +73,16 @@ def status_landing():
 	return render_template('status.html')
 
 
-# User interface about status of their task
-# TODO
+""" Gives of search task by id """
 @main.route('/results/<task_id>')
 def status_dash(task_id):
 
 	task = Query.query.filter_by(friendly_id= task_id).first()
 	started = datetime.fromtimestamp(task.execution_time).strftime('%Y-%m-%d %H:%M')
 
-	return render_template('results_testing.html', task_id = task_id, task=task, started=started)
+	return render_template('results_testing.html', task_id = task_id, task=task, started=started, map=f'/results/{task_id}/map', csv=f'/results/{task_id}/csv', gj=f'/results/{task_id}/geojson')
 
+""" url for returning map by id """
 @main.route('/results/<task_id>/map')
 def map(task_id):
 
@@ -92,7 +92,7 @@ def map(task_id):
 	# return render_template(f'maps/{task.user_id}/{task.execution_time}/master.html')
 	return render_template(f'maps/test_user_2/{task.execution_time}/master.html')
 
-
+""" endpoint for search task info """
 @main.route('/info/<task_id>', methods=['GET'])
 def status_endpoint(task_id):
 

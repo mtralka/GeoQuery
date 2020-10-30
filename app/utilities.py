@@ -1,12 +1,17 @@
 import string, random, folium, branca
 import geopandas as gpd
 import pandas as pd
+from datetime import datetime
 
 from folium import plugins
 from pathlib import Path
 
 from . import db
 from .model import Query
+
+""" return UNIX timestamp from string """
+def create_timestamp(val):
+    return datetime.strptime(str(val), '%Y-%m-%d').timestamp()
 
 
 """ Create unique ID not in DB """

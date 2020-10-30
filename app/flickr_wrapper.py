@@ -4,7 +4,7 @@ import json, time, random, requests, os
 import pandas as pd
 
 from .env import SECRET, KEY
-from .utilities import toFile, toMap
+from .utilities import toFile, toMap, create_timestamp
 from . import celery
 
 URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search'
@@ -23,11 +23,18 @@ def formatInput(raw):
 
     """
 
-    POSSIBLE_PARAMS = ('radius', 'radius_unit', 'accuracy', 'min_taken', 'max_taken', 'tags')
+    POSSIBLE_PARAMS = ('radius', 'radius_unit', 'accuracy', 'min_taken_date', 'max_taken_date', 'tags')
     param = {'lat' : raw['lat'], 'lon' : raw['lon'] }
 
     for term in POSSIBLE_PARAMS:
         if term in raw and len(raw[term]) > 0:
+            
+            # to search with UNIX timestamp
+            #if term == 'min_taken' or term == 'max_taken':
+            #    param[term] = create_timestamp(raw[term])
+            #else:
+            #    param[term] = raw[term]
+
             param[term] = raw[term]
 
     return param
@@ -63,6 +70,7 @@ def executeSearch(params, user, request_page= 1, search_id= 0, master= False, df
         print('Value Error')
         print(response)
 
+    # catch returning error
     if str(response['photos']['pages']) == '0':
         print(response)
         time.sleep(10)
@@ -75,8 +83,9 @@ def flickrControl(raw_query, user, timestamp, task):
     
     query = formatInput(raw_query)
     param = {**DEFAULT_PARAM, **query}
-
-    current_page, total_page, master_df,total_page = executeSearch(param, user, search_id = timestamp, master=True)
+    print('param')
+    print(param)
+    current_page, total_page, master_df, total_page = executeSearch(param, user, search_id = timestamp, master=True)
 
     # walk search
     while current_page <= total_page:
@@ -92,7 +101,11 @@ def flickrControl(raw_query, user, timestamp, task):
     task.update_state(state=f'IN PROGRESS', meta={'status': 'saving flickr results...'})
 
     toFile(master_df, user, timestamp, format='CSV')
-    toFile(master_df, user, timestamp, format='GeoJSON')
+    try:
+        toFile(master_df, user, timestamp, format='GeoJSON')
+    # No GEO
+    except AttributeError:
+        print('No Geo Data')
 
     task.update_state(state=f'IN PROGRESS', meta={'status': 'making flickr maps...'})
 

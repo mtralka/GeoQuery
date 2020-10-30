@@ -44,7 +44,7 @@ class FlickrSearch(FlaskForm):
 	radius_units = SelectField('Radius Units', choices= [ ('km', 'KM'), ('mi', 'MI') ])
 
 	tags = StringField('Search Tags', validators=[Length(max= 50, message= 'Maximum tag length reached'), Optional()])
-	min_taken = DateField('Minimum Date Taken', format='%Y-%m-%d', validators=[Optional()])
-	max_taken = DateField('Maximum Date Taken', format='%Y-%m-%d', validators=[Optional()])
+	min_taken_date = DateField('Minimum Date Taken', format='%Y-%m-%d', validators=[Optional()])
+	max_taken_date = DateField('Maximum Date Taken', format='%Y-%m-%d', validators=[Optional()])
 	accuracy = IntegerField('Accuracy', validators=[NumberRange(max= 16, min= 0, message='Accuracy is defined from 1 - 16'), Optional()])
 	search = SubmitField('Execute Search')

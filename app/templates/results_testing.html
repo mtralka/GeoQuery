@@ -222,7 +222,7 @@
 
                 </div>
 
-                <div class="right grid-minimum grid-card progress" id='progress'>
+                <div class="right grid-minimum grid-card progress" id='progress' style="display: none;">
 
                     <p id='percent'>
                             
@@ -237,6 +237,44 @@
                     </p>
                     
                 </div>
+
+                <div class="right grid-minimum grid-card progress" id='done' style="display: ;">
+
+                    <div class="results">
+
+                        <p>
+
+                            Download
+
+                        </p>
+
+                        <a href='{{csv}}'>
+    
+                            CSV
+    
+                        </a>
+
+                        <a href="{{gj}}">
+    
+                            GeoJSON
+    
+                        </a>
+
+                        <a href='{{map}}'>
+
+                            map
+
+                        </a>
+    
+                    </div>
+                    
+                </div>
+
+
+
+
+
+
                 <iframe src='' id='results-map' class="bottom grid-minimum" style="background-color: greenyellow;display: none;">
                     
 
@@ -302,7 +340,9 @@
                         $('#results-map').attr('src', data['result'] );
 
                         setTimeout($('#results-map').show(), 500);
-                        
+                        $('#done').toggle()
+                        $('#progress').toggle()
+
                         
                         $('#status').text('finished');
 
