@@ -184,7 +184,7 @@
                 
                             L.circle( [e.latlng.lat, e.latlng.lng], {
 
-                                radius: document.getElementById('radius').value,
+                                radius: document.getElementById('radius').value * 1000,
                                 fillOpacity: .5
 
                             }).addTo(mapSelection);
