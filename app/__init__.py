@@ -7,14 +7,15 @@ from .env import CELERY_BROKER_URL
 db = SQLAlchemy()
 
 celery = Celery(
-    __name__, broker='redis://localhost:6379/0', backend='redis://localhost:6379/0')
+    __name__, broker="redis://localhost:6379/0", backend="redis://localhost:6379/0"
+)
 
 
 def create_app():
     app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = 'SECRETKEY'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+    app.config["SECRET_KEY"] = "SECRETKEY"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
 
     # CELERY INIT
     celery.conf.update(app.config)
@@ -22,7 +23,7 @@ def create_app():
     db.init_app(app)
 
     login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
+    login_manager.login_view = "auth.login"
     login_manager.init_app(app)
 
     from .model import User
@@ -33,10 +34,12 @@ def create_app():
 
     # blue auth
     from .auth import auth as auth_blueprint
+
     app.register_blueprint(auth_blueprint)
 
     # blue main
     from .main import main as main_blueprint
+
     app.register_blueprint(main_blueprint)
 
     return app
