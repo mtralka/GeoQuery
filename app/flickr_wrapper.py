@@ -1,11 +1,20 @@
 # FLICKR API Wrapper
 
-import json, time, random, requests, os
-import pandas as pd
+import json
+import os
+import random
+import time
 
-from .env import SECRET, KEY
-from .utilities import toFile, toMap, create_timestamp
+import pandas as pd
+import requests
+
 from . import celery
+from .env import KEY
+from .env import SECRET
+from .utilities import create_timestamp
+from .utilities import toFile
+from .utilities import toMap
+
 
 URL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search'
 

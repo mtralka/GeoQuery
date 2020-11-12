@@ -1,7 +1,7 @@
 
 from . import celery
-
 from .flickr_wrapper import flickrControl
+
 
 @celery.task(bind= True)
 def newSearch(self, raw_query, user, timestamp, friendly_id):

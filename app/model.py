@@ -1,5 +1,7 @@
 from flask_login import UserMixin
+
 from . import db
+
 
 """ Table Depicting Users """
 class User(UserMixin, db.Model):

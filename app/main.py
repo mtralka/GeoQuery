@@ -1,14 +1,26 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash, jsonify, send_from_directory
-from flask_login import login_required, current_user
+from datetime import datetime
+import time
+
+from celery import Celery
+from flask import Blueprint
+from flask import flash
+from flask import jsonify
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import send_from_directory
+from flask import session
+from flask import url_for
+from flask_login import current_user
+from flask_login import login_required
+
+from . import celery
 from . import db
 from .forms import FlickrSearch
-from .model import User, Query
-from .utilities import create_unique_id
-import time
-from celery import Celery
-from . import celery
-from datetime import datetime
+from .model import Query
+from .model import User
 from .search_control import newSearch
+from .utilities import create_unique_id
 
 
 main = Blueprint('main', __name__)
