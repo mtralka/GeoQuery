@@ -3,10 +3,9 @@ from . import celery
 from .flickr_wrapper import flickrControl
 
 
-@celery.task(bind= True)
+@celery.task(bind=True)
 def newSearch(self, raw_query, user, timestamp, friendly_id):
     """ Controls master execution of all search functions
-    
     Parameters:
         raw_query (dict): raw user dict
         user (string): primary key of user
@@ -19,4 +18,3 @@ def newSearch(self, raw_query, user, timestamp, friendly_id):
 
     return {'current': '2', 'total': '1', 'status': '',
             'result': f'/results/{friendly_id}/map'}
-    

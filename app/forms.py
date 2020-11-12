@@ -32,21 +32,27 @@ from wtforms.validators import Optional
 WTF_CSRF_SECRET_KEY = 'CSRFSTRING' # Todo pull from env 
 
 
-
-class LoginForm(FlaskForm):
-	
-	email = TextField("Email", validators=[InputRequired("Please enter your email"), Email("Please enter an email")])
-	password = PasswordField("Password", validators=[DataRequired("Enter your password")])
+class LoginForm(FlaskForm):	
+	email = TextField("Email", validators=[
+		InputRequired("Please enter your email"), Email("Please enter an email")])
+	password = PasswordField("Password", validators=[
+		DataRequired("Enter your password")])
 	submit = SubmitField("Login")
 
-class SignUp(FlaskForm):
-	
-	name = TextField("Name", validators=[InputRequired(message = "Please enter your name")])
-	email = TextField("Email", validators=[InputRequired(message = "Please enter your email"), Email("Please enter an email")])
-	password = PasswordField("Password", validators=[InputRequired(message = "Enter your password"), Length(min = 4, message = "Minimum password length 4")])
-	password_confirm = PasswordField("Password Confirm", validators=[InputRequired(message = "Enter your password"), EqualTo('password', message = "Passwords must match")])
-	submit = SubmitField("Sign Up")
 
+class SignUp(FlaskForm):
+	name = TextField("Name", validators=[
+		InputRequired(message="Please enter your name")])
+	email = TextField("Email", validators=[
+		InputRequired(message="Please enter your email"), Email(
+			"Please enter an email")])
+	password = PasswordField("Password", validators=[
+		InputRequired(message="Enter your password"), Length(
+			min= 4, message="Minimum password length 4")])
+	password_confirm = PasswordField("Password Confirm", validators=[
+		InputRequired(message="Enter your password"), EqualTo(
+			'password', message="Passwords must match")])
+	submit = SubmitField("Sign Up")
 
 
 class FlickrSearch(FlaskForm):
@@ -59,13 +65,20 @@ class FlickrSearch(FlaskForm):
 	max long
 	"""
 	# radius search
-	lat = DecimalField('Latitude', places= 5, rounding= None, validators=[InputRequired(message= 'Input Required')])
-	lon = DecimalField('Longitude', places= 5, rounding= None, validators=[InputRequired(message= 'Input Required')])
+	lat = DecimalField('Latitude', places=5, rounding=None, validators=[
+		InputRequired(message='Input Required')])
+	lon = DecimalField('Longitude', places=5, rounding=None, validators=[
+		InputRequired(message='Input Required')])
 	radius = IntegerField('Radius', validators=[Optional()])
-	radius_units = SelectField('Radius Units', choices= [ ('km', 'KM'), ('mi', 'MI') ])
+	radius_units = SelectField('Radius Units', choices=[('km', 'KM'), ('mi', 'MI')])
 
-	tags = StringField('Search Tags', validators=[Length(max= 50, message= 'Maximum tag length reached'), Optional()])
-	min_taken_date = DateField('Minimum Date Taken', format='%Y-%m-%d', validators=[Optional()])
-	max_taken_date = DateField('Maximum Date Taken', format='%Y-%m-%d', validators=[Optional()])
-	accuracy = IntegerField('Accuracy', validators=[NumberRange(max= 16, min= 0, message='Accuracy is defined from 1 - 16'), Optional()])
+	tags = StringField('Search Tags', validators=[
+		Length(max=50, message='Maximum tag length reached'), Optional()])
+	min_taken_date = DateField(
+		'Minimum Date Taken', format='%Y-%m-%d', validators=[Optional()])
+	max_taken_date = DateField(
+		'Maximum Date Taken', format='%Y-%m-%d', validators=[Optional()])
+	accuracy = IntegerField(
+		'Accuracy', validators=[NumberRange(
+			max=16, min=0, message='Accuracy is defined from 1 - 16'), Optional()])
 	search = SubmitField('Execute Search')

@@ -6,7 +6,9 @@ from .env import CELERY_BROKER_URL
 
 db = SQLAlchemy()
 
-celery = Celery(__name__, broker= 'redis://localhost:6379/0', backend= 'redis://localhost:6379/0')
+celery = Celery(
+    __name__, broker='redis://localhost:6379/0', backend='redis://localhost:6379/0')
+
 
 def create_app():
     app = Flask(__name__)
