@@ -2,7 +2,7 @@
 
 ### *Search, Know, Change*
 
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) ![GitHub language count](https://img.shields.io/github/languages/count/mtralka/GeoQuery) [![Generic badge](https://img.shields.io/badge/Status-Development-orange.svg)](https://shields.io/) 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) ![GitHub language count](https://img.shields.io/github/languages/count/mtralka/GeoQuery) [![Generic badge](https://img.shields.io/badge/Status-Development-orange.svg)](https://shields.io/) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 #### **Objective**
 
