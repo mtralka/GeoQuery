@@ -1,126 +1,251 @@
-{% extends "base.html" %}
+<!doctype html>
+<html class='text-gray-900 leading-tight font-sans overflow-x-hidden'>
 
-{% block content %}
+<head>
+    <!-- ... -->
+    <title> SEARCH PAGE </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="..\static\css\tailwind.css" rel="stylesheet">
 
-            <div class='landing-title'>
 
-                <h1>
+</head>
 
-                    GeoQuery
+<style>
+    .active {
+        display: block;
+    }
+</style>
 
+<body class='bg-gray-100'>
+    <header class='container mx-auto w-screen bg-blue-400 p-5'>
+
+        <nav class="flex-row md:justify-between">
+
+
+            <div class="flex flex-row justify-between text-gray-900 font-bold">
+
+                <!-- BRAND ICON -->
+                <a href='/' class=''>
+                    <img src='..\static\img\brand.png' alt="Geo Query" class='h-12 w-12'></img>
+                </a>
+
+                <!-- BURGER ICON -->
+                <button id="burger-button" class="md:hidden bg-yellow-500 rounded p-1 h-10 w-10" href=''>
+                    <svg class='fill-current' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <ul class="hidden text-center md:flex flex-col justify-evenly md:flex-row md:justify-end text-lg"
+                    id="mobile-menu">
+                    <li class="p-6 hover:bg-yellow-800"><a href='#'> Home </a></li>
+                    <li class="p-6 hover:bg-yellow-800"><a href='#'> Search </a></li>
+                    <li class="p-6 hover:bg-yellow-800"><a href='#'> About </a></li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <main>
+
+        <div class='pt-24'>
+            <div class='container px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center'>
+
+                <!-- left -->
+                <div
+                    class='flex flex-col w-full md:w-2/5 justify-center items-center md:items-start text-center md:text-left'>
+                    <h1 class='text-5xl md:text-6xl font-extrabold'>
+
+                        GeoQuery
+
+                    </h1>
+
+                    <p class="leading-normal text-2xl mb-8 mt-4">
+                        Search the World
+                    </p>
+
+                    <div class='flex flex-wrap flex-col md:flex-row md:justify-between'>
+                        <button
+                            class="mx-4 lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                            Sign Up
+                        </button>
+
+                        <button
+                            class="mx-4 lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                            Search Now
+                        </button>
+
+                    </div>
+
+
+
+                </div>
+
+                <!-- right -->
+                <div class="w-full md:w-3/5 py-6 text-center">
+                    <img class="w-full md:w-4/5 z-50" src="..\static\img\connected_world_wuay.svg" />
+                </div>
+
+
+            </div>
+
+
+
+            <div class='container max-w-5xl mx-auto m-6'>
+                <h1 class="w-full my-2 text-4xl font-bold text-center">
+                    It's as easy as
                 </h1>
 
-                <h2>
-
-                    <span id='subtitle'></span> the World
-
-                </h2>
 
             </div>
 
-            <div class='landing-buttons'>
+            <div class='container w-full md:max-w-5xl mx-auto m-6 flex flex-col md:flex-row p-3'>
 
-                <a href='/' class='button'> 
 
-                    Sign Up
 
-                </a>
+                <!-- CARD -->
+                <div
+                    class='bg-white relative flex-initial md:w-1/3 bg-grey-400 flex justify-between flex-col p-4 rounded-2xl m-2 shadow-lg hover:shadow-2xl'>
 
-                <a href="#info" class='button'>
+                    <div class='absolute -top-2 md:-top-5 -left-3 bg-pink-400 rounded-full h-20 w-20 flex items-center 
+                    transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 justify-center 
+                    text-gray-900 font-bold text-5xl shadow-lg'>
 
-                    Learn More
+                        1
+                    </div>
 
-                </a>
+                    <h4 class='text-3xl font-bold leading-normal text-center'>
+
+                        Search
+
+
+                    </h4>
+
+                    <img class='w-full sm:h-64 mx-auto mt-3 p-5' src='..\static\img\location_search_bqps.svg'>
+
+                    <p class='text-xl text-left leading-loose'>
+
+                        The world is a big place! Find a location that interests <span class='font-bold'>you</span>,
+                        think up
+                        a timeframe that might be interesting, and click that search button!
+
+
+
+                    </p>
+
+
+                </div>
+
+                <!-- CARD -->
+                <div
+                    class='relative bg-white flex-initial md:w-1/3 bg-grey-400 flex justify-between flex-col p-4 rounded-2xl m-2 shadow-lg hover:shadow-2xl'>
+
+                    <div class='absolute -top-2 md:-top-5 -left-3 bg-pink-600 rounded-full h-20 w-20 flex items-center 
+                        transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
+                        justify-center text-gray-900 font-bold text-5xl shadow-lg'>
+
+                        2
+                    </div>
+                    <h4 class='text-3xl font-bold leading-normal text-center'>
+
+                        Know
+
+
+                    </h4>
+
+                    <img class='w-full sm:h-64 mx-auto mt-3 p-5' src='..\static\img\data_processing_yrrv.svg'>
+
+                    <p class='text-xl text-left leading-loose'>
+
+                        Wohoo! Nice job on that search button. Now it's time to sit back and grab a cup of tea
+                        while we wait for the results to come in. In the meantime, you might want to read-up
+                        on what type on information you'll get back or even <span class='font-bold'>star</span>
+                        our github.
+                    </p>
+
+
+                </div>
+
+                <!-- CARD -->
+                <div
+                    class='relative bg-white flex-initial md:w-1/3 bg-grey-400 flex justify-between flex-col p-4 rounded-2xl m-2 shadow-lg hover:shadow-2xl'>
+                    <div class='absolute -top-2 md:-top-5 -left-3  bg-pink-800 rounded-full h-20 w-20 flex items-center 
+                        transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
+                        justify-center text-gray-700 font-bold text-5xl shadow-lg'>
+
+                        3
+                    </div>
+                    <h4 class='text-3xl font-bold leading-normal text-center'>
+
+                        Change
+
+
+                    </h4>
+
+                    <img class='w-full sm:h-64 mx-auto mt-3 p-5' src='..\static\img\the_world_is_mine_nb0e.svg'>
+
+                    <p class='text-lg text-left leading-normal'>
+
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo
+                        posuere et sit amet ligula.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                        at ipsum eu nunc commodo
+
+
+
+                    </p>
+
+
+                </div>
+
+
+
+
 
             </div>
 
-            <div class='card-container max-width' id='info'>
 
-                <div class='card no-background no-boxshadow' style="justify-content: center;align-items: center;">
 
-                    <h2>
 
-                        The world is full of data
 
-                    </h2>
 
-                </div>
 
-                <div class='card no-background no-boxshadow'>
 
-                    
-                    <img src="{{ url_for ('static', filename= 'img/globe_with_points.svg') }}">
 
-                </div>
 
-                <div class='card no-background no-boxshadow'>
 
-                   
-                    <img src="{{ url_for ('static', filename= 'img/data_processing_yrrv.svg') }}">
 
-                </div>
 
-                <div class='card no-background no-boxshadow'>
 
-                    <h2>
 
-                        But aggregating this data is <b>time-consuming</b> and <b>restrictive</b>.
 
-                    </h2>
 
-                </div>
+    </main>
 
-                <div class='card full-width no-background no-boxshadow height-auto'>
+    <footer class='footer'>
 
-                    <h2 class="no-margin">
 
-                        Now, with <b>GeoQuery</b>, the <span id='description' style="min-width: 7rem;display: inline-block;"></span> is at your fingertips.
-                        
-                    </h2>
-                   
-                    <img src=" {{ url_for ('static', filename= 'img/the_world_is_mine_nb0e.svg') }}" class='margin-center'>
 
-                </div>
+    </footer>
 
-            </div>
+    <script>
+        let hamburger = document.getElementById('burger-button');
 
-        
+        let mobileMenu = document.getElementById('mobile-menu');
 
-            <!--
+        hamburger.addEventListener('click', function () {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
 
-            
-            
-            -->
+</body>
 
-            <script>
 
-            
-                var subtitleOptions = {
-    
-                    strings: ['<i>Search<i/>', '<i>Know<i/>', '<i>Change<i/>'],
-                    typeSpeed: 100,
-                    startDelay: 100,
-                    loop: true,
-                    backdelay: 40,
-                    fadeOut: false
-                    
-                };
-    
-                var descriptionOptions = {
-    
-                    strings: ['data', 'world'],
-                    typeSpeed: 200,
-                    startDelay: 100,
-                    loop: true,
-                    backdelay: 40,
-                    fadeOut: true,
-                    showCursor: false
-                    
-                };
-    
-                var typed = new Typed('#subtitle', subtitleOptions);
-                var typed = new Typed('#description', descriptionOptions);
-    
-            </script>
 
-{% endblock %}
+</html>
