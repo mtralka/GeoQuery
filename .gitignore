@@ -21,5 +21,4 @@ celerybeat-schedule.*
 web-map-draft.html
 testing/
 app/templates/maps/
-app/static/world-110m.json
-app/static/css/tailwind.css
+app/static/*
