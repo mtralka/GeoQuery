@@ -1,215 +1,470 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class='text-gray-900 leading-tight font-sans overflow-x-hidden'>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title> SEARCH PAGE </title>
+<head>
 
-        <meta name="author" content="Matthew Tralka">
-        <meta name="description"
-            content="">
-        <meta name="keywords" content="">
-        
-        <!-- CSS -->
-        <link rel="stylesheet" href="../static/css/normalize.css"/>
-   
-        
-        <link rel="stylesheet" href="../static/css/home.css" />
+    <title> Search | GeoQuery </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="..\static\css\tailwind.css" rel="stylesheet">
 
-        
-        <!-- ADOBE FONTS -->
-        <link rel="stylesheet" href="https://use.typekit.net/hwf2qbl.css">
-
-        
-
-        <!-- typed.js -->
-        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-
-        <!--
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        -->
-
-        <!-- LEAFLET -->
-        <!-- LEAFLET -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    <!-- LEAFLET -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin=""/>
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
 
 
-    </head>
+</head>
 
-    <body>
+<style>
+    .active {
+        display: block;
+    }
+</style>
 
-        <header class='nav'>
-        
-            <a class='nav-brand' href="/">
+<body class='bg-gray-100'>
+    <header class=' mx-auto w-screen bg-green-800 p-5'>
 
-                <img src="../static/img/brand.png" alt='GeoQuery' width='70'>
+        <nav class="flex-row md:justify-between">
 
-            </a>
 
-            <nav class='nav-sub'>
+            <div class="flex flex-row justify-between text-white font-bold">
 
-                <a href="/" class='nav-item'>
-
-                    home
-
+                <!-- BRAND ICON -->
+                <a href='/' class=''>
+                    <img src='..\static\img\brand.png' alt="Geo Query" class='h-12 w-12'></img>
                 </a>
 
-                <a href="/search" class='nav-item'>
+                <!-- BURGER ICON -->
+                <button id="burger-button" class="md:hidden bg-yellow-500 rounded p-1 h-10 w-10" href=''>
+                    <svg class='fill-current' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
 
-                    search
+                <ul class="hidden text-center md:flex flex-col justify-evenly md:flex-row md:justify-end text-lg"
+                    id="mobile-menu">
+                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Home </a></li>
+                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Search </a></li>
+                    <li class="p-6 hover:bg-yellow-700"><a href='#'> About </a></li>
 
-                </a>
+                </ul>
 
-                <a href="/about" class='nav-item'>
+            </div>
 
-                    about
+        </nav>
 
-                </a>
+    </header>
 
-            </nav>
+    <main>
+        <div class='mx-auto max-w-7xl full-width mt-24'>
 
-        </header>
+            <div class='full-width shadow-2xl rounded-3xl pt-2 bg-gray-100 mx-2'>
 
-        <main style='justify-content: center;'>
+                <h1 class='mx-auto text-center md:text-left font-bold text-3xl py-4 pl-6'>
 
-            <div class="search-container"> 
+                    New Search
 
-                <div class='search-card' style="overflow-y: auto;background-color: grey;">
+                </h1>
 
-                    <h3>
+                <!-- SEARCH CONTAINER -->
+                <div class='full-width h-2/3 md:pl-4 shadow-lg rounded-3xl md:flex md:flex-row'>
 
-                        Parameters
-    
-                    </h3>
+                    <!-- LEFT -->
+                    <form
+                        class='
+                            w-full h-auto md:w-1/2 md:h-full rounded-t-3xl md:rounded-none md:rounded-l-3xl p-5 bg-white block
+                            flex flex-col h-full items-center justify-center md:flex-row md:flex-wrap md:justify-around md:items-center'
+                        style='min-height: 500px;'>
 
-                    <form class='form-container ' action="/search" id='search-form' method='POST'>
+                        <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
 
-                        {{ form.csrf_token }}
-            
-                        <div class="form-item">
-            
-                            {{ form.lat }}
-                            {{ form.lat.label }} 
-            
+                            <input class='w-4/5 h-full
+                            font-semibold bg-gray-100 p-2
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="lat"
+                                name="lat" type="text" value="" placeholder="Latitude" onchange="updateMap();">
+
+                            <p class='inline-block'>
+
+                                lat
+
+                            </p>
+
                         </div>
-            
-                        <div class="form-item">
-            
-                            {{ form.lon }}
-                            {{ form.lon.label }} 
-            
+
+                        <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                            <input class='w-4/5 h-full
+                            font-semibold bg-gray-100 p-2
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="lon"
+                                name="lon" type="text" value="" placeholder="Longitude" onchange="updateMap();">
+
+                            <p class='inline-block'>
+
+                                lon
+
+                            </p>
+
                         </div>
-            
-                        <div class="form-item">
-            
-                            {{ form.radius }}
-                            {{ form.radius.label }} 
-            
+
+                        <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                            <input class='w-4/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block'
+                                id="radius" name="radius" type="text" value="" placeholder="Radius"
+                                onchange="updateMap();">
+
+                            <p class='inline-block'>
+
+                                km
+
+                            </p>
+
                         </div>
-            
-                        <div class="form-item">
-            
-                            {{ form.radius_units }}
-                            {{ form.radius_units.label }} 
-            
+
+                        <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                            <input class='w-3/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="acc"
+                                name="acc" type="text" value="" placeholder="Accuracy"
+                                onchange="updateAccuracy(this.value);">
+
+                            <p class='inline-block' id='acc-info'>
+
+                                accuracy
+
+                            </p>
+
                         </div>
-            
-                        <div class="form-item">
-            
-                            {{ form.accuracy }}
-                            {{ form.accuracy.label }} 
-            
+
+                        <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                            <input
+                                class='w-3/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block overflow-hidden'
+                                id="acc" name="acc" type="date" value="" placeholder="date">
+
+                            <p class='inline-block' id=''>
+
+                                start
+
+                            </p>
+
+                            <p class='inline-block' id=''>
+
+                                date
+
+                            </p>
+
+
                         </div>
-                        
-                        <div class="form-item">
-            
-                            {{ form.min_taken_date (class='date')}}
-                            {{ form.min_taken_date.label }} 
-            
+
+                        <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                            <input class='w-3/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="acc"
+                                name="acc" type="date" value="" placeholder="date">
+
+                            <p class='inline' id=''>
+
+                                end
+
+                            </p>
+
+                            <p class='inline' id=''>
+
+                                date
+
+                            </p>
+
                         </div>
-            
-                        <div class="form-item">
-            
-                            {{ form.max_taken_date (class='date') }}
-                            {{ form.max_taken_date.label }} 
-            
+
+                        <div class='w-4/6 h-14 md:w-full md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-7 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                            <input class='w-3/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="acc"
+                                name="acc" type="text" value="" placeholder="search tags">
+
+                            <p class='inline-block' id='acc-info'>
+
+                                tags
+
+                            </p>
+
+
                         </div>
-            
-                        <div class="form-item">
-            
-                            {{ form.tags }}
-                            {{ form.tags.label }} 
-            
-                        </div>
-                        
-                        
+
+                        <button class="mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
+                            rounded-full my-6 py-5 px-9 shadow-lg focus:outline-none focus:shadow-outline
+                            transform transition hover:scale-105 duration-300 ease-in-out">
+                            Search Now
+                        </button>
+
                     </form>
 
-                    {{ form.search (id='search',class='button', form='search-form') }}
+                    <!-- RIGHT -->
+                    <div
+                        class='w-full md:w-1/2 md:h-full rounded-b-3xl md:rounded-none md:rounded-r-3xl bg-white overflow-hidden block'>
+
+                        <!-- LEAFLET MAP -->
+                        <div id='map-selection' style="height: 500px;"></div>
+
+                    </div>
 
                 </div>
+            </div>
 
-                <div class='search-card' id='map-selection'>
+        </div>
 
-                    <!-- LEAFLET SCRIPT -->
-                    <script type="text/javascript">
-                    
-                        var mapSelection = L.map('map-selection', {
+        <div class='mx-auto max-w-7xl full-width mt-10'>
 
-                            zoom: 3,
-                            center: [38.89 , -31.75]
-                        });
 
-                        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-                                        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                                        id: 'mapbox/streets-v11',
-                                        tileSize: 512,
-                                        zoomOffset: -1,
-                                        accessToken: 'pk.eyJ1IjoibXRyYWxrYSIsImEiOiJja2VjNm5hdWEwNjQ4MnZ0cHlycXlndnN5In0.mfQAFUPzfGZeMht0EToJBA'
-                                    }).addTo(mapSelection);
 
-                        mapSelection.on('click', function(e) {
+            <div class='full-width shadow-2xl rounded-3xl pt-2 bg-gray-100 mx-2 md:pl-4'>
 
-                            document.getElementById('lon').value = e.latlng.lng;
-                            document.getElementById('lat').value = e.latlng.lat;
+                <h1 class='mx-auto text-center md:text-left font-bold text-3xl py-4 pl-3'>
 
-                            //alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-                
-                            L.circle( [e.latlng.lat, e.latlng.lng], {
+                    Flickr Search Terms
 
-                                radius: document.getElementById('radius').value * 1000,
-                                fillOpacity: .5
+                </h1>
 
-                            }).addTo(mapSelection);
-                            
-                            
-                        });
-                    
-                    </script>
+                <div class='w-full h-2/3 md:pl-4 shadow-lg bg-white rounded-3xl text-lg'>
+
+                    <DL class='md:w-1/2 p-4'>
+                        <DT class='font-bold'>lat (latitiude)</DT>
+                        <DD class='pl-10'>
+                            given in wgs84, decimal
+                        </DD>
+
+                        <DT class='font-bold'>lon (longitude)</DT>
+                        <DD class='pl-10'>
+                            given in wgs84, decimal
+                        </DD>
+
+                        <DT class='font-bold'>radius</DT>
+                        <DD class='pl-10'>
+                            search radius in kilometers from center-point defined from given lat
+                            / lon. Maximum 32 KM. Defaults to 5km
+                        </DD>
+
+                        <DT class='font-bold'>accuracy</DT>
+                        <DD class='pl-10'>
+                            recorded accuracy level of geotagged location information. Defaults
+                            to 16
+
+                            <ul class='list-outside pl-10 italic'>
+                                <li>World : 1</li>
+                                <li>County : 3</li>
+                                <li>Region : 6</li>
+                                <li>City : 11</li>
+                                <li>Street : 16</li>
+
+                            </ul>
+                        </DD>
+
+                        <DT class='font-bold'>tags</DT>
+                        <DD class='pl-10'>
+                            additional tags to search by. Comma deliminated
+                        </DD>
+
+                        </ul>
+
+
+
+
+
 
                 </div>
 
             </div>
 
-        </main>
+    </main>
 
-        <footer class='footer no-margin'>
+    <footer class='w-full text-center flex justify-evenly items-center text-sm md:text-lg mt-10 p-5 text-gray-600'>
 
-            <div>
+        <p>GitHub</p>
 
-                &#0169;2020 <a href="https://tralka.xyz"><strong>Matthew Tralka</strong></a>
+        <p class='font-bold'>GeoQuery &#xA9; 2020 Matthew Tralka</p>
 
-            </div>
+        <p>Contact Us</p>
 
-        </footer>
 
-    </body>
+    </footer>
+
+    <script>
+        // mobile menu
+        let hamburger = document.getElementById('burger-button');
+
+        let mobileMenu = document.getElementById('mobile-menu');
+
+        hamburger.addEventListener('click', function () {
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
+
+    <!-- LEAFLET SCRIPT -->
+    <script type="text/javascript">
+
+        var mapSelection = L.map('map-selection', {
+            zoom: 3,
+            center: [38.89, -31.75]
+        });
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1IjoibXRyYWxrYSIsImEiOiJja2VjNm5hdWEwNjQ4MnZ0cHlycXlndnN5In0.mfQAFUPzfGZeMht0EToJBA'
+        }).addTo(mapSelection);
+
+        var circle;
+
+        mapSelection.on('click', function (e) {
+
+            // set input lat / lon with clicked value
+            document.getElementById('lon').value = e.latlng.lng.toFixed(4);
+            document.getElementById('lat').value = e.latlng.lat.toFixed(4);
+
+            let rad = document.getElementById('radius').value;
+
+            if (rad > 32 || rad <= 0) {
+                rad = 5;
+                document.getElementById('radius').value = 5;
+            }
+
+            // remove existing circle
+            if (circle) {
+                circle.remove(mapSelection);
+            }
+
+            // update circle
+            circle = L.circle([e.latlng.lat, e.latlng.lng], {
+
+                radius: rad * 1000,
+                fillOpacity: .5
+
+            });
+
+            // add circle to map
+            circle.addTo(mapSelection);
+
+            // fly to circle
+            mapSelection.flyTo(new L.LatLng(e.latlng.lat, e.latlng.lng), 10);
+
+        });
+
+
+        function updateMap() {
+
+            // get new vars
+            let lon = document.getElementById('lon').value;
+            let lat = document.getElementById('lat').value;
+            let rad = document.getElementById('radius').value;
+
+            if (rad > 32 || rad <= 0) {
+                rad = 5;
+                document.getElementById('radius').value = 5;
+            }
+
+            // remove existing circle
+            if (circle) {
+                circle.remove(mapSelection);
+            }
+
+            // update circle
+            circle = L.circle([lat, lon], {
+
+                radius: rad * 1000,
+                fillOpacity: .5
+
+            })
+
+            // add circle to map
+            circle.addTo(mapSelection);
+
+            // fly to circle center
+            mapSelection.flyTo(new L.LatLng(lat, lon), 10);
+
+        };
+
+    </script>
+
+    <script>
+        function updateAccuracy(accuracy) {
+
+            let description;
+
+            if (!accuracy) {
+
+                description = 'accuracy';
+            }
+
+            else if (accuracy < 0) {
+
+                description = 'too low';
+                document.getElementById('acc').value = 1;
+            }
+            else if (accuracy == 1) {
+
+                description = 'World';
+                console.log('test');
+            }
+
+            else if (accuracy <= 3) {
+
+                description = 'County';
+            }
+
+            else if (accuracy <= 6) {
+
+                description = 'Region';
+            }
+
+            else if (accuracy <= 11) {
+
+                description = 'City';
+            }
+
+            else if (accuracy <= 16) {
+
+                description = 'Street';
+            }
+
+            else if (accuracy > 16) {
+
+                description = 'too high';
+                document.getElementById('acc').value = 16;
+            }
+            else {
+
+                description = 'error';
+                document.getElementById('acc').value = 16;
+            }
+
+            document.getElementById('acc-info').innerHTML = description;
+
+        };
+
+
+
+
+    </script>
+
+</body>
+
+
 
 </html>
