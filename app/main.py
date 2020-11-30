@@ -25,7 +25,7 @@ from .search_control import newSearch
 from .utilities import create_unique_id
 
 
-RESULTS_PATH = "./response"
+RESULTS_PATH = ".\\response"
 
 main = Blueprint("main", __name__)
 
@@ -50,7 +50,7 @@ def search():
 
     if form.validate_on_submit():
 
-        if form.validate() == False:
+        if form.validate() is False:
 
             flash("Failed Validation")
             return redirect(url_for("main.search"))
@@ -81,14 +81,14 @@ def search():
                 max_taken=data.get("max_taken"),
                 accuracy=data.get("accuracy"),
                 radius=data.get("radius"),
-                radius_units=data.get("radius_units"),
+                radius_units='KM',
                 tags=data.get("tags"),
             )
             db.session.add(query)
             db.session.commit()
             return redirect(f"/results/{friendly_id}")
 
-    return render_template("search.html", form=form)
+    return render_template("search.html", form=form, title='Search')
 
 
 @main.route("/status", methods=["GET", "POST"])
@@ -111,6 +111,7 @@ def status_dash(task_id):
         "results_testing.html",
         task_id=task_id,
         task=task,
+        title='Results',
         started=started,
         map=f"/results/{task_id}/map",
         csv=f"/results/{task_id}/csv",
@@ -171,10 +172,9 @@ def get_results(task_id):
     
     task = Query.query.filter_by(friendly_id=task_id).first()
 
-    path = os.path.join(RESULTS_PATH, task.user_id, \
-        task.execution_time, 'master.geojson')
-
-    with open(path) as file:
+    path = os.path.join(RESULTS_PATH, str(task.user_id),str(task.execution_time), 'master.geojson')
+    print(path)
+    with open(path, 'r', encoding='utf8') as file:
         results = json.load(file)
 
     return results

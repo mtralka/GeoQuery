@@ -1,530 +1,441 @@
-<!doctype html>
-<html class='text-gray-900 leading-tight font-sans overflow-x-hidden'>
+{% extends "base.html" %}
 
-<head>
-    <title> Results | GeoQuery </title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="..\static\css\tailwind.css" rel="stylesheet">
+{% block content %}
 
-</head>
+<div class='mx-auto max-w-7xl full-width mt-24'>
 
-<style>
-    .active {
-        display: block;
-    }
-</style>
+    <div class='full-width shadow-2xl rounded-3xl pt-2 bg-gray-100 mx-2'>
 
-<body class='bg-gray-100 overflow-hidden'>
-    <header class=' mx-auto w-screen bg-green-800 p-5'>
+        <div class='mx-auto text-left pb-2'>
+            <h1 class='mx-auto text-center md:text-left font-bold text-3xl pt-4 pl-6'>
 
-        <nav class="flex-row md:justify-between">
+                Search: {{ task_id }}
 
 
-            <div class="flex flex-row justify-between text-white font-bold">
+            </h1>
 
-                <!-- BRAND ICON -->
-                <a href='/' class=''>
-                    <img src='..\static\img\brand.png' alt="Geo Query" class='h-12 w-12'></img>
-                </a>
+            <p class='mx-auto text-center md:text-left font-medium text-lg pl-6'>
 
-                <!-- BURGER ICON -->
-                <button id="burger-button" class="md:hidden bg-yellow-500 rounded p-1 h-10 w-10" href=''>
-                    <svg class='fill-current' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
+                Started: {{ started }}
 
-                <ul class="hidden text-center md:flex flex-col justify-evenly md:flex-row md:justify-end text-lg"
-                    id="mobile-menu">
-                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Home </a></li>
-                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Search </a></li>
-                    <li class="p-6 hover:bg-yellow-700"><a href='#'> About </a></li>
 
-                </ul>
+            </p>
+
+        </div>
+
+        <!-- 1st CONTAINER -->
+        <div class='w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row'>
+
+            <!-- SEARCH TERMS -->
+            <div class='w-full md:w-1/2 p-2 bg-white shadow-md rounded-3xl md:mr-2'>
+
+
+                <form class='p-5 block h-full flex flex-col  items-center justify-center
+                             md:flex-row md:flex-wrap md:justify-around md:items-center' style='min-height: 500px;'>
+
+                    <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                        <input class='w-4/5 h-full
+                            font-semibold bg-gray-100 p-2
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="lat"
+                            name="lat" type="text" value="{{ '%0.3f'| format(task.lat|float) }}" placeholder="Latitude"
+                            onchange="updateMap();" readonly>
+
+                        <p class='inline-block'>
+
+                            lat
+
+                        </p>
+
+                    </div>
+
+                    <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                        <input class='w-4/5 h-full
+                            font-semibold bg-gray-100 p-2
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="lon"
+                            name="lon" type="text" value="{{ '%0.3f'| format(task.lon|float) }}" placeholder="Longitude"
+                            onchange="updateMap();" readonly>
+
+                        <p class='inline-block'>
+
+                            lon
+
+                        </p>
+
+                    </div>
+
+                    <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                        <input class='w-4/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block'
+                            id="radius" name="radius" type="text" value="{{ task.radius }}" placeholder="Radius"
+                            onchange="updateMap();" readonly>
+
+                        <p class='inline-block'>
+
+                            km
+
+                        </p>
+
+                    </div>
+
+                    <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                        <input class='w-3/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="acc"
+                            name="acc" type="text" value="{{ task.accuracy }}" placeholder="Accuracy"
+                            onchange="updateAccuracy(this.value);" readonly>
+
+                        <p class='inline-block' id='acc-info'>
+
+                            accuracy
+
+                        </p>
+
+                    </div>
+
+                    <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                        <input
+                            class='w-3/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block overflow-hidden'
+                            id="acc" name="acc" type="date" value="{{ task.min_taken }}" placeholder="date" readonly>
+
+                        <p class='inline-block' id=''>
+
+                            start
+
+                        </p>
+
+                        <p class='inline-block' id=''>
+
+                            date
+
+                        </p>
+
+
+                    </div>
+
+                    <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                        <input class='w-3/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="acc"
+                            name="acc" type="date" value="{{ task.max_taken }}" placeholder="date" readonly>
+
+                        <p class='inline' id=''>
+
+                            end
+
+                        </p>
+
+                        <p class='inline' id=''>
+
+                            date
+
+                        </p>
+
+                    </div>
+
+                    <div class='w-4/6 h-14 md:w-full md:h-12 bg-gray-100 border border-gray-200
+                        shadow mx-2 md:mx-7 my-2 text-lg rounded tracking-wide overflow-hidden'>
+
+                        <input class='w-3/5 h-full font-semibold bg-gray-100
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="acc"
+                            name="acc" type="text" value="{{ task.tags }}" placeholder="search tags" readonly>
+
+                        <p class='inline-block' id='acc-info'>
+
+                            tags
+
+                        </p>
+
+
+                    </div>
+
+                    <div class="mx-4 lg:mx-1 bg-yellow-500 text-gray-800 font-bold
+                             my-6 py-5 px-9 shadow-lg" id='status'>
+                        {{ task.status }}
+                    </div>
+
+                </form>
+
+
 
             </div>
 
-        </nav>
+            <!-- STATUS  -->
 
-    </header>
+            <div class='w-full md:w-1/2 bg-white shadow-md rounded-3xl mt-3 md:m-0 md:ml-2 overflow-hidden'
+                style="min-height: 400px;">
+                <div id='progress'></div>
+                <div class='relative  h-full p-2 flex flex-col items-center justify-center' style="min-height: 400px;">
 
-    <main>
+                    <p class='text-6xl font-semibold' id='percent'>
 
-        <div class='mx-auto max-w-7xl full-width mt-24'>
-
-            <div class='full-width shadow-2xl rounded-3xl pt-2 bg-gray-100 mx-2'>
-
-                <div class='mx-auto text-left pb-2'>
-                    <h1 class='mx-auto text-center md:text-left font-bold text-3xl pt-4 pl-6'>
-
-                        Search: CTAEC
-
-
-                    </h1>
-
-                    <p class='mx-auto text-center md:text-left font-medium text-lg pl-6'>
-
-                        Started: 2020-10-26 10:11
-
+                        0%
 
                     </p>
 
-                </div>
+                    <p class='font-medium text-lg absolute bottom-0 p-2'>
 
-                <!-- 1st CONTAINER -->
-                <div class='w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row'>
+                        <span id='current'>N/A</span> of <span id='total'>N/A</span> pages
 
-                    <!-- SEARCH TERMS -->
-                    <div class='w-full md:w-1/2 p-2 bg-white shadow-md rounded-3xl md:mr-2'>
+                    </p>
 
-
-                        <form class='p-5 block h-full flex flex-col  items-center justify-center
-                             md:flex-row md:flex-wrap md:justify-around md:items-center' style='min-height: 500px;'>
-
-                            <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
-                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
-
-                                <input class='w-4/5 h-full
-                            font-semibold bg-gray-100 p-2
-                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="lat"
-                                    name="lat" type="text" value="" placeholder="Latitude" onchange="updateMap();"
-                                    readonly>
-
-                                <p class='inline-block'>
-
-                                    lat
-
-                                </p>
-
-                            </div>
-
-                            <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
-                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
-
-                                <input class='w-4/5 h-full
-                            font-semibold bg-gray-100 p-2
-                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="lon"
-                                    name="lon" type="text" value="" placeholder="Longitude" onchange="updateMap();"
-                                    readonly>
-
-                                <p class='inline-block'>
-
-                                    lon
-
-                                </p>
-
-                            </div>
-
-                            <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
-                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
-
-                                <input class='w-4/5 h-full font-semibold bg-gray-100
-                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block'
-                                    id="radius" name="radius" type="text" value="" placeholder="Radius"
-                                    onchange="updateMap();" readonly>
-
-                                <p class='inline-block'>
-
-                                    km
-
-                                </p>
-
-                            </div>
-
-                            <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
-                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
-
-                                <input class='w-3/5 h-full font-semibold bg-gray-100
-                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="acc"
-                                    name="acc" type="text" value="" placeholder="Accuracy"
-                                    onchange="updateAccuracy(this.value);" readonly>
-
-                                <p class='inline-block' id='acc-info'>
-
-                                    accuracy
-
-                                </p>
-
-                            </div>
-
-                            <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
-                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
-
-                                <input
-                                    class='w-3/5 h-full font-semibold bg-gray-100
-                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block overflow-hidden'
-                                    id="acc" name="acc" type="date" value="" placeholder="date" readonly>
-
-                                <p class='inline-block' id=''>
-
-                                    start
-
-                                </p>
-
-                                <p class='inline-block' id=''>
-
-                                    date
-
-                                </p>
-
-
-                            </div>
-
-                            <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
-                        shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
-
-                                <input class='w-3/5 h-full font-semibold bg-gray-100
-                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="acc"
-                                    name="acc" type="date" value="" placeholder="date" readonly>
-
-                                <p class='inline' id=''>
-
-                                    end
-
-                                </p>
-
-                                <p class='inline' id=''>
-
-                                    date
-
-                                </p>
-
-                            </div>
-
-                            <div class='w-4/6 h-14 md:w-full md:h-12 bg-gray-100 border border-gray-200
-                        shadow mx-2 md:mx-7 my-2 text-lg rounded tracking-wide overflow-hidden'>
-
-                                <input class='w-3/5 h-full font-semibold bg-gray-100
-                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="acc"
-                                    name="acc" type="text" value="" placeholder="search tags" readonly>
-
-                                <p class='inline-block' id='acc-info'>
-
-                                    tags
-
-                                </p>
-
-
-                            </div>
-
-                            <div class="mx-4 lg:mx-1 bg-yellow-500 text-gray-800 font-bold
-                             my-6 py-5 px-9 shadow-lg" id='status'>
-                                In Progress
-                            </div>
-
-                        </form>
-
-
-
-                    </div>
-
-                    <!-- STATUS  -->
-
-                    <div class='w-full md:w-1/2 bg-white shadow-md rounded-3xl mt-3 md:m-0 md:ml-2 overflow-hidden'
-                        style="min-height: 400px;">
-                        <div id='progress'></div>
-                        <div class='relative  h-full p-2 flex flex-col items-center justify-center'
-                            style="min-height: 400px;">
-
-                            <p class='text-6xl font-semibold' id='percent'>
-
-                                60%
-
-                            </p>
-
-                            <p class='font-medium text-lg absolute bottom-0 p-2'>
-
-                                <span id='current'>1200</span> of <span id='total'> items </span>
-
-                            </p>
-
-
-
-                        </div>
-
-
-                    </div>
-
-
-                </div>
-
-                <!-- 2nd MAP CONTAINER -->
-                <div class=' w-full h-2/3 md:p-4  rounded-3xl md:flex md:flex-row mt-3 md:m-0' id='map-card'>
-
-                    <div class='w-full bg-white shadow-md rounded-3xl ' style='min-height: 500px;' id='map'>
-                    </div>
 
 
                 </div>
 
 
-
-                <!-- 3rd CONTAINER -->
-                <div class=' w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row mt-3 md:m-0 h-min-full'
-                    id='results-card'>
-
-                    <!-- Local Morans Box -->
-                    <div class='w-full md:w-1/2 bg-white shadow-md rounded-3xl md:mr-2 overflow-hidden'>
-
-                        <img class='h-full w-full' src='..\static\img\ex_lmi.png'>
-
-
-
-                    </div>
-
-                    <!-- Download Results  -->
-
-                    <div class='w-full md:w-1/2 md:h-full shadow-md rounded-3xl md:ml-2 mt-3 md:m-0 md:ml-2 bg-white'>
-
-                        <h4 class='text-3xl text-center font-bold m-2 p-2'>
-
-                            Downloads
-
-                        </h4>
-
-                        <div class='flex flex-col items-center justify-around h-full'>
-
-                            <button class="w-1/3 mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
-                            rounded-full my-6 py-5 px-9 shadow-lg focus:outline-none focus:shadow-outline
-                            transform transition hover:scale-105 duration-300 ease-in-out">
-                                GeoJSON
-                            </button>
-
-                            <button class="w-1/3 mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
-                            rounded-full my-6 py-5 px-9 shadow-lg focus:outline-none focus:shadow-outline
-                            transform transition hover:scale-105 duration-300 ease-in-out">
-                                CSV (Excel)
-                            </button>
-
-                            <button class="w-1/3 mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
-                            rounded-full my-6 py-5 px-9 shadow-lg focus:outline-none focus:shadow-outline
-                            transform transition hover:scale-105 duration-300 ease-in-out">
-                                Map
-                            </button>
-
-
-
-                        </div>
-                    </div>
-                </div>
             </div>
+
+
+        </div>
+
+        <!-- 2nd MAP CONTAINER -->
+        <div class='w-full h-2/3 md:p-4  rounded-3xl md:flex md:flex-row mt-3 md:m-0 hidden' id='map-card'>
+
+            <div class='w-full bg-white shadow-md rounded-3xl ' style='min-height: 500px;' id='map'>
+            </div>
+
+
         </div>
 
 
 
+        <!-- 3rd CONTAINER -->
+        <div class=' w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row mt-3 md:m-0 h-min-full hidden'
+            id='results-card'>
 
+            <!-- Local Morans Box -->
+            <div class='w-full md:w-1/2 bg-white shadow-md rounded-3xl md:mr-2 overflow-hidden'>
 
-    </main>
-
-    <footer class='w-full text-center flex justify-evenly items-center text-sm md:text-lg mt-10 p-5 text-gray-600'>
-
-        <p>GitHub</p>
-
-        <p class='font-bold'>GeoQuery &#xA9; 2020 Matthew Tralka</p>
-
-        <p>Contact Us</p>
-
-
-    </footer>
-
-    <!-- nanobar.js -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js'></script>
-
-    <!-- LEAFLET -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+                <img class='h-full w-full' src='..\static\img\ex_lmi.png'>
 
 
 
-    <!-- Progress Updater -->
-    <script type="text/javascript">
+            </div>
 
-        function update_progress(status_url, nanobar) {
+            <!-- Download Results  -->
 
-            $.getJSON(status_url, function (data) {
+            <div class='w-full md:w-1/2 md:h-full shadow-md rounded-3xl md:ml-2 mt-3 md:m-0 md:ml-2 bg-white'>
 
-                percent = parseInt((data['current'] - 1) * 100 / data['total']);
+                <h4 class='text-3xl text-center font-bold m-2 p-2'>
+
+                    Downloads
+
+                </h4>
+
+                <div class='flex flex-col items-center justify-around h-full'>
+
+                    <button class="w-1/3 mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
+                            rounded-full my-6 py-5 px-9 shadow-lg focus:outline-none focus:shadow-outline
+                            transform transition hover:scale-105 duration-300 ease-in-out">
+                        GeoJSON
+                    </button>
+
+                    <button class="w-1/3 mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
+                            rounded-full my-6 py-5 px-9 shadow-lg focus:outline-none focus:shadow-outline
+                            transform transition hover:scale-105 duration-300 ease-in-out">
+                        CSV (Excel)
+                    </button>
+
+                    <button class="w-1/3 mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
+                            rounded-full my-6 py-5 px-9 shadow-lg focus:outline-none focus:shadow-outline
+                            transform transition hover:scale-105 duration-300 ease-in-out">
+                        Map
+                    </button>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- nanobar.js -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js'></script>
+
+<!-- LEAFLET -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+<!--
+
+
+<script scr='https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css'></script>
+<script scr='https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css'></script>
+<script scr='https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js'></script>
+-->
+
+<link rel="stylesheet" href='..\static\js\MarkerCluster.css'>
+<link rel="stylesheet" href='..\static\js\MarkerCluster.Default.css'>
+<script src='..\static\js\leaflet.markercluster.js'></script>
+
+<!-- Fetch for Progress -->
+<script type='text/javascript'>
+
+    function fetchProgress(nanobar) {
+
+        let url = '/info/{{ task_id }}'
+
+        fetch(url)
+            .then((response) => {
+
+                return response.json();
+
+            })
+
+            .then((data) => {
+
+                // update elements
+
+                let percent = parseInt(((data['current'] - 1) / data['total']) * 100);
 
                 if (percent < 0) {
 
                     percent = percent * -1;
+
                 }
 
                 nanobar.go(percent);
 
-                $('#percent').text(percent + ' %');
+                document.getElementById('current').innerHTML = data['current'];
+                document.getElementById('total').innerHTML = data['total'];
+                document.getElementById('percent').innerHTML = percent + '%';
+                document.getElementById('status').innerHTML = data['status'];
 
-                $('#status').text(data['status']);
-                $('#code').text(data['state']);
 
-                $('#total').text((data['current'] - 1) + ' of ' + data['total']);
-
+                // if done
                 if (data['state'] != 'PENDING' && data['state'] != 'IN PROGRESS') {
 
-                    nanobar.go(100);
-                    $('#percent').text('100 %');
-                    $('#results-map').attr('src', data['result']);
-
-                    setTimeout($('#results-map').show(), 500);
-                    $('#done').toggle()
-                    $('#progress').toggle()
-
-
-                    $('#status').text('finished');
+                    document.getElementById('status').innerHTML = 'Done!';
+                    getResults();
 
                 }
 
+                // not done
                 else {
 
-                    $('#current').text('Current ' + data['current']);
+                    // call again in 2 seconds
                     setTimeout(function () {
-                        update_progress(status_url, nanobar);
+                        fetchProgress(nanobar)
                     }, 2000);
+
+
                 }
+
+            })
+
+    };
+
+    function getResults() {
+
+        let url = '/info/{{ task_id }}/results';
+        let lon = '{{ task.lon }}';
+        lon = parseFloat(lon)
+
+        let lat = '{{ task.lat }}';
+        lat = parseFloat(lat);
+
+        // create leaflet map
+        var mapResults = L.map('map', {
+            zoom: 3,
+            center: [lat, lon],
+            preferCanvas: true
+        });
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+
+            accessToken: 'pk.eyJ1IjoibXRyYWxrYSIsImEiOiJja2VjNm5hdWEwNjQ4MnZ0cHlycXlndnN5In0.mfQAFUPzfGZeMht0EToJBA'
+        }).addTo(mapResults);
+
+
+        var geojsonMarkerOptions = {
+            radius: 8,
+            fillColor: "#ff7800",
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8,
+            preferCanvas: true
+        };
+
+        fetch(url)
+            .then((response) => {
+
+                return response.json();
+
+            })
+
+            .then((data) => {
+
+                //var points = L.geoJSON(data, {
+                //    pointToLayer: function (feature, latlng) {
+                //        return L.circleMarker(latlng, geojsonMarkerOptions);
+                //    }
+                //})
+
+                var point = L.geoJSON(data);
+
+                var cluster = L.markerClusterGroup();
+
+                cluster.addLayer(point);
+
+                mapResults.addLayer(cluster)
+
+            })
+
+        // show results
+        document.getElementById('map-card').classList.remove('hidden');
+        document.getElementById('results-card').classList.remove('hidden');
+
+
+    };
+
+
+
+</script>
+
+<script type="text/javascript">
+
+    document.onreadystatechange = () => {
+
+        // on page load
+        if (document.readyState === 'complete') {
+
+            // init loading bar
+            var nanobar = new Nanobar({
+
+                target: document.getElementById('progress')
             });
 
+            // find progress
+            fetchProgress(nanobar);
         }
 
-    </script>
+    };
 
-    <!-- Fetch for Progress -->
-    <script type='text/javascript'>
-
-        function fetchProgress(nanobar) {
-
-            let url = '/info/{{ task_id }}'
-
-            fetch(url)
-                .then((response) => {
-
-                    return response.json();
-
-                })
-
-                .then((data) => {
-
-                    // update elements
-
-                    let percent = parseInt(((data['current']) / data['total']) * 100);
-
-                    if (percent < 0) {
-
-                        percent = percent * -1;
-
-                    }
-
-                    nanobar.go(percent);
-
-                    document.getElementById('current').text = data['current'];
-                    document.getElementById('total').text = data['total'];
-                    document.getElementById('percent').text = percent;
-                    document.getElementById('status').text = data['status'];
+</script>
 
 
-                    // if done
-                    if (data['state'] != 'PENDING' && data['state'] != 'IN PROGRESS') {
-
-                        getResults();
-
-                    }
-
-                    // not done
-                    else {
-
-                        // call again in 2 seconds
-                        setTimeout(function () {
-                            fetchProgress(nanobar)
-                        }, 2000);
-
-
-                    }
-
-                })
-
-        };
-
-        function getResults() {
-
-            let url = '/info/{{ task_id }}/results'
-
-            // create leaflet map
-            var mapResults = L.map('map', {
-                zoom: 3,
-                center: [38.89, -31.75],
-                preferCanvas: true
-            });
-
-            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                id: 'mapbox/streets-v11',
-                tileSize: 512,
-                zoomOffset: -1,
-
-                accessToken: 'pk.eyJ1IjoibXRyYWxrYSIsImEiOiJja2VjNm5hdWEwNjQ4MnZ0cHlycXlndnN5In0.mfQAFUPzfGZeMht0EToJBA'
-            }).addTo(mapResults);
-
-            fetch(url)
-                .then((response) => {
-
-                    return response.json();
-
-                })
-
-                .then((data) => {
-
-                    L.getJSON(data, {
-
-                        style: pointStyle
-
-                    }).addTo(mapResults);
-
-                })
-
-            // show results
-            document.getElementById('map-card')
-            document.getElementById('results-card')
-            document.getElementById('map')
-            document.getElementById('status').text = 'Done!';
-
-        };
-
-
-
-    </script>
-
-    <script type="text/javascript">
-
-        document.onreadystatechange = () => {
-
-            // on page load
-            if (document.readyState === 'complete') {
-
-                // init loading bar
-                var nanobar = new Nanobar({
-
-                    target: document.getElementById('progress')
-                });
-
-                // update progress
-
-
-                nanobar.go(60);
-
-                // find progress
-                fetchProgress(nanobar);
-            }
-
-        };
-
-    </script>
-
-</body>
-
-</html>
+{% endblock %}

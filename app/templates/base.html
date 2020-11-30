@@ -1,96 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class='text-gray-900 leading-tight font-sans overflow-x-hidden'>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title> SEARCH PAGE </title>
+<head>
+    <title> {{ title }} | GeoQuery </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="..\static\css\tailwind.css" rel="stylesheet">
 
-        <meta name="author" content="Matthew Tralka">
-        <meta name="description"
-            content="">
-        <meta name="keywords" content="">
-        
-        <!-- CSS -->
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'css/normalize.css') }}"/>
-        <!--
-            <link rel="stylesheet" href="{{ url_for ('static', filename= 'css/style.css') }}" />
-        -->
-        
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'css/home.css') }}" />
+</head>
 
-        <!-- FONT -->
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslabbook-webfont.woff2') }}"/>
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslablight-webfont.woff2') }}"/>
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslabmedium-webfont.woff2') }}"/>
-        <link rel="stylesheet" href="{{ url_for ('static', filename= 'fonts/klinicslabbold-webfont.woff2') }}"/>
-        
-        <!-- ADOBE FONTS -->
-        <link rel="stylesheet" href="https://use.typekit.net/hwf2qbl.css">
+<style>
+    .active {
+        display: block;
+    }
+</style>
 
-        
+<body class='bg-gray-100 overflow-hidden'>
+    <header class=' mx-auto w-screen bg-green-800 p-5'>
 
-        <!-- typed.js -->
-        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+        <nav class="flex-row md:justify-between">
 
-        <!--
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        -->
 
-    </head>
+            <div class="flex flex-row justify-between text-white font-bold">
 
-    <body>
-
-        <header class='nav'>
-        
-            <a class='nav-brand' href="/">
-
-                <img src="{{ url_for ('static', filename= 'img/brand.png') }}" alt='GeoQuery' width='70'>
-
-            </a>
-
-            <nav class='nav-sub'>
-
-                <a href="/" class='nav-item'>
-
-                    home
-
+                <!-- BRAND ICON -->
+                <a href='/' class=''>
+                    <img src='..\static\img\brand.png' alt="Geo Query" class='h-12 w-12'></img>
                 </a>
 
-                <a href="/search" class='nav-item'>
+                <!-- BURGER ICON -->
+                <button id="burger-button" class="md:hidden bg-yellow-500 rounded p-1 h-10 w-10" href=''>
+                    <svg class='fill-current' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
 
-                    search
+                <ul class="hidden text-center md:flex flex-col justify-evenly md:flex-row md:justify-end text-lg"
+                    id="mobile-menu">
+                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Home </a></li>
+                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Search </a></li>
+                    <li class="p-6 hover:bg-yellow-700"><a href='#'> About </a></li>
 
-                </a>
-
-                <a href="/about" class='nav-item'>
-
-                    about
-
-                </a>
-
-            </nav>
-
-        </header>
-
-        <main>
-
-            {% block content %}
-            {% endblock %}
-
-        </main>
-
-        <footer class='footer'>
-
-            <div>
-
-                &#0169;2020 <a href="https://tralka.xyz"><strong>Matthew Tralka</strong></a>
+                </ul>
 
             </div>
 
-        </footer>
+        </nav>
 
-    </body>
+    </header>
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <footer class='w-full text-center flex justify-evenly items-center text-sm md:text-lg mt-10 p-5 text-gray-600'>
+
+        <p>GitHub</p>
+
+        <p class='font-bold'>GeoQuery &#xA9; 2020 Matthew Tralka</p>
+
+        <p>Contact Us</p>
+
+
+    </footer>
+
+</body>
+<script>
+    let hamburger = document.getElementById('burger-button');
+
+    let mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', function () {
+        mobileMenu.classList.toggle('active');
+    });
+</script>
 
 </html>

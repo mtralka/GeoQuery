@@ -76,7 +76,6 @@ class SignUp(FlaskForm):
 
 class FlickrSearch(FlaskForm):
 
-
     # radius search
     lat = DecimalField(
         "Latitude",
@@ -91,7 +90,7 @@ class FlickrSearch(FlaskForm):
         validators=[InputRequired(message="Input Required")],
     )
     radius = IntegerField("Radius", validators=[Optional()])
-    radius_units = SelectField("Radius Units", choices=[("km", "KM"), ("mi", "MI")])
+    #  radius_units = SelectField("Radius Units", choices=[("km", "KM"), ("mi", "MI")])
 
     tags = StringField(
         "Search Tags",
@@ -110,4 +109,4 @@ class FlickrSearch(FlaskForm):
             Optional(),
         ],
     )
-    search = SubmitField("Execute Search")
+    search = SubmitField("Search Now")
