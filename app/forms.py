@@ -75,14 +75,8 @@ class SignUp(FlaskForm):
 
 
 class FlickrSearch(FlaskForm):
-    # TODO Adjust messages
-    # TODO Create custom validator check for dates
-    """
-    min lat
-    min long
-    max lat
-    max long
-    """
+
+
     # radius search
     lat = DecimalField(
         "Latitude",

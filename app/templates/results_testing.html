@@ -211,7 +211,7 @@
                             </div>
 
                             <div class="mx-4 lg:mx-1 bg-yellow-500 text-gray-800 font-bold
-                             my-6 py-5 px-9 shadow-lg">
+                             my-6 py-5 px-9 shadow-lg" id='status'>
                                 In Progress
                             </div>
 
@@ -229,7 +229,7 @@
                         <div class='relative  h-full p-2 flex flex-col items-center justify-center'
                             style="min-height: 400px;">
 
-                            <p class='text-6xl font-semibold'>
+                            <p class='text-6xl font-semibold' id='percent'>
 
                                 60%
 
@@ -237,7 +237,7 @@
 
                             <p class='font-medium text-lg absolute bottom-0 p-2'>
 
-                                1200 of 2500 items
+                                <span id='current'>1200</span> of <span id='total'> items </span>
 
                             </p>
 
@@ -252,9 +252,9 @@
                 </div>
 
                 <!-- 2nd MAP CONTAINER -->
-                <div class=' w-full h-2/3 md:p-4  rounded-3xl md:flex md:flex-row mt-3 md:m-0'>
+                <div class=' w-full h-2/3 md:p-4  rounded-3xl md:flex md:flex-row mt-3 md:m-0' id='map-card'>
 
-                    <div class='w-full bg-white shadow-md rounded-3xl ' style='min-height: 500px;' src=''>
+                    <div class='w-full bg-white shadow-md rounded-3xl ' style='min-height: 500px;' id='map'>
                     </div>
 
 
@@ -263,7 +263,8 @@
 
 
                 <!-- 3rd CONTAINER -->
-                <div class=' w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row mt-3 md:m-0 h-min-full'>
+                <div class=' w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row mt-3 md:m-0 h-min-full'
+                    id='results-card'>
 
                     <!-- Local Morans Box -->
                     <div class='w-full md:w-1/2 bg-white shadow-md rounded-3xl md:mr-2 overflow-hidden'>
@@ -332,6 +333,13 @@
     <!-- nanobar.js -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.min.js'></script>
 
+    <!-- LEAFLET -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
 
 
 
@@ -386,8 +394,112 @@
 
     </script>
 
-    <script type="text/javascript">
+    <!-- Fetch for Progress -->
+    <script type='text/javascript'>
 
+        function fetchProgress(nanobar) {
+
+            let url = '/info/{{ task_id }}'
+
+            fetch(url)
+                .then((response) => {
+
+                    return response.json();
+
+                })
+
+                .then((data) => {
+
+                    // update elements
+
+                    let percent = parseInt(((data['current']) / data['total']) * 100);
+
+                    if (percent < 0) {
+
+                        percent = percent * -1;
+
+                    }
+
+                    nanobar.go(percent);
+
+                    document.getElementById('current').text = data['current'];
+                    document.getElementById('total').text = data['total'];
+                    document.getElementById('percent').text = percent;
+                    document.getElementById('status').text = data['status'];
+
+
+                    // if done
+                    if (data['state'] != 'PENDING' && data['state'] != 'IN PROGRESS') {
+
+                        getResults();
+
+                    }
+
+                    // not done
+                    else {
+
+                        // call again in 2 seconds
+                        setTimeout(function () {
+                            fetchProgress(nanobar)
+                        }, 2000);
+
+
+                    }
+
+                })
+
+        };
+
+        function getResults() {
+
+            let url = '/info/{{ task_id }}/results'
+
+            // create leaflet map
+            var mapResults = L.map('map', {
+                zoom: 3,
+                center: [38.89, -31.75],
+                preferCanvas: true
+            });
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+
+                accessToken: 'pk.eyJ1IjoibXRyYWxrYSIsImEiOiJja2VjNm5hdWEwNjQ4MnZ0cHlycXlndnN5In0.mfQAFUPzfGZeMht0EToJBA'
+            }).addTo(mapResults);
+
+            fetch(url)
+                .then((response) => {
+
+                    return response.json();
+
+                })
+
+                .then((data) => {
+
+                    L.getJSON(data, {
+
+                        style: pointStyle
+
+                    }).addTo(mapResults);
+
+                })
+
+            // show results
+            document.getElementById('map-card')
+            document.getElementById('results-card')
+            document.getElementById('map')
+            document.getElementById('status').text = 'Done!';
+
+        };
+
+
+
+    </script>
+
+    <script type="text/javascript">
 
         document.onreadystatechange = () => {
 
@@ -400,10 +512,13 @@
                     target: document.getElementById('progress')
                 });
 
+                // update progress
+
+
                 nanobar.go(60);
 
                 // find progress
-                update_progress(url, nanobar);
+                fetchProgress(nanobar);
             }
 
         };

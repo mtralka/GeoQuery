@@ -85,10 +85,12 @@
                         <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
                         shadow mx-2 md:mx-0 my-2 text-lg rounded tracking-wide overflow-hidden'>
 
-                            <input class='w-4/5 h-full
-                            font-semibold bg-gray-100 p-2
-                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="lat"
-                                name="lat" type="text" value="" placeholder="Latitude" onchange="updateMap();">
+                            {{ form.lat (class= 'w-4/5 h-full font-semibold bg-gray-100 p-2
+                                text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' 
+                                placeholder="Latitude"
+                                onchange="updateMap();
+                                )}}
+                            <input class='' id="lat" name="lat" type="text" value="" placeholder="Latitude" ">
 
                             <p class='inline-block'>
 
@@ -103,7 +105,7 @@
 
                             <input class='w-4/5 h-full
                             font-semibold bg-gray-100 p-2
-                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id="lon"
+                            text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block' id=" lon"
                                 name="lon" type="text" value="" placeholder="Longitude" onchange="updateMap();">
 
                             <p class='inline-block'>

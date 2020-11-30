@@ -1,4 +1,6 @@
 from datetime import datetime
+import json
+import os
 import time
 
 from celery import Celery
@@ -22,6 +24,8 @@ from .model import User
 from .search_control import newSearch
 from .utilities import create_unique_id
 
+
+RESULTS_PATH = "./response"
 
 main = Blueprint("main", __name__)
 
@@ -137,22 +141,19 @@ def status_endpoint(task_id):
 
     task = newSearch.AsyncResult(friendly.id)
 
-    map_results = f"/results/{task_id}/map"
     if task.state == "PENDING":
         response = {
             "state": task.state,
             "current": "waiting",
             "total": "waiting",
-            "status": "waiting",
-            "result": map_results,
+            "status": "waiting"
         }
     elif task.state != "FAILURE":
         response = {
             "state": task.state,
             "current": task.info.get("current"),
             "total": task.info.get("total"),
-            "status": task.info.get("status"),
-            "result": map_results,
+            "status": task.info.get("status")
         }
     else:
         # wrong
@@ -164,6 +165,19 @@ def status_endpoint(task_id):
         }
     return jsonify(response)
 
+""" send geojson of results """
+@main.route("/info/<task_id>/results", methods=['GET'])
+def get_results(task_id):
+    
+    task = Query.query.filter_by(friendly_id=task_id).first()
+
+    path = os.path.join(RESULTS_PATH, task.user_id, \
+        task.execution_time, 'master.geojson')
+
+    with open(path) as file:
+        results = json.load(file)
+
+    return results
 
 # TODO adjust and implement
 @main.errorhandler(404)
