@@ -21,8 +21,8 @@ Flickr Integration|validated to 200k results / 20 minutes|done| :heavy_check_mar
 FB Integration| |not started| :heavy_minus_sign:
 Twitter Integration| |not started| :heavy_minus_sign:
 Results page|fully implemented, design could use work|usable|   :soon:
-home page|design could use work|usable|  :heavy_minus_sign:
-about page| |not started| :heavy_minus_sign:
+home page|design could use work|in progress|  :heavy_minus_sign:
+about page| |in progress| :heavy_minus_sign:
 DB|done|done| :heavy_check_mark:
 login / signup page|backend implemented, needs front|in progress| :soon:
 Async tasking| celery /redis (docker) |done| :heavy_check_mark:
@@ -33,13 +33,16 @@ scheduled searches | |not started| :heavy_minus_sign:
 email alerts | |not started| :heavy_minus_sign:
 dynamic mapping | folium |done| :heavy_check_mark:
 results serving | map done. need CSV + GeoJSON |in progress| :soon:
+css transition | adoption of tailwindcss |in progress| :soon:
 
 *this ReadMe is a work in progress. Please check back soon or contact me for more information.*
 
 
 #### Examples
 
+**frontend re-design in progress**
 *Current as of 10.26 - subject to change*
+
 
 - [CSV results](example/exampleCSV.csv)
 - [GeoJSON results](example/exampleGeoJSON.geojson)

@@ -1,126 +1,224 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+    .active {
+        display: block;
+    }
 
-            <div class='landing-title'>
+    /* shapedivider.app */
+    .custom-shape-divider-bottom-1606337444 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+    }
 
-                <h1>
+    .custom-shape-divider-bottom-1606337444 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 168px;
+    }
 
-                    GeoQuery
+    .custom-shape-divider-bottom-1606337444 .shape-fill {
+        fill: #065F46;
+    }
+</style>
 
-                </h1>
 
-                <h2>
+<div class='pt-24'>
+    <div class='container px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center max-w-7xl'>
 
-                    <span id='subtitle'></span> the World
+        <!-- left -->
+        <div class='flex flex-col w-full md:w-2/5 justify-center items-center md:items-start text-center md:text-left'>
+            <h1 class='text-5xl md:text-6xl font-extrabold'>
 
-                </h2>
+                GeoQuery
 
-            </div>
+            </h1>
 
-            <div class='landing-buttons'>
+            <p class="leading-normal text-2xl mb-8 mt-4">
+                Unified GeoSpatial Search
+            </p>
 
-                <a href='/' class='button'> 
-
+            <div class='flex flex-wrap flex-col md:flex-row md:justify-between'>
+                <button class="mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
+                            rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline
+                            transform transition hover:scale-105 duration-300 ease-in-out">
                     Sign Up
+                </button>
 
-                </a>
-
-                <a href="#info" class='button'>
-
-                    Learn More
-
-                </a>
-
-            </div>
-
-            <div class='card-container max-width' id='info'>
-
-                <div class='card no-background no-boxshadow' style="justify-content: center;align-items: center;">
-
-                    <h2>
-
-                        The world is full of data
-
-                    </h2>
-
-                </div>
-
-                <div class='card no-background no-boxshadow'>
-
-                    
-                    <img src="{{ url_for ('static', filename= 'img/globe_with_points.svg') }}">
-
-                </div>
-
-                <div class='card no-background no-boxshadow'>
-
-                   
-                    <img src="{{ url_for ('static', filename= 'img/data_processing_yrrv.svg') }}">
-
-                </div>
-
-                <div class='card no-background no-boxshadow'>
-
-                    <h2>
-
-                        But aggregating this data is <b>time-consuming</b> and <b>restrictive</b>.
-
-                    </h2>
-
-                </div>
-
-                <div class='card full-width no-background no-boxshadow height-auto'>
-
-                    <h2 class="no-margin">
-
-                        Now, with <b>GeoQuery</b>, the <span id='description' style="min-width: 7rem;display: inline-block;"></span> is at your fingertips.
-                        
-                    </h2>
-                   
-                    <img src=" {{ url_for ('static', filename= 'img/the_world_is_mine_nb0e.svg') }}" class='margin-center'>
-
-                </div>
+                <button class="mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
+                            rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline
+                            transform transition hover:scale-105 duration-300 ease-in-out">
+                    Search Now
+                </button>
 
             </div>
 
-        
+        </div>
 
-            <!--
+        <!-- right -->
+        <div class="w-full md:w-3/5 py-6 text-center">
+            <img class="w-full md:w-4/5 z-50" src="..\static\img\connected_world_wuay.svg" />
+        </div>
 
-            
-            
-            -->
+    </div>
 
-            <script>
+    <div class='container mx-auto my-20 pb-20'>
 
-            
-                var subtitleOptions = {
-    
-                    strings: ['<i>Search<i/>', '<i>Know<i/>', '<i>Change<i/>'],
-                    typeSpeed: 100,
-                    startDelay: 100,
-                    loop: true,
-                    backdelay: 40,
-                    fadeOut: false
-                    
-                };
-    
-                var descriptionOptions = {
-    
-                    strings: ['data', 'world'],
-                    typeSpeed: 200,
-                    startDelay: 100,
-                    loop: true,
-                    backdelay: 40,
-                    fadeOut: true,
-                    showCursor: false
-                    
-                };
-    
-                var typed = new Typed('#subtitle', subtitleOptions);
-                var typed = new Typed('#description', descriptionOptions);
-    
-            </script>
+        <h2 class="w-full my-2 text-4xl font-bold text-center mb-5">
 
-{% endblock %}
+            API's We Use:
+
+        </h2>
+
+        <div class='mx-auto md:flex md:flex-row md:justify-evenly md:items-center max-w-2xl container z-30'>
+
+            <!-- FLICKR -->
+            <img class='m-auto md:m-0 md:w-1/4 w-2/3 lg:w-1/3 md:h-1/3 mt-3 p-5'' src=' ..\static\img\flickrbrand.png'>
+
+            <!-- TWITTER -->
+            <img class='m-auto md:m-0 md:w-1/4 w-2/3 lg:w-1/3 md:h-1/3 mt-3 p-5''
+                        src=' ..\static\img\Twitter_Logo_Blue.svg'>
+
+            <!-- 4 SQUARE -->
+            <img class='m-auto md:m-0 md:w-1/4 w-2/3 lg:w-1/3 md:h-1/3 mt-3 p-5 z-30'
+                src='..\static\img\Foursquare.png'>
+
+            <!-- F BOOK -->
+            <img class='m-auto md:m-0 md:w-1/4 w-2/3 lg:w-1/3 md:h-1/3 mt-3 p-5 z-30'
+                src=' ..\static\img\f_logo_RGB-Blue_114.png'>
+
+
+        </div>
+
+    </div>
+
+    <div class='relative w-screen z-0'>
+        <div class="custom-shape-divider-bottom-1606337444">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="shape-fill"></path>
+            </svg>
+        </div>
+
+
+    </div>
+    <div class='bg-green-800'>
+
+        <!-- STEPS -->
+
+
+        <div class='container w-full md:max-w-5xl mx-auto flex flex-col md:flex-row p-3 py-10'>
+
+            <!-- CARD -->
+            <div class='bg-white relative flex-initial md:w-1/3 bg-grey-400 flex justify-between flex-col
+                        p-4 rounded-2xl m-2 shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-102 transition
+                         duration-300 ease-in-out transform'>
+
+                <div class='absolute -top-2 md:-top-5 -left-3 bg-pink-400 rounded-full h-20 w-20 flex items-center 
+                    transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 justify-center 
+                    text-gray-900 font-bold text-5xl shadow-lg'>
+
+                    1
+                </div>
+
+                <h4 class='text-3xl font-bold leading-normal text-center'>
+
+                    Search
+
+
+                </h4>
+
+                <img class='w-full sm:h-64 mx-auto mt-3 p-5' src='..\static\img\location_search_bqps.svg'>
+
+                <p class='text-xl text-left leading-loose'>
+
+                    The world is a big place! Find a location that interests <span class='font-bold'>you</span>,
+                    think up
+                    a timeframe that might be interesting, and click that search button!
+
+
+
+                </p>
+
+
+            </div>
+
+            <!-- CARD -->
+            <div class='relative bg-white flex-initial md:w-1/3 bg-grey-400 flex justify-between
+                        flex-col p-4 rounded-2xl m-2 shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-102 transition
+                        duration-300 ease-in-out transform'>
+
+                <div class='absolute -top-2 md:-top-5 -left-3 bg-pink-600 rounded-full h-20 w-20 flex items-center 
+                        transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
+                        justify-center text-gray-900 font-bold text-5xl shadow-lg'>
+
+                    2
+                </div>
+                <h4 class='text-3xl font-bold leading-normal text-center'>
+
+                    Know
+
+
+                </h4>
+
+                <img class='w-full sm:h-64 mx-auto mt-3 p-5' src='..\static\img\data_processing_yrrv.svg'>
+
+                <p class='text-xl text-left leading-loose'>
+
+                    Wohoo! Nice job on that search button. Now it's time to sit back and grab a cup of tea
+                    while we wait for the results to come in. In the meantime, let's plan how to make a change!
+                </p>
+
+
+            </div>
+
+            <!-- CARD -->
+            <div class='relative bg-white flex-initial md:w-1/3 bg-grey-400 flex justify-between flex-col p-4
+                        rounded-2xl m-2 shadow-lg hover:shadow-2xl hover:-translate-y-1 hover:scale-102 transition
+                        duration-300 ease-in-out transform'>
+
+                <div class='absolute -top-2 md:-top-5 -left-3  bg-pink-800 rounded-full h-20 w-20 flex items-center 
+                        transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105
+                        justify-center text-gray-700 font-bold text-5xl shadow-lg'>
+
+                    3
+                </div>
+                <h4 class='text-3xl font-bold leading-normal text-center'>
+
+                    Change
+
+
+                </h4>
+
+                <img class='w-full sm:h-64 mx-auto mt-3 p-5' src='..\static\img\the_world_is_mine_nb0e.svg'>
+
+                <p class='text-xl text-left leading-loose'>
+
+                    Congradulations on your newfound knowledge! Now get out there and make a <span
+                        class='font-bold'>change</span>.
+                    Feel free to star our Github or fork a branch and add your own features.
+
+                </p>
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+    {% endblock %}

@@ -1,9 +1,21 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash, session
+from flask import Blueprint
+from flask import flash
+from flask import redirect
+from flask import render_template
+from flask import request
+from flask import session
+from flask import url_for
+from flask_login import login_required
+from flask_login import login_user
+from flask_login import logout_user
+from werkzeug.security import check_password_hash
+from werkzeug.security import generate_password_hash
+
 from . import db
-from werkzeug.security import generate_password_hash, check_password_hash
+from .forms import LoginForm
+from .forms import SignUp
 from .model import User
-from flask_login import login_user, logout_user, login_required
-from .forms import LoginForm, SignUp
+
 
 WTF_CSRF_SECRET_KEY = "CSRFSTRING"
 

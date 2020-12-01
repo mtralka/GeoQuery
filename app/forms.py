@@ -75,14 +75,7 @@ class SignUp(FlaskForm):
 
 
 class FlickrSearch(FlaskForm):
-    # TODO Adjust messages
-    # TODO Create custom validator check for dates
-    """
-    min lat
-    min long
-    max lat
-    max long
-    """
+
     # radius search
     lat = DecimalField(
         "Latitude",
@@ -97,7 +90,7 @@ class FlickrSearch(FlaskForm):
         validators=[InputRequired(message="Input Required")],
     )
     radius = IntegerField("Radius", validators=[Optional()])
-    radius_units = SelectField("Radius Units", choices=[("km", "KM"), ("mi", "MI")])
+    #  radius_units = SelectField("Radius Units", choices=[("km", "KM"), ("mi", "MI")])
 
     tags = StringField(
         "Search Tags",
@@ -116,4 +109,4 @@ class FlickrSearch(FlaskForm):
             Optional(),
         ],
     )
-    search = SubmitField("Execute Search")
+    search = SubmitField("Search Now")

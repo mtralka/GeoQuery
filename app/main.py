@@ -1,4 +1,6 @@
 from datetime import datetime
+import json
+import os
 import time
 
 from celery import Celery
@@ -23,6 +25,8 @@ from .search_control import newSearch
 from .utilities import create_unique_id
 
 
+RESULTS_PATH = ".\\response"
+
 main = Blueprint("main", __name__)
 
 main.secret_key = "SECRETKEY"
@@ -46,7 +50,7 @@ def search():
 
     if form.validate_on_submit():
 
-        if form.validate() == False:
+        if form.validate() is False:
 
             flash("Failed Validation")
             return redirect(url_for("main.search"))
@@ -77,14 +81,14 @@ def search():
                 max_taken=data.get("max_taken"),
                 accuracy=data.get("accuracy"),
                 radius=data.get("radius"),
-                radius_units=data.get("radius_units"),
+                radius_units='KM',
                 tags=data.get("tags"),
             )
             db.session.add(query)
             db.session.commit()
             return redirect(f"/results/{friendly_id}")
 
-    return render_template("search.html", form=form)
+    return render_template("search.html", form=form, title='Search')
 
 
 @main.route("/status", methods=["GET", "POST"])
@@ -107,6 +111,7 @@ def status_dash(task_id):
         "results_testing.html",
         task_id=task_id,
         task=task,
+        title='Results',
         started=started,
         map=f"/results/{task_id}/map",
         csv=f"/results/{task_id}/csv",
@@ -137,22 +142,19 @@ def status_endpoint(task_id):
 
     task = newSearch.AsyncResult(friendly.id)
 
-    map_results = f"/results/{task_id}/map"
     if task.state == "PENDING":
         response = {
             "state": task.state,
             "current": "waiting",
             "total": "waiting",
-            "status": "waiting",
-            "result": map_results,
+            "status": "waiting"
         }
     elif task.state != "FAILURE":
         response = {
             "state": task.state,
             "current": task.info.get("current"),
             "total": task.info.get("total"),
-            "status": task.info.get("status"),
-            "result": map_results,
+            "status": task.info.get("status")
         }
     else:
         # wrong
@@ -164,6 +166,18 @@ def status_endpoint(task_id):
         }
     return jsonify(response)
 
+""" send geojson of results """
+@main.route("/info/<task_id>/results", methods=['GET'])
+def get_results(task_id):
+    
+    task = Query.query.filter_by(friendly_id=task_id).first()
+
+    path = os.path.join(RESULTS_PATH, str(task.user_id),str(task.execution_time), 'master.geojson')
+    print(path)
+    with open(path, 'r', encoding='utf8') as file:
+        results = json.load(file)
+
+    return results
 
 # TODO adjust and implement
 @main.errorhandler(404)
