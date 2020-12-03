@@ -112,7 +112,8 @@ def status_dash(task_id):
         "results_testing.html",
         task_id=task_id,
         task=task,
-        started=started
+        started=started,
+        title='Results'
     )
 
 
