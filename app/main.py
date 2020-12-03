@@ -15,13 +15,14 @@ from flask import session
 from flask import url_for
 from flask_login import current_user
 from flask_login import login_required
+from sqlalchemy.sql.elements import Null
 
 from . import celery
 from . import db
 from .forms import FlickrSearch
 from .model import Query
 from .model import User
-from .search_control import newSearch
+from .search_control import new_search
 from .utilities import create_unique_id
 
 
@@ -64,7 +65,7 @@ def search():
             friendly_id = create_unique_id()
 
             # Async Task Register
-            task = newSearch.delay(data, user, task_time, friendly_id)
+            task = new_search.delay(data, user, task_time, friendly_id)
 
             print(task.state)
             print(task.id)
@@ -81,14 +82,14 @@ def search():
                 max_taken=data.get("max_taken"),
                 accuracy=data.get("accuracy"),
                 radius=data.get("radius"),
-                radius_units='KM',
+                radius_units="KM",
                 tags=data.get("tags"),
             )
             db.session.add(query)
             db.session.commit()
             return redirect(f"/results/{friendly_id}")
 
-    return render_template("search.html", form=form, title='Search')
+    return render_template("search.html", form=form, title="Search")
 
 
 @main.route("/status", methods=["GET", "POST"])
@@ -111,11 +112,8 @@ def status_dash(task_id):
         "results_testing.html",
         task_id=task_id,
         task=task,
-        title='Results',
         started=started,
-        map=f"/results/{task_id}/map",
-        csv=f"/results/{task_id}/csv",
-        gj=f"/results/{task_id}/geojson",
+        title="Results",
     )
 
 
@@ -140,21 +138,21 @@ def status_endpoint(task_id):
 
     friendly = Query.query.filter_by(friendly_id=task_id).first()
 
-    task = newSearch.AsyncResult(friendly.id)
+    task = new_search.AsyncResult(friendly.id)
 
     if task.state == "PENDING":
         response = {
             "state": task.state,
             "current": "waiting",
             "total": "waiting",
-            "status": "waiting"
+            "status": "waiting",
         }
     elif task.state != "FAILURE":
         response = {
             "state": task.state,
             "current": task.info.get("current"),
             "total": task.info.get("total"),
-            "status": task.info.get("status")
+            "status": task.info.get("status"),
         }
     else:
         # wrong
@@ -166,18 +164,27 @@ def status_endpoint(task_id):
         }
     return jsonify(response)
 
+
 """ send geojson of results """
-@main.route("/info/<task_id>/results", methods=['GET'])
+
+
+@main.route("/info/<task_id>/results", methods=["GET"])
 def get_results(task_id):
-    
+
     task = Query.query.filter_by(friendly_id=task_id).first()
 
-    path = os.path.join(RESULTS_PATH, str(task.user_id),str(task.execution_time), 'master.geojson')
+    path = os.path.join(
+        RESULTS_PATH, str(task.user_id), str(task.execution_time), "master.geojson"
+    )
     print(path)
-    with open(path, 'r', encoding='utf8') as file:
-        results = json.load(file)
+    try:
+        with open(path, "r", encoding="utf8") as file:
+            results = json.load(file)
+    except FileNotFoundError:
+        results = Null
 
     return results
+
 
 # TODO adjust and implement
 @main.errorhandler(404)

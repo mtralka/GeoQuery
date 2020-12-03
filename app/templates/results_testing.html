@@ -286,6 +286,7 @@
 <link rel="stylesheet" href='..\static\js\MarkerCluster.css'>
 <link rel="stylesheet" href='..\static\js\MarkerCluster.Default.css'>
 <script src='..\static\js\leaflet.markercluster.js'></script>
+<script src='..\static\js\leaflet-heat.js'></script>
 
 <!-- Fetch for Progress -->
 <script type='text/javascript'>
@@ -315,7 +316,7 @@
 
                 nanobar.go(percent);
 
-                document.getElementById('current').innerHTML = data['current'];
+                document.getElementById('current').innerHTML = data['current'] - 1;
                 document.getElementById('total').innerHTML = data['total'];
                 document.getElementById('percent').innerHTML = percent + '%';
                 document.getElementById('status').innerHTML = data['status'];
@@ -337,7 +338,6 @@
                         fetchProgress(nanobar)
                     }, 2000);
 
-
                 }
 
             })
@@ -353,6 +353,9 @@
         let lat = '{{ task.lat }}';
         lat = parseFloat(lat);
 
+        let rad = '{{ task.radius }}';
+        rad = parseInt(rad);
+
         // create leaflet map
         var mapResults = L.map('map', {
             zoom: 3,
@@ -360,6 +363,10 @@
             preferCanvas: true
         });
 
+        // go to search location
+        mapResults.setView(new L.LatLng(lat, lon), 13);
+
+        // add basemap
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             id: 'mapbox/streets-v11',
@@ -369,14 +376,14 @@
             accessToken: 'pk.eyJ1IjoibXRyYWxrYSIsImEiOiJja2VjNm5hdWEwNjQ4MnZ0cHlycXlndnN5In0.mfQAFUPzfGZeMht0EToJBA'
         }).addTo(mapResults);
 
-
+        // set style option
         var geojsonMarkerOptions = {
-            radius: 8,
-            fillColor: "#ff7800",
-            color: "#000",
+            radius: 4,
+            fillColor: "#B45309",
+            color: "#065F46",
             weight: 1,
-            opacity: 1,
-            fillOpacity: 0.8,
+            opacity: .6,
+            fillOpacity: 0.7,
             preferCanvas: true
         };
 
@@ -387,21 +394,68 @@
 
             })
 
+
             .then((data) => {
 
-                //var points = L.geoJSON(data, {
-                //    pointToLayer: function (feature, latlng) {
-                //        return L.circleMarker(latlng, geojsonMarkerOptions);
-                //    }
-                //})
+                coords = [];
 
-                var point = L.geoJSON(data);
+                // func to bind popup and create coors
+                function onEach(feature, layer) {
+                    layer.bindPopup(
+                        `<strong>Title:</strong> <a href=${feature.properties.url_l}>${feature.properties.title}</a><br/>` +
+                        `<strong>Date Taken:</strong> ${new Date(feature.properties.datetaken).toLocaleString()}<br/>` +
+                        `<strong>Photo ID:</strong> ${feature.properties.id}</a > <br />` +
+                        `<strong>Owner:</strong> ${feature.properties.ownername}</a > <br />`
+                    );
 
-                var cluster = L.markerClusterGroup();
+                    coords.push([feature.properties.latitude, feature.properties.longitude, 1]);
+                };
 
-                cluster.addLayer(point);
+                // create points layer
+                let points = L.geoJSON(data, {
 
-                mapResults.addLayer(cluster)
+                    style: geojsonMarkerOptions,
+
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng, geojsonMarkerOptions);
+                    },
+
+                    onEachFeature: onEach
+
+                })
+
+                // create cluster layer
+                let cluster = L.markerClusterGroup();
+                cluster.addLayer(points);
+
+                // create heatmap layer
+                let heatMap = new L.heatLayer(coords, {
+                    radius: 25,
+                    blur: 25,
+                    maxZoom: 17
+                });
+
+                // create overlay group
+                let overlays = {
+                    "Heatmap": heatMap,
+                    "Clustered": cluster,
+                    "Raw Points": points
+                };
+
+                // add control for overlay group
+                L.control.layers(overlays).addTo(mapResults);
+
+                // add init layer based on num points
+                if (coords.length < 20000) {
+
+                    mapResults.addLayer(points);
+
+                }
+                else {
+
+                    mapResults.addLayer(cluster);
+                }
+
 
             })
 

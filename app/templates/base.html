@@ -25,7 +25,9 @@
 
                 <!-- BRAND ICON -->
                 <a href='/' class=''>
-                    <img src='..\static\img\brand.png' alt="Geo Query" class='h-12 w-12'></img>
+
+                    <img src="{{ url_for('static', filename='img/brand.png') }}" alt="Geo Query"
+                        class='h-12 w-12'></img>
                 </a>
 
                 <!-- BURGER ICON -->
@@ -39,9 +41,29 @@
 
                 <ul class="hidden text-center md:flex flex-col justify-evenly md:flex-row md:justify-end text-lg"
                     id="mobile-menu">
-                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Home </a></li>
-                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Search </a></li>
-                    <li class="p-6 hover:bg-yellow-700"><a href='#'> About </a></li>
+
+                    <a href="{{ url_for('main.index')}}">
+                        <li class="p-6 hover:bg-yellow-700"> Home</li>
+                    </a>
+
+                    <a href="{{ url_for('main.search')}}">
+                        <li class="p-6 hover:bg-yellow-700">Search</li>
+                    </a>
+
+                    {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('auth.login')}}">
+                        <li class="p-6 hover:bg-yellow-700">Login</li>
+                    </a>
+
+                    <a href="{{ url_for('auth.signup')}}">
+                        <li class="p-6 hover:bg-yellow-700">Sign Up</li>
+                    </a>
+
+                    {% endif %}
+
+                    <a href="{{ url_for('main.about')}}">
+                        <li class="p-6 hover:bg-yellow-700">About</li>
+                    </a>
 
                 </ul>
 
@@ -60,12 +82,11 @@
 
     <footer class='w-full text-center flex justify-evenly items-center text-sm md:text-lg mt-10 p-5 text-gray-600'>
 
-        <p>GitHub</p>
+        <p><a href='https://github.com/mtralka/GeoQuery'>GitHub</a></p>
 
         <p class='font-bold'>GeoQuery &#xA9; 2020 Matthew Tralka</p>
 
-        <p>Contact Us</p>
-
+        <p><a href='https://tralka.xyz'>tralka.xyz</a></p>
 
     </footer>
 
