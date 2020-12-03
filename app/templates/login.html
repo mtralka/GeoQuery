@@ -4,27 +4,25 @@
 
 <div class='mx-auto max-w-7xl full-width mt-24 flex justify-center'>
 
-    {% for field in form.errors %}
-    {% for error in form.errors[field] %}
-    <div class="">
-        <strong>Error!</strong> {{error}}
-    </div>
-    {% endfor %}
-    {% endfor %}
-    <form class='shadow-2xl max-w-md bg-white mx-auto flex flex-col justify-evenly p-10' ,method="POST" ,
+
+    <form class='shadow-2xl max-w-md bg-white mx-auto flex flex-col justify-evenly p-10' , method="post" ,
         action="/login">
+
 
         <h1 class='text-center text-2xl font-bold m-3 mb-0'>
 
             Login
 
         </h1>
+        {% for field in form.errors %}
+        {% for error in form.errors[field] %}
+        <div class="">
+            <strong>Error!</strong> {{error}}
+        </div>
+        {% endfor %}
+        {% endfor %}
 
-
-
-
-
-        {{ form.csrf_token }}
+        {{ form.hidden_tag() }}
 
         {{ form.email (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
                     text-center focus:border-gray-300 

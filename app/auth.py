@@ -20,23 +20,19 @@ from .model import User
 WTF_CSRF_SECRET_KEY = "CSRFSECRET"
 
 auth = Blueprint("auth", __name__)
+auth.secret_key = "SECRETKEY"
 
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():
 
     form = LoginForm()
-    print(form.errors)  
+    
     if form.is_submitted():
-        print('was submit')
-
-    if form.validate():
-        print('valid')
-
-    if not form.validate():
-        print('validate error')
-        flash("All fields are required.")
-        return render_template("login.html", form=form, title='Login')
+        if not form.validate():
+            
+            flash("Validation Error")
+            return render_template("login.html", form=form, title='Login')
     
     if form.validate_on_submit():
 
@@ -47,13 +43,13 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         if not user or not check_password_hash(user.password, password):
-            print('Check 2')
+            # TODO implement flash
             flash("Please check your login details and try again.")
-            return render_template("login.html", form=form)
+            return render_template("login.html", form=form, title='Login')
 
         login_user(user, remember=remember)
 
-        return redirect(url_for("main.landing"))
+        return redirect(url_for("main.index"))
 
     return render_template("login.html", form=form, title='Login')
 
