@@ -98,6 +98,7 @@ def status_landing():
 
 
 """ render results page """
+
 @main.route("/results/<task_id>")
 def status_dash(task_id):
 
@@ -114,44 +115,61 @@ def status_dash(task_id):
 
 
 """ send geojson attatchment """
+
+
 @main.route("/results/<task_id>/geojson")
 def map(task_id):
 
     task = Query.query.filter_by(friendly_id=task_id).first()
 
     path = os.path.join(
-        app.config['RESULTS'], str(task.user_id), str(task.execution_time),'master.geojson'
+        app.config["RESULTS"],
+        str(task.user_id),
+        str(task.execution_time),
+        "master.geojson",
     )
     attachment_filename = f"results_{str(int(task.execution_time))}"
 
     print(path)
     try:
-        return send_file(path,
-            as_attachment=True,mimetype='json', attachment_filename=attachment_filename)
+        return send_file(
+            path,
+            as_attachment=True,
+            mimetype="json",
+            attachment_filename=attachment_filename,
+        )
     except FileNotFoundError:
         abort(404)
-    
+
+
 """ send csv attatchment """
+
+
 @main.route("/results/<task_id>/csv")
 def csv(task_id):
 
     task = Query.query.filter_by(friendly_id=task_id).first()
 
     path = os.path.join(
-        app.config['RESULTS'], str(task.user_id), str(task.execution_time),'master.csv'
+        app.config["RESULTS"], str(task.user_id), str(task.execution_time), "master.csv"
     )
     attachment_filename = f"results_{str(int(task.execution_time))}"
 
     print(path)
     try:
-        return send_file(path,
-            as_attachment=True,mimetype='text/json', attachment_filename=attachment_filename)
+        return send_file(
+            path,
+            as_attachment=True,
+            mimetype="text/json",
+            attachment_filename=attachment_filename,
+        )
     except FileNotFoundError:
         abort(404)
-    
 
 
 """ endpoint for task info """
+
+
 @main.route("/info/<task_id>", methods=["GET"])
 def status_endpoint(task_id):
 
@@ -185,6 +203,8 @@ def status_endpoint(task_id):
 
 
 """ return geojson of results for leaflet """
+
+
 @main.route("/info/<task_id>/results", methods=["GET"])
 def get_results(task_id):
 
@@ -201,6 +221,7 @@ def get_results(task_id):
         results = Null
 
     return results
+
 
 @main.errorhandler(404)
 def page_not_found(error):
