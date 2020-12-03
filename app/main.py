@@ -5,6 +5,7 @@ import time
 
 from celery import Celery
 from flask import Blueprint
+from flask import abort
 from flask import flash
 from flask import jsonify
 from flask import redirect
@@ -109,7 +110,7 @@ def status_dash(task_id):
     started = datetime.fromtimestamp(task.execution_time).strftime("%Y-%m-%d %H:%M")
 
     return render_template(
-        "results_testing.html",
+        "results.html",
         task_id=task_id,
         task=task,
         started=started,
@@ -120,14 +121,35 @@ def status_dash(task_id):
 """ url for returning map by id """
 
 
-@main.route("/results/<task_id>/map")
+@main.route("/results/<task_id>/geojson")
 def map(task_id):
 
     task = Query.query.filter_by(friendly_id=task_id).first()
 
-    # switch to task.user_id in production
-    # return render_template(f'maps/{task.user_id}/{task.execution_time}/master.html')
-    return render_template(f"maps/test_user_2/{task.execution_time}/master.html")
+    path = os.path.join(
+        RESULTS_PATH, str(task.user_id), str(task.execution_time)
+    )
+
+    try:
+        return send_from_directory(path, filename='master.geojson', as_attachment=True)
+    except FileNotFoundError:
+        abort(404)
+    
+
+@main.route("/results/<task_id>/csv")
+def csv(task_id):
+
+    task = Query.query.filter_by(friendly_id=task_id).first()
+
+    path = os.path.join(
+        RESULTS_PATH, str(task.user_id), str(task.execution_time)
+    )
+
+    try:
+        return send_from_directory(path, filename='master.csv', as_attachment=True)
+    except FileNotFoundError:
+        abort(404)
+    
 
 
 """ endpoint for search task info """
