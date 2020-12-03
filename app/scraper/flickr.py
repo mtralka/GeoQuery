@@ -90,5 +90,5 @@ class flickr(Base):
             },
         )
         if self.current_page <= self.total_page:
-            time.sleep(0.5)
+            time.sleep(0.2)
             self.search(first_run=False)
