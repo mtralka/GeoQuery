@@ -3,13 +3,23 @@
 {% block content %}
 <div class='mx-auto max-w-7xl full-width mt-24 flex justify-center'>
 
-    <form class='shadow-2xl max-w-md bg-white mx-auto flex flex-col justify-evenly p-10'>
+    <form class='shadow-2xl max-w-md bg-white mx-auto flex flex-col justify-evenly p-10' , method="POST">
 
         <h1 class='text-center text-2xl font-bold m-3 mb-0'>
 
             Sign Up
 
         </h1>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class='text center text-lg text-red m-2 mb-0'>
+            {% for message in messages %}
+            <li> {{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
 
         {{ form.csrf_token }}
 

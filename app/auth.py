@@ -17,7 +17,7 @@ from .forms import SignUp
 from .model import User
 
 
-WTF_CSRF_SECRET_KEY = "CSRFSTRING"
+WTF_CSRF_SECRET_KEY = "CSRFSECRET"
 
 auth = Blueprint("auth", __name__)
 
@@ -26,20 +26,28 @@ auth = Blueprint("auth", __name__)
 def login():
 
     form = LoginForm()
+    print(form.errors)  
+    if form.is_submitted():
+        print('was submit')
 
+    if form.validate():
+        print('valid')
+
+    if not form.validate():
+        print('validate error')
+        flash("All fields are required.")
+        return render_template("login.html", form=form, title='Login')
+    
     if form.validate_on_submit():
 
         email = request.form.get("email")
         password = request.form.get("password")
         remember = True if request.form.get("remember") else False
 
-        if form.validate() == False:
-            flash("All fields are required.")
-            return render_template("login.html", form=form)
-
         user = User.query.filter_by(email=email).first()
 
         if not user or not check_password_hash(user.password, password):
+            print('Check 2')
             flash("Please check your login details and try again.")
             return render_template("login.html", form=form)
 
@@ -61,9 +69,10 @@ def signup():
         name = request.form.get("name")
         password = request.form.get("password")
 
-        if form.validate() == False:
-            flash("All fields are required.")
-            return render_template("signup.html", form=form,title='Sign Up')
+        if form.validate() is False:
+                print('validate signup error')
+                flash("All fields are required.")
+                return render_template("signup.html", form=form, title='Sign Up')
 
         user = User.query.filter_by(email=email).first()
 
