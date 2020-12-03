@@ -22,7 +22,7 @@
         {% endfor %}
         {% endfor %}
 
-        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
 
         {{ form.email (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
                     text-center focus:border-gray-300 
