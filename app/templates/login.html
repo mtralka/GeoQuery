@@ -1,69 +1,18 @@
-<!doctype html>
-<html class='text-gray-900 leading-tight font-sans overflow-x-hidden'>
+{% extends "base.html" %}
 
-<head>
-    <title> Login | GeoQuery </title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="..\static\css\tailwind.css" rel="stylesheet">
+{% block content %}
 
-</head>
+<div class='mx-auto max-w-7xl full-width mt-24 flex justify-center'>
 
-<style>
-    .active {
-        display: block;
-    }
-</style>
+    <form class='shadow-2xl max-w-md bg-white mx-auto flex flex-col justify-evenly p-10'>
 
-<body class='bg-gray-100 overflow-hidden'>
-    <header class=' mx-auto w-screen bg-green-800 p-5'>
+        <h1 class='text-center text-2xl font-bold m-3 mb-0'>
 
-        <nav class="flex-row md:justify-between">
+            Login
 
+        </h1>
 
-            <div class="flex flex-row justify-between text-white font-bold">
-
-                <!-- BRAND ICON -->
-                <a href='/' class=''>
-                    <img src='..\static\img\brand.png' alt="Geo Query" class='h-12 w-12'></img>
-                </a>
-
-                <!-- BURGER ICON -->
-                <button id="burger-button" class="md:hidden bg-yellow-500 rounded p-1 h-10 w-10" href=''>
-                    <svg class='fill-current' xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-
-                <ul class="hidden text-center md:flex flex-col justify-evenly md:flex-row md:justify-end text-lg"
-                    id="mobile-menu">
-                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Home </a></li>
-                    <li class="p-6 hover:bg-yellow-700"><a href='#'> Search </a></li>
-                    <li class="p-6 hover:bg-yellow-700"><a href='#'> About </a></li>
-
-                </ul>
-
-            </div>
-
-        </nav>
-
-    </header>
-
-    <main>
-
-        <div class='mx-auto max-w-7xl full-width mt-24 flex justify-center'>
-
-            <form class='shadow-2xl max-w-md bg-white mx-auto flex flex-col justify-evenly p-10'>
-
-                <h1 class='text-center text-2xl font-bold m-3 mb-0'>
-
-                    Login
-
-                </h1>
-
-                {{ form.email (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
+        {{ form.email (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
                     text-center focus:border-gray-300 
                     focus:bg-gray-200 appearance-none',
                                     placeholder="Email",
@@ -71,41 +20,24 @@
                                     )}}
 
 
-                {{ form.password (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
+        {{ form.password (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
                     text-center focus:border-gray-300 focus:bg-gray-200 
                     appearance-none',
                                         placeholder="Password",
                                         type="password"
                                         )}}
 
-                {{ form.submit (class= 'mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
+        {{ form.submit (class= 'mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
                 rounded-full my-3 py-5 px-5 shadow-lg focus:outline-none focus:shadow-outline
                 transform transition hover:scale-105 duration-300 ease-in-out'
                     
                                         )}}
 
 
-            </form>
+    </form>
 
 
-        </div>
+</div>
 
 
-
-
-    </main>
-
-    <footer class='w-full text-center flex justify-evenly items-center text-sm md:text-lg mt-10 p-5 text-gray-600'>
-
-        <p>GitHub</p>
-
-        <p class='font-bold'>GeoQuery &#xA9; 2020 Matthew Tralka</p>
-
-        <p>Contact Us</p>
-
-
-    </footer>
-
-</body>
-
-</html>
+{% endblock %}

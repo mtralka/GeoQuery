@@ -17,11 +17,6 @@ def create_app():
     app.config["SECRET_KEY"] = "SECRETKEY"
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
 
-    # abs path for results serving
-    app.config[
-        "RESULTS"
-    ] = "C:\\Users\\mtral\\Documents\\GitHub\\matthewtralka_MnM4SDS_project\\response"
-
     # CELERY INIT
     celery.conf.update(app.config)
 

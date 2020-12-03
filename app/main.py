@@ -30,7 +30,7 @@ main = Blueprint("main", __name__)
 
 main.secret_key = "SECRETKEY"
 WTF_CSRF_SECRET_KEY = "CSRFSECRET"
-
+RESULTS_PATH = "C:\\Users\\mtral\\Documents\\GitHub\\matthewtralka_MnM4SDS_project\\response"
 
 @main.route("/")
 def index():
@@ -123,14 +123,13 @@ def map(task_id):
     task = Query.query.filter_by(friendly_id=task_id).first()
 
     path = os.path.join(
-        app.config["RESULTS"],
+        RESULTS_PATH,
         str(task.user_id),
         str(task.execution_time),
         "master.geojson",
     )
     attachment_filename = f"results_{str(int(task.execution_time))}"
 
-    print(path)
     try:
         return send_file(
             path,
@@ -151,16 +150,17 @@ def csv(task_id):
     task = Query.query.filter_by(friendly_id=task_id).first()
 
     path = os.path.join(
-        app.config["RESULTS"], str(task.user_id), str(task.execution_time), "master.csv"
+        RESULTS_PATH,
+        str(task.user_id),
+        str(task.execution_time),
+        "master.csv",
     )
-    attachment_filename = f"results_{str(int(task.execution_time))}"
+    attachment_filename = f"results_{str(int(task.execution_time))}.csv"
 
-    print(path)
     try:
         return send_file(
             path,
             as_attachment=True,
-            mimetype="text/json",
             attachment_filename=attachment_filename,
         )
     except FileNotFoundError:
