@@ -3,7 +3,7 @@ from .scraper.flickr import flickr
 
 
 @celery.task(bind=True)
-def new_search(self, data, user, task_time, friendly_id, task):
+def new_search(self, data, user, task_time, friendly_id):
 
     celery_task = self
 

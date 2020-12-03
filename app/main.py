@@ -15,6 +15,7 @@ from flask import session
 from flask import url_for
 from flask_login import current_user
 from flask_login import login_required
+from sqlalchemy.sql.elements import Null
 
 from . import celery
 from . import db
@@ -111,11 +112,7 @@ def status_dash(task_id):
         "results_testing.html",
         task_id=task_id,
         task=task,
-        title='Results',
-        started=started,
-        map=f"/results/{task_id}/map",
-        csv=f"/results/{task_id}/csv",
-        gj=f"/results/{task_id}/geojson",
+        started=started
     )
 
 
@@ -174,10 +171,14 @@ def get_results(task_id):
 
     path = os.path.join(RESULTS_PATH, str(task.user_id),str(task.execution_time), 'master.geojson')
     print(path)
-    with open(path, 'r', encoding='utf8') as file:
-        results = json.load(file)
+    try:
+        with open(path, 'r', encoding='utf8') as file:
+            results = json.load(file)  
+    except FileNotFoundError:
+        results = Null
 
     return results
+
 
 # TODO adjust and implement
 @main.errorhandler(404)

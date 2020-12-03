@@ -63,22 +63,42 @@
 
                 </h1>
 
-                <input class='m-5 h-14 font-semibold font-lg bg-gray-100 p-2
-                            text-center focus:border-gray-300 
-                            focus:bg-gray-200 appearance-none' id="lat" name="" type="text" value=""
-                    placeholder="Email">
+                {{ form.name (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
+                text-center focus:border-gray-300 
+                focus:bg-gray-200 appearance-none',
+                                    placeholder="Name",
+                                    type="Text"
+                                    )}}
 
 
-                <input class='m-5 h-14 font-semibold font-lg bg-gray-100 p-2
-                    text-center focus:border-gray-300 focus:bg-gray-200 
-                    appearance-none' id="lat" name="" type="password" value="" placeholder="Password">
+                {{ form.email (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
+                text-center focus:border-gray-300 
+                focus:bg-gray-200 appearance-none',
+                                    placeholder="Email",
+                                    type="Text"
+                                    )}}
 
 
-                <button class="mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
-                            rounded-full my-3 py-5 px-5 shadow-lg focus:outline-none focus:shadow-outline
-                            transform transition hover:scale-105 duration-300 ease-in-out">
-                    Submit
-                </button>
+                {{ form.password (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
+                text-center focus:border-gray-300 
+                focus:bg-gray-200 appearance-none',
+                                    placeholder="Password",
+                                    type="password"
+                                    )}}
+
+                { form.password_confirm (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
+                text-center focus:border-gray-300
+                focus:bg-gray-200 appearance-none',
+                placeholder="Confirm Password",
+                type="password"
+                )}}
+
+                { form.submit (class= 'mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
+                rounded-full my-3 py-5 px-5 shadow-lg focus:outline-none focus:shadow-outline
+                transform transition hover:scale-105 duration-300 ease-in-out'
+
+                )}}
+
 
             </form>
 
