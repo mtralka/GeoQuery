@@ -364,7 +364,7 @@
         });
 
         // go to search location
-        mapResults.setView(new L.LatLng(lat, lon), 12);
+        mapResults.setView(new L.LatLng(lat, lon), 13);
 
         // add basemap
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -399,17 +399,19 @@
 
                 coords = [];
 
+                // func to bind popup and create coors
                 function onEach(feature, layer) {
                     layer.bindPopup(
                         `<strong>Title:</strong> <a href=${feature.properties.url_l}>${feature.properties.title}</a><br/>` +
-                        `<strong>Photo ID:</strong> ${feature.properties.id}</a><br/>` +
-                        `<strong>Owner:</strong> ${feature.properties.ownername}</a><br/>`
+                        `<strong>Date Taken:</strong> ${new Date(feature.properties.datetaken).toLocaleString()}<br/>` +
+                        `<strong>Photo ID:</strong> ${feature.properties.id}</a > <br />` +
+                        `<strong>Owner:</strong> ${feature.properties.ownername}</a > <br />`
                     );
 
                     coords.push([feature.properties.latitude, feature.properties.longitude, 1]);
                 };
 
-
+                // create points layer
                 let points = L.geoJSON(data, {
 
                     style: geojsonMarkerOptions,
@@ -422,26 +424,38 @@
 
                 })
 
+                // create cluster layer
                 let cluster = L.markerClusterGroup();
                 cluster.addLayer(points);
-                //mapResults.addLayer(cluster);
 
-                mapResults.addLayer(points)
-
+                // create heatmap layer
                 let heatMap = new L.heatLayer(coords, {
                     radius: 25,
                     blur: 25,
                     maxZoom: 17
                 });
-                //mapResults.addLayer(heatMap);
 
+                // create overlay group
                 let overlays = {
                     "Heatmap": heatMap,
                     "Clustered": cluster,
                     "Raw Points": points
                 };
 
+                // add control for overlay group
                 L.control.layers(overlays).addTo(mapResults);
+
+                // add init layer based on num points
+                if (coords.length < 20000) {
+
+                    mapResults.addLayer(points);
+
+                }
+                else {
+
+                    mapResults.addLayer(cluster);
+                }
+
 
             })
 
