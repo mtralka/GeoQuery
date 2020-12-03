@@ -1,23 +1,18 @@
 from . import celery
-from .flickr_wrapper import flickrControl
+from .scraper.flickr import flickr
 
 
 @celery.task(bind=True)
-def newSearch(self, raw_query, user, timestamp, friendly_id):
-    """Controls master execution of all search functions
-    Parameters:
-        raw_query (dict): raw user dict
-        user (string): primary key of user
-        timestamp (string): UNIX Timestamp
-    """
+def new_search(self, data, user, task_time, friendly_id, task):
+
     celery_task = self
 
-    # Launch Flickr Search
-    flickrControl(raw_query, user, timestamp, celery_task)
+    flckr = flickr(user, task_time, friendly_id, celery_task, data)
+    flckr.search(first_run=True)
+    flckr.make_files()
 
     return {
-        "current": "2",
-        "total": "1",
-        "status": "",
-        "result": f"/results/{friendly_id}/map",
+        "current": flckr.current_page,
+        "total": flckr.total_page,
+        "status": "FINISHED"
     }

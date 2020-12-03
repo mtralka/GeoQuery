@@ -21,7 +21,7 @@ from . import db
 from .forms import FlickrSearch
 from .model import Query
 from .model import User
-from .search_control import newSearch
+from .search_control import new_search
 from .utilities import create_unique_id
 
 
@@ -64,7 +64,7 @@ def search():
             friendly_id = create_unique_id()
 
             # Async Task Register
-            task = newSearch.delay(data, user, task_time, friendly_id)
+            task = new_search.delay(data, user, task_time, friendly_id)
 
             print(task.state)
             print(task.id)
@@ -140,7 +140,7 @@ def status_endpoint(task_id):
 
     friendly = Query.query.filter_by(friendly_id=task_id).first()
 
-    task = newSearch.AsyncResult(friendly.id)
+    task = new_search.AsyncResult(friendly.id)
 
     if task.state == "PENDING":
         response = {
