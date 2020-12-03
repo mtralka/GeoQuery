@@ -1,8 +1,8 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 from celery import Celery
-from .env import CELERY_BROKER_URL
+from flask import Flask
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+
 
 db = SQLAlchemy()
 
@@ -16,6 +16,9 @@ def create_app():
 
     app.config["SECRET_KEY"] = "SECRETKEY"
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
+    
+    # abs path for results serving
+    app.config["RESULTS"] = "C:\\Users\\mtral\\Documents\\GitHub\\matthewtralka_MnM4SDS_project\\response"
 
     # CELERY INIT
     celery.conf.update(app.config)

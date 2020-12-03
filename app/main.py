@@ -3,7 +3,6 @@ import json
 import os
 import time
 
-from celery import Celery
 from flask import Blueprint
 from flask import abort
 from flask import flash
@@ -11,6 +10,7 @@ from flask import jsonify
 from flask import redirect
 from flask import render_template
 from flask import request
+from flask import send_file
 from flask import send_from_directory
 from flask import session
 from flask import url_for
@@ -18,7 +18,6 @@ from flask_login import current_user
 from flask_login import login_required
 from sqlalchemy.sql.elements import Null
 
-from . import celery
 from . import db
 from .forms import FlickrSearch
 from .model import Query
@@ -26,8 +25,6 @@ from .model import User
 from .search_control import new_search
 from .utilities import create_unique_id
 
-
-RESULTS_PATH = ".\\response"
 
 main = Blueprint("main", __name__)
 
@@ -100,9 +97,7 @@ def status_landing():
     return render_template("status.html")
 
 
-""" Gives of search task by id """
-
-
+""" render results page """
 @main.route("/results/<task_id>")
 def status_dash(task_id):
 
@@ -118,43 +113,45 @@ def status_dash(task_id):
     )
 
 
-""" url for returning map by id """
-
-
+""" send geojson attatchment """
 @main.route("/results/<task_id>/geojson")
 def map(task_id):
 
     task = Query.query.filter_by(friendly_id=task_id).first()
 
     path = os.path.join(
-        RESULTS_PATH, str(task.user_id), str(task.execution_time)
+        app.config['RESULTS'], str(task.user_id), str(task.execution_time),'master.geojson'
     )
+    attachment_filename = f"results_{str(int(task.execution_time))}"
 
+    print(path)
     try:
-        return send_from_directory(path, filename='master.geojson', as_attachment=True)
+        return send_file(path,
+            as_attachment=True,mimetype='json', attachment_filename=attachment_filename)
     except FileNotFoundError:
         abort(404)
     
-
+""" send csv attatchment """
 @main.route("/results/<task_id>/csv")
 def csv(task_id):
 
     task = Query.query.filter_by(friendly_id=task_id).first()
 
     path = os.path.join(
-        RESULTS_PATH, str(task.user_id), str(task.execution_time)
+        app.config['RESULTS'], str(task.user_id), str(task.execution_time),'master.csv'
     )
+    attachment_filename = f"results_{str(int(task.execution_time))}"
 
+    print(path)
     try:
-        return send_from_directory(path, filename='master.csv', as_attachment=True)
+        return send_file(path,
+            as_attachment=True,mimetype='text/json', attachment_filename=attachment_filename)
     except FileNotFoundError:
         abort(404)
     
 
 
-""" endpoint for search task info """
-
-
+""" endpoint for task info """
 @main.route("/info/<task_id>", methods=["GET"])
 def status_endpoint(task_id):
 
@@ -177,7 +174,7 @@ def status_endpoint(task_id):
             "status": task.info.get("status"),
         }
     else:
-        # wrong
+        # catch all
         response = {
             "state": task.state,
             "current": 1,
@@ -187,9 +184,7 @@ def status_endpoint(task_id):
     return jsonify(response)
 
 
-""" send geojson of results """
-
-
+""" return geojson of results for leaflet """
 @main.route("/info/<task_id>/results", methods=["GET"])
 def get_results(task_id):
 
@@ -207,8 +202,6 @@ def get_results(task_id):
 
     return results
 
-
-# TODO adjust and implement
 @main.errorhandler(404)
 def page_not_found(error):
     return render_template("404.html", title="404")
