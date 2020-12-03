@@ -14,5 +14,5 @@ def new_search(self, data, user, task_time, friendly_id):
     return {
         "current": flckr.current_page,
         "total": flckr.total_page,
-        "status": "FINISHED"
+        "status": "FINISHED",
     }

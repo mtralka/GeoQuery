@@ -82,14 +82,14 @@ def search():
                 max_taken=data.get("max_taken"),
                 accuracy=data.get("accuracy"),
                 radius=data.get("radius"),
-                radius_units='KM',
+                radius_units="KM",
                 tags=data.get("tags"),
             )
             db.session.add(query)
             db.session.commit()
             return redirect(f"/results/{friendly_id}")
 
-    return render_template("search.html", form=form, title='Search')
+    return render_template("search.html", form=form, title="Search")
 
 
 @main.route("/status", methods=["GET", "POST"])
@@ -113,7 +113,7 @@ def status_dash(task_id):
         task_id=task_id,
         task=task,
         started=started,
-        title='Results'
+        title="Results",
     )
 
 
@@ -145,14 +145,14 @@ def status_endpoint(task_id):
             "state": task.state,
             "current": "waiting",
             "total": "waiting",
-            "status": "waiting"
+            "status": "waiting",
         }
     elif task.state != "FAILURE":
         response = {
             "state": task.state,
             "current": task.info.get("current"),
             "total": task.info.get("total"),
-            "status": task.info.get("status")
+            "status": task.info.get("status"),
         }
     else:
         # wrong
@@ -164,17 +164,22 @@ def status_endpoint(task_id):
         }
     return jsonify(response)
 
+
 """ send geojson of results """
-@main.route("/info/<task_id>/results", methods=['GET'])
+
+
+@main.route("/info/<task_id>/results", methods=["GET"])
 def get_results(task_id):
-    
+
     task = Query.query.filter_by(friendly_id=task_id).first()
 
-    path = os.path.join(RESULTS_PATH, str(task.user_id),str(task.execution_time), 'master.geojson')
+    path = os.path.join(
+        RESULTS_PATH, str(task.user_id), str(task.execution_time), "master.geojson"
+    )
     print(path)
     try:
-        with open(path, 'r', encoding='utf8') as file:
-            results = json.load(file)  
+        with open(path, "r", encoding="utf8") as file:
+            results = json.load(file)
     except FileNotFoundError:
         results = Null
 

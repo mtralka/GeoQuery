@@ -1,4 +1,3 @@
-
 import time
 
 import pandas as pd
@@ -93,5 +92,3 @@ class flickr(Base):
         if self.current_page <= self.total_page:
             time.sleep(0.5)
             self.search(first_run=False)
-
-    

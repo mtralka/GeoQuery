@@ -18,7 +18,7 @@ class Base:
 
     def make_files(self, csv=True, geojson=True, pickle=False):
 
-        file_path = os.path.join('response', self.user, self.start_time)
+        file_path = os.path.join("response", self.user, self.start_time)
 
         if not os.path.exists(file_path):
             os.makedirs(file_path)
@@ -33,15 +33,13 @@ class Base:
         if geojson:
             gdf = gpd.GeoDataFrame(
                 self.df,
-                geometry=gpd.points_from_xy(self.df.longitude, self.df.latitude)
+                geometry=gpd.points_from_xy(self.df.longitude, self.df.latitude),
             )
             gdf.to_file(os.path.join(file_path, "master.geojson"), driver="GeoJSON")
 
         if pickle:
             self.df.to_pickle(os.path.join(file_path, "master.pkl"))
 
-        self.task.update_state(
-            state="IN PROGRESS", meta={"status": "results saved"}
-        )
+        self.task.update_state(state="IN PROGRESS", meta={"status": "results saved"})
 
         print("file save complete")
