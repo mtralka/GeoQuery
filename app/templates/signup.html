@@ -11,6 +11,8 @@
 
         </h1>
 
+        {{ form.csrf_token }}
+
         {{ form.name (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
                 text-center focus:border-gray-300 
                 focus:bg-gray-200 appearance-none',
@@ -34,14 +36,14 @@
                                     type="password"
                                     )}}
 
-        { form.password_confirm (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
+        {{ form.password_confirm (class= 'm-5 h-14 font-semibold font-lg bg-gray-100 p-2
         text-center focus:border-gray-300
         focus:bg-gray-200 appearance-none',
         placeholder="Confirm Password",
         type="password"
         )}}
 
-        { form.submit (class= 'mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
+        {{ form.submit (class= 'mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
         rounded-full my-3 py-5 px-5 shadow-lg focus:outline-none focus:shadow-outline
         transform transition hover:scale-105 duration-300 ease-in-out'
 

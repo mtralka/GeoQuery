@@ -1,22 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField
 from wtforms import DecimalField
-from wtforms import FormField
-from wtforms import HiddenField
 from wtforms import IntegerField
 from wtforms import PasswordField
-from wtforms import RadioField
-from wtforms import SelectField
 from wtforms import StringField
 from wtforms import SubmitField
-from wtforms import TextAreaField
 from wtforms import TextField
-from wtforms import ValidationError
-from wtforms import validators
-from wtforms import widgets
 from wtforms.fields.html5 import DateField
-from wtforms.form import BaseForm
-from wtforms.form import Form
 from wtforms.validators import DataRequired
 from wtforms.validators import Email
 from wtforms.validators import EqualTo
@@ -24,9 +13,6 @@ from wtforms.validators import InputRequired
 from wtforms.validators import Length
 from wtforms.validators import NumberRange
 from wtforms.validators import Optional
-
-
-# TODO adjust imports for proj
 
 
 WTF_CSRF_SECRET_KEY = "CSRFSTRING"  # Todo pull from env

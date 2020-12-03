@@ -47,7 +47,7 @@ def login():
 
         return redirect(url_for("main.landing"))
 
-    return render_template("login.html", form=form)
+    return render_template("login.html", form=form, title='Login')
 
 
 @auth.route("/signup", methods=["GET", "POST"])
@@ -63,13 +63,13 @@ def signup():
 
         if form.validate() == False:
             flash("All fields are required.")
-            return render_template("signup.html", form=form)
+            return render_template("signup.html", form=form,title='Sign Up')
 
         user = User.query.filter_by(email=email).first()
 
         if user:
             flash("Email address already exists")
-            return render_template("signup.html", form=form)
+            return render_template("signup.html", form=form, title='Sign Up')
 
         new_user = User(
             email=email,
@@ -82,7 +82,7 @@ def signup():
 
         return redirect(url_for("auth.login"))
 
-    return render_template("signup.html", form=form)
+    return render_template("signup.html", form=form, title='Sign Up')
 
 
 @auth.route("/logout")
