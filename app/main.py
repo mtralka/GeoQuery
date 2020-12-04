@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+from logging import log
 import os
 import time
 
@@ -11,12 +12,12 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import send_file
-from flask import send_from_directory
-from flask import session
 from flask import url_for
 from flask_login import current_user
 from flask_login import login_required
 from sqlalchemy.sql.elements import Null
+
+from app.auth import login
 
 from . import db
 from .forms import FlickrSearch
@@ -42,6 +43,7 @@ def about():
     return render_template("about.html")
 
 
+@login_required
 @main.route("/search", methods=["GET", "POST"])
 def search():
 
@@ -57,8 +59,8 @@ def search():
         else:
 
             data = request.form
-            # user = current_user.id
-            user = "test_user_2"  # for testing only
+            user = current_user.id
+            #  user = "test_user" #  testing only
             task_time = str(time.time())
             friendly_id = create_unique_id()
 
@@ -90,6 +92,7 @@ def search():
     return render_template("search.html", form=form, title="Search")
 
 
+@login_required
 @main.route("/status", methods=["GET", "POST"])
 def status_landing():
 
@@ -99,6 +102,7 @@ def status_landing():
 
 """ render results page """
 
+@login_required
 @main.route("/results/<task_id>")
 def status_dash(task_id):
 
@@ -117,6 +121,7 @@ def status_dash(task_id):
 """ send geojson attatchment """
 
 
+@login_required
 @main.route("/results/<task_id>/geojson")
 def map(task_id):
 
@@ -144,6 +149,7 @@ def map(task_id):
 """ send csv attatchment """
 
 
+@login_required
 @main.route("/results/<task_id>/csv")
 def csv(task_id):
 
@@ -170,6 +176,7 @@ def csv(task_id):
 """ endpoint for task info """
 
 
+@login_required
 @main.route("/info/<task_id>", methods=["GET"])
 def status_endpoint(task_id):
 
@@ -205,6 +212,7 @@ def status_endpoint(task_id):
 """ return geojson of results for leaflet """
 
 
+@login_required
 @main.route("/info/<task_id>/results", methods=["GET"])
 def get_results(task_id):
 
