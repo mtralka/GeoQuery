@@ -39,7 +39,6 @@
                         lat
 
                     </p>
-
                 </div>
 
                 <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
@@ -58,7 +57,6 @@
                         lon
 
                     </p>
-
                 </div>
 
                 <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
@@ -76,7 +74,6 @@
                         km
 
                     </p>
-
                 </div>
 
                 <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
@@ -95,7 +92,6 @@
                         accuracy
 
                     </p>
-
                 </div>
 
                 <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
@@ -118,8 +114,6 @@
                         date
 
                     </p>
-
-
                 </div>
 
                 <div class='w-4/6 h-14 md:w-2/5 md:h-12 bg-gray-100 border border-gray-200
@@ -143,7 +137,6 @@
                         date
 
                     </p>
-
                 </div>
 
                 <div class='w-4/6 h-14 md:w-full md:h-12 bg-gray-100 border border-gray-200
@@ -160,8 +153,6 @@
                         tags
 
                     </p>
-
-
                 </div>
 
                 {{ form.search (class="mx-4 lg:mx-1 hover:underline bg-yellow-500 text-gray-800 font-bold
@@ -178,10 +169,8 @@
                 <div id='map-selection' style="height: 500px;"></div>
 
             </div>
-
         </div>
     </div>
-
 </div>
 
 <div class='mx-auto max-w-7xl full-width mt-10'>
@@ -232,16 +221,7 @@
                 <DD class='pl-10'>
                     additional tags to search by. Comma deliminated
                 </DD>
-
-                </ul>
-
-
-
-
-
-
         </div>
-
     </div>
 
     <!-- LEAFLET -->
@@ -251,7 +231,6 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
-
 
     <script>
         // mobile menu
@@ -315,7 +294,6 @@
             mapSelection.flyTo(new L.LatLng(e.latlng.lat, e.latlng.lng), 10);
 
         });
-
 
         function updateMap() {
 
@@ -407,9 +385,6 @@
             document.getElementById('acc-info').innerHTML = description;
 
         };
-
-
-
 
     </script>
 
