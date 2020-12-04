@@ -1,5 +1,5 @@
 <!doctype html>
-<html class='text-gray-900 leading-tight font-sans overflow-x-hidden'>
+<html class='text-gray-900 leading-tight font-sans overflow-x-hidden h-screen'>
 
 <head>
     <title> {{ title }} | GeoQuery </title>
@@ -21,9 +21,9 @@
     }
 </style>
 
-<body class='bg-gray-100 overflow-hidden'
+<body class='min-h-full relative bg-gray-100 overflow-hidden'
     style="background-color:var(--bckgrnd-color);background-image: var(--bckgrnd-image);">
-    <header class=' mx-auto w-screen bg-green-800 p-5'>
+    <header class='mx-auto w-screen bg-green-800 p-5'>
 
         <nav class="flex-row md:justify-between">
 
@@ -87,15 +87,15 @@
 
     </header>
 
-    <main>
+    <main class='pb-24'>
 
         {% block content %}
         {% endblock %}
 
     </main>
 
-    <footer
-        class='w-full text-center flex justify-evenly items-center text-sm md:text-lg mt-10 p-5 text-gray-600 bg-white'>
+    <footer class='absolute bottom-0 w-full text-center flex justify-evenly 
+        items-center text-sm md:text-lg p-5 text-gray-600 bg-white'>
 
         <p><a href='https://github.com/mtralka/GeoQuery'>&#11088; on GitHub</a></p>
 
