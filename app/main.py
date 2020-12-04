@@ -17,12 +17,9 @@ from flask_login import current_user
 from flask_login import login_required
 from sqlalchemy.sql.elements import Null
 
-from app.auth import login
-
 from . import db
 from .forms import FlickrSearch
 from .model import Query
-from .model import User
 from .search_control import new_search
 from .utilities import create_unique_id
 
@@ -32,6 +29,7 @@ main = Blueprint("main", __name__)
 main.secret_key = "SECRETKEY"
 WTF_CSRF_SECRET_KEY = "CSRFSECRET"
 RESULTS_PATH = "C:\\Users\\mtral\\Documents\\GitHub\\matthewtralka_MnM4SDS_project\\response"
+
 
 @main.route("/")
 def index():
