@@ -41,7 +41,6 @@ def about():
     return render_template("about.html")
 
 
-
 @main.route("/search", methods=["GET", "POST"])
 @login_required
 def search():
