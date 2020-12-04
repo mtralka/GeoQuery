@@ -2,7 +2,6 @@ import time
 
 import pandas as pd
 import requests
-from sqlalchemy.sql.elements import Null
 
 from ..env import KEY
 from .base import Base
