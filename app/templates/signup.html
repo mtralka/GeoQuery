@@ -13,13 +13,21 @@
 
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ul class='text center text-lg text-red m-2 mb-0'>
-            {% for message in messages %}
-            <li> {{ message }} </li>
-            {% endfor %}
-        </ul>
+        {% for message in messages %}
+        <div class="">
+            <strong>{{message}}!</strong>
+        </div>
+        {% endfor %}
         {% endif %}
         {% endwith %}
+
+        {% for field in form.errors %}
+        {% for error in form.errors[field] %}
+        <div class="">
+            <strong>Error!</strong> {{error}}
+        </div>
+        {% endfor %}
+        {% endfor %}
 
         {{ form.csrf_token }}
 
@@ -61,7 +69,6 @@
 
 
     </form>
-
 
 </div>
 

@@ -66,9 +66,8 @@ def signup():
         password = request.form.get("password")
 
         if form.validate() is False:
-                print('validate signup error')
-                flash("All fields are required.")
-                return render_template("signup.html", form=form, title='Sign Up')
+            flash("All fields are required.")
+            return render_template("signup.html", form=form, title='Sign Up')
 
         user = User.query.filter_by(email=email).first()
 

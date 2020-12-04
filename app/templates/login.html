@@ -4,7 +4,6 @@
 
 <div class='mx-auto max-w-7xl full-width mt-24 flex justify-center'>
 
-
     <form class='shadow-2xl max-w-md bg-white mx-auto flex flex-col justify-evenly p-10' , method="post" ,
         action="/login">
 
@@ -14,6 +13,17 @@
             Login
 
         </h1>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="">
+            <strong>{{message}}!</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
         {% for field in form.errors %}
         {% for error in form.errors[field] %}
         <div class="">
@@ -43,11 +53,7 @@
                     
                                         )}}
 
-
     </form>
-
-
 </div>
-
 
 {% endblock %}
