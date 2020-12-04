@@ -27,13 +27,13 @@ auth.secret_key = "SECRETKEY"
 def login():
 
     form = LoginForm()
-    
+   
     if form.is_submitted():
         if not form.validate():
-            
+          
             flash("Validation Error")
             return render_template("login.html", form=form, title='Login')
-    
+   
     if form.validate_on_submit():
 
         email = request.form.get("email")
@@ -87,8 +87,9 @@ def signup():
 
     return render_template("signup.html", form=form, title='Sign Up')
 
-@login_required
+
 @auth.route("/logout")
+@login_required
 def logout():
 
     logout_user()

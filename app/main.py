@@ -41,8 +41,9 @@ def about():
     return render_template("about.html")
 
 
-@login_required
+
 @main.route("/search", methods=["GET", "POST"])
+@login_required
 def search():
 
     form = FlickrSearch()
@@ -90,8 +91,9 @@ def search():
     return render_template("search.html", form=form, title="Search")
 
 
-@login_required
+
 @main.route("/status", methods=["GET", "POST"])
+@login_required
 def status_landing():
 
     # TODO implement input page for manual status search w/ friendly id
@@ -100,8 +102,9 @@ def status_landing():
 
 """ render results page """
 
-@login_required
+
 @main.route("/results/<task_id>")
+@login_required
 def status_dash(task_id):
 
     task = Query.query.filter_by(friendly_id=task_id).first()
@@ -119,8 +122,8 @@ def status_dash(task_id):
 """ send geojson attatchment """
 
 
-@login_required
 @main.route("/results/<task_id>/geojson")
+@login_required
 def map(task_id):
 
     task = Query.query.filter_by(friendly_id=task_id).first()
@@ -147,8 +150,9 @@ def map(task_id):
 """ send csv attatchment """
 
 
-@login_required
+
 @main.route("/results/<task_id>/csv")
+@login_required
 def csv(task_id):
 
     task = Query.query.filter_by(friendly_id=task_id).first()
@@ -174,8 +178,8 @@ def csv(task_id):
 """ endpoint for task info """
 
 
-@login_required
 @main.route("/info/<task_id>", methods=["GET"])
+@login_required
 def status_endpoint(task_id):
 
     friendly = Query.query.filter_by(friendly_id=task_id).first()
@@ -210,8 +214,8 @@ def status_endpoint(task_id):
 """ return geojson of results for leaflet """
 
 
-@login_required
 @main.route("/info/<task_id>/results", methods=["GET"])
+@login_required
 def get_results(task_id):
 
     task = Query.query.filter_by(friendly_id=task_id).first()
