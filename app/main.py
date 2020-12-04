@@ -28,7 +28,9 @@ main = Blueprint("main", __name__)
 
 main.secret_key = "SECRETKEY"
 WTF_CSRF_SECRET_KEY = "CSRFSECRET"
-RESULTS_PATH = "C:\\Users\\mtral\\Documents\\GitHub\\matthewtralka_MnM4SDS_project\\response"
+RESULTS_PATH = (
+    "C:\\Users\\mtral\\Documents\\GitHub\\matthewtralka_MnM4SDS_project\\response"
+)
 
 
 @main.route("/")
@@ -90,7 +92,6 @@ def search():
     return render_template("search.html", form=form, title="Search")
 
 
-
 @main.route("/status", methods=["GET", "POST"])
 @login_required
 def status_landing():
@@ -147,7 +148,6 @@ def map(task_id):
 
 
 """ send csv attatchment """
-
 
 
 @main.route("/results/<task_id>/csv")

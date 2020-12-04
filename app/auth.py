@@ -27,13 +27,13 @@ auth.secret_key = "SECRETKEY"
 def login():
 
     form = LoginForm()
-   
+
     if form.is_submitted():
         if not form.validate():
-          
+
             flash("Validation Error")
-            return render_template("login.html", form=form, title='Login')
-   
+            return render_template("login.html", form=form, title="Login")
+
     if form.validate_on_submit():
 
         email = request.form.get("email")
@@ -44,13 +44,13 @@ def login():
 
         if not user or not check_password_hash(user.password, password):
             flash("Please check your login details and try again.")
-            return render_template("login.html", form=form, title='Login')
+            return render_template("login.html", form=form, title="Login")
 
         login_user(user, remember=remember)
 
         return redirect(url_for("main.index"))
 
-    return render_template("login.html", form=form, title='Login')
+    return render_template("login.html", form=form, title="Login")
 
 
 @auth.route("/signup", methods=["GET", "POST"])
@@ -66,13 +66,13 @@ def signup():
 
         if form.validate() is False:
             flash("All fields are required.")
-            return render_template("signup.html", form=form, title='Sign Up')
+            return render_template("signup.html", form=form, title="Sign Up")
 
         user = User.query.filter_by(email=email).first()
 
         if user:
             flash("Email address already exists")
-            return render_template("signup.html", form=form, title='Sign Up')
+            return render_template("signup.html", form=form, title="Sign Up")
 
         new_user = User(
             email=email,
@@ -85,7 +85,7 @@ def signup():
 
         return redirect(url_for("auth.login"))
 
-    return render_template("signup.html", form=form, title='Sign Up')
+    return render_template("signup.html", form=form, title="Sign Up")
 
 
 @auth.route("/logout")

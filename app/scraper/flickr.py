@@ -49,17 +49,13 @@ class flickr(Base):
 
         if not _current:
             _current = self.current_page
-      
+
         if not _total:
             _total = self.total_page
 
         self.task.update_state(
             state=_state,
-            meta={
-                "current": _current,
-                "total": _total,
-                "status": _status
-            },
+            meta={"current": _current, "total": _total, "status": _status},
         )
 
     def search(self, first_run=True):
@@ -80,18 +76,19 @@ class flickr(Base):
                 self.total_page = response["photos"]["pages"]
             else:
                 self.df = self.df.append(
-                    pd.DataFrame.from_dict(response["photos"]["photo"], orient="columns"),
+                    pd.DataFrame.from_dict(
+                        response["photos"]["photo"], orient="columns"
+                    ),
                     ignore_index=True,
                 )
         except KeyError:  # no photos
-            self._update_status('FINISHED', 'no photos found...', '0', '0')
+            self._update_status("FINISHED", "no photos found...", "0", "0")
             self.current_page = 0
             self.total_page = 0
-            
+
         try:
             # API timed-out
-            if not first_run and \
-                str(response["photos"]["pages"]) == "0":
+            if not first_run and str(response["photos"]["pages"]) == "0":
 
                 print(response)
 
@@ -109,7 +106,7 @@ class flickr(Base):
 
         if self.current_page <= self.total_page:
 
-            self._update_status('IN PROGRESS', 'searching flickr...')
+            self._update_status("IN PROGRESS", "searching flickr...")
             self.current_page = self.current_page + 1
 
             time.sleep(0.2)
