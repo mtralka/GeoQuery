@@ -65,20 +65,20 @@ class flickr(Base):
                 ignore_index=True,
             )
 
-        try:
-            if str(response["photos"]["pages"]) == "0":
+            try:
+                # API timeout and reset
+                if str(response["photos"]["pages"]) == "0":
+                    print(response)
+
+                    time.sleep(5)
+                    self.search(first_run=False)
+                else:
+                    self.current_page = response["photos"]["page"]
+            except ValueError:
+                print("Value Error")
                 print(response)
-                time.sleep(5)
-                # self.current_page = self.current_page - 1
-                self.search()
-            else:
-                self.current_page = response["photos"]["page"]
-        except ValueError:
-            print("Value Error")
-            print(response)
 
         print(f"Page {self.current_page} of {self.total_page}")
-
         self.current_page = self.current_page + 1
 
         self.task.update_state(
@@ -89,6 +89,7 @@ class flickr(Base):
                 "status": "searching flickr...",
             },
         )
+
         if self.current_page <= self.total_page:
             time.sleep(0.2)
             self.search(first_run=False)

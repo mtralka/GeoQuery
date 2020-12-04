@@ -6,7 +6,7 @@ from .scraper.flickr import flickr
 def new_search(self, data, user, task_time, friendly_id):
 
     celery_task = self
-
+    
     flckr = flickr(user, task_time, friendly_id, celery_task, data)
     flckr.search(first_run=True)
     flckr.make_files()
