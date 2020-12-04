@@ -18,7 +18,7 @@ class Base:
 
     def make_files(self, csv=True, geojson=True, pickle=False):
 
-        file_path = os.path.join("response", self.user, self.start_time)
+        file_path = os.path.join("response", str(self.user), str(self.start_time))
 
         if not os.path.exists(file_path):
             os.makedirs(file_path)
@@ -31,11 +31,14 @@ class Base:
             self.df.to_csv(os.path.join(file_path, "master.csv"), index=False)
 
         if geojson:
-            gdf = gpd.GeoDataFrame(
-                self.df,
-                geometry=gpd.points_from_xy(self.df.longitude, self.df.latitude),
-            )
-            gdf.to_file(os.path.join(file_path, "master.geojson"), driver="GeoJSON")
+            try:
+                gdf = gpd.GeoDataFrame(
+                    self.df,
+                    geometry=gpd.points_from_xy(self.df.longitude, self.df.latitude),
+                )
+                gdf.to_file(os.path.join(file_path, "master.geojson"), driver="GeoJSON")
+            except AttributeError:  # no photos
+                return
 
         if pickle:
             self.df.to_pickle(os.path.join(file_path, "master.pkl"))

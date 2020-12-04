@@ -203,8 +203,8 @@ def status_endpoint(task_id):
         # catch all
         response = {
             "state": task.state,
-            "current": 1,
-            "total": 1,
+            "current": task.info.get("current"),
+            "total": task.info.get("total"),
             "status": str(task.info),
         }
     return jsonify(response)
@@ -227,7 +227,7 @@ def get_results(task_id):
         with open(path, "r", encoding="utf8") as file:
             results = json.load(file)
     except FileNotFoundError:
-        results = Null
+        abort(404)
 
     return results
 
