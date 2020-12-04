@@ -43,7 +43,6 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         if not user or not check_password_hash(user.password, password):
-            # TODO implement flash
             flash("Please check your login details and try again.")
             return render_template("login.html", form=form, title='Login')
 
@@ -88,7 +87,7 @@ def signup():
 
     return render_template("signup.html", form=form, title='Sign Up')
 
-
+@login_required
 @auth.route("/logout")
 def logout():
 
