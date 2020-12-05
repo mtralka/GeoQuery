@@ -37,8 +37,3 @@ def create_unique_id(length=5):
             break
 
     return id
-
-
-def toGeo(df):
-    """ convert dataframe to geodataframe """
-    return gpd.GeoDataFrame(df, geometry=gpd.points_from_xy(df.longitude, df.latitude))
