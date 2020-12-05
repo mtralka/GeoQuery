@@ -105,7 +105,7 @@
                         <input
                             class='w-3/5 h-full font-semibold bg-gray-100
                             text-center focus:border-gray-300 focus:bg-gray-200 appearance-none inline-block overflow-hidden'
-                            id="acc" name="acc" type="date" value="new Date({{task.min_taken}})" placeholder="date" readonly>
+                            id="acc" name="acc" type="date" value="{{task.min_taken}}" placeholder="date" readonly>
 
                         <p class='inline-block' id=''>
 
@@ -200,7 +200,8 @@
         </div>
 
         <!-- 2nd MAP CONTAINER -->
-        <div class='w-full h-2/3 md:p-4  rounded-3xl md:flex md:flex-row mt-3 md:m-0 hidden' id='map-card'>
+        <div class='w-full h-2/3 md:p-4  rounded-3xl md:flex md:flex-row mt-3 md:m-0 hidden md:hidden lg:hidden'
+            id='map-card'>
 
             <div class='w-full bg-white shadow-md rounded-3xl ' style='min-height: 500px;' id='map'>
             </div>
@@ -211,7 +212,7 @@
 
 
         <!-- 3rd CONTAINER -->
-        <div class=' w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row mt-3 md:m-0 h-min-full hidden'
+        <div class=' w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row mt-3 md:m-0 h-min-full hidden md:hidden lg:hidden'
             id='results-card'>
 
             <!-- Local Morans Box -->
@@ -448,7 +449,11 @@
 
         // show results
         document.getElementById('map-card').classList.remove('hidden');
+        document.getElementById('map-card').classList.remove('md:hidden');
+        document.getElementById('map-card').classList.remove('lg:hidden');
         document.getElementById('results-card').classList.remove('hidden');
+        document.getElementById('results-card').classList.remove('md:hidden');
+        document.getElementById('results-card').classList.remove('lg:hidden');
 
 
     };
