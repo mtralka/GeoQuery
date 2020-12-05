@@ -1,15 +1,7 @@
 from datetime import datetime
-from pathlib import Path
 import random
 import string
 
-import branca
-import folium
-from folium import plugins
-import geopandas as gpd
-import pandas as pd
-
-from . import db
 from .model import Query
 
 
