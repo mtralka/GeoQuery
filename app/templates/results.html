@@ -194,8 +194,7 @@
         </div>
 
         <!-- 2nd MAP CONTAINER -->
-        <div class='w-full h-2/3 md:p-4  rounded-3xl md:flex md:flex-row mt-3 md:m-0 hidden md:hidden lg:hidden'
-            id='map-card'>
+        <div class='w-full h-2/3 md:p-4  rounded-3xl md:flex md:flex-row mt-3 md:m-0' id='map-card'>
 
             <div class='w-full bg-white shadow-md rounded-3xl ' style='min-height: 500px;' id='map'>
             </div>
@@ -203,14 +202,22 @@
         </div>
 
         <!-- 3rd CONTAINER -->
-        <div class=' w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row mt-3 md:m-0 h-min-full hidden md:hidden lg:hidden'
-            id='results-card'>
+        <div class=' w-full h-2/3 md:p-4 rounded-3xl md:flex md:flex-row mt-3 md:m-0 h-min-full' id='results-card'
+            style="display:none;">
 
-            <!-- Local Morans Box -->
-            <div class='w-full md:w-1/2 bg-white shadow-md rounded-3xl md:mr-2 overflow-hidden'>
+            <!-- Other Results Box -->
+            <div
+                class='w-full md:w-1/2 bg-white shadow-md rounded-3xl md:mr-2 overflow-hidden flex flex-col justify-center items-center'>
 
+                <!-- 
                 <img class='h-full w-full' src='..\static\img\ex_lmi.png'>
+                -->
 
+                <p class="text-4xl font-semibold p-4 w-full text-center">
+
+                    Queried <span id='total_photos'>N/A</span> photos in <span id='total_time'>N/A</span> minutes
+
+                </p>
 
 
             </div>
@@ -370,7 +377,6 @@
 
             })
 
-
             .then((data) => {
 
                 coords = [];
@@ -432,21 +438,18 @@
                     mapResults.addLayer(cluster);
                 }
 
-
+                // set total photos
+                document.getElementById('total_photos').innerHTML = coords.length;
             })
 
+        // find time delta
+        let started = "{{started}}";
+        document.getElementById('total_time').innerHTML = (parseInt((new Date(Date.now()) - new Date(started)) / 60000));
+
         // show results
-        document.getElementById('map-card').classList.remove('hidden');
-        document.getElementById('map-card').classList.remove('md:hidden');
-        document.getElementById('map-card').classList.remove('lg:hidden');
-        document.getElementById('results-card').classList.remove('hidden');
-        document.getElementById('results-card').classList.remove('md:hidden');
-        document.getElementById('results-card').classList.remove('lg:hidden');
-
-
+        document.getElementById('results-card').removeAttribute('style');
+        // TODO : solve issues with hiding --> showing leaflet
     };
-
-
 
 </script>
 
