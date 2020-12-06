@@ -1,0 +1,10 @@
+{
+    "python.pythonPath": "C:\\Users\\mtral\\anaconda3\\envs\\WEB_APP\\python.exe",
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint-flask"
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true
+}

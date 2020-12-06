@@ -13,12 +13,10 @@ env.bak/
 venv.bak/
 env.py
 response/
-.vscode
 commands.txt
 admin/
 celerybeat-schedule.*
 *.sqlite
 web-map-draft.html
 testing/
-app/templates/maps/
 app/static/*
