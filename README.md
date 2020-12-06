@@ -20,6 +20,7 @@ Twitter Integration| |not started| :heavy_minus_sign:
 about page| |in progress| :soon:
 scheduled searches | |not started| :heavy_minus_sign:
 email alerts | |not started| :heavy_minus_sign:
+task searchbar | |not started| :heavy_minus_sign:
 
 
 #### Examples

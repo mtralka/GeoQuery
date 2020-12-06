@@ -15,7 +15,6 @@ from flask import send_file
 from flask import url_for
 from flask_login import current_user
 from flask_login import login_required
-from sqlalchemy.sql.elements import Null
 
 from . import db
 from .forms import FlickrSearch
