@@ -8,11 +8,13 @@ from flask import Blueprint
 from flask import abort
 from flask import flash
 from flask import jsonify
+from flask import make_response
 from flask import redirect
 from flask import render_template
 from flask import request
 from flask import send_file
 from flask import url_for
+from flask.wrappers import Response
 from flask_login import current_user
 from flask_login import login_required
 
@@ -27,9 +29,7 @@ main = Blueprint("main", __name__)
 
 main.secret_key = "SECRETKEY"
 WTF_CSRF_SECRET_KEY = "CSRFSECRET"
-RESULTS_PATH = (
-    "C:\\Users\\mtral\\Documents\\GitHub\\matthewtralka_MnM4SDS_project\\response"
-)
+RESULTS_PATH =  "/app/response"
 
 
 @main.route("/")
@@ -221,10 +221,10 @@ def get_results(task_id):
     path = os.path.join(
         RESULTS_PATH, str(task.user_id), str(task.execution_time), "master.geojson"
     )
-    print(path)
     try:
         with open(path, "r", encoding="utf8") as file:
             results = json.load(file)
+            print(results)
     except FileNotFoundError:
         abort(404)
 
