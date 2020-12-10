@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 celery = Celery(
-    __name__, broker="redis://localhost:6379/0", backend="redis://localhost:6379/0"
+    __name__, broker="redis://redis:6379/0", backend="redis://redis:6379/0"
 )
 
 

@@ -7,10 +7,11 @@ def create_celery(app):
 
     celery = Celery(
         app.import_name,
-        backend="redis://localhost:6379/0",
-        broker="redis://localhost:6379/0",
+        backend="redis://redis:6379/0",
+        broker="redis://redis:6379/0",
         ignore_result=False,
         task_ignore_result=False,
+        #include=[f'{app.import_name}.search_control']
     )
 
     celery.conf.update(app.config)
