@@ -17,6 +17,6 @@ commands.txt
 admin/
 celerybeat-schedule.*
 *.sqlite
-web-map-draft.html
 testing/
-app\app\static\css\tailwind.css
+*tailwind.css
+.vscode
