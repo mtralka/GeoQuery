@@ -1,9 +1,9 @@
+import os
 import time
 
 import pandas as pd
 import requests
 
-from ..env import KEY
 from .base import Base
 
 
@@ -14,7 +14,7 @@ class flickr(Base):
         "format": "json",
         "nojsoncallback": "1",
         "has_geo": "1",
-        "api_key": KEY,
+        "api_key": os.environ.get("FLICKR_KEY"),
         "extras": "description, license, date_upload, date_taken, owner_name, \
         icon_server, original_format, last_update, geo, tags, url_l",
     }
