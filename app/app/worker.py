@@ -1,3 +1,5 @@
+import os
+
 from celery import Celery
 
 from . import create_app
@@ -7,11 +9,10 @@ def create_celery(app):
 
     celery = Celery(
         app.import_name,
-        backend="redis://redis:6379/0",
-        broker="redis://redis:6379/0",
+        backend=os.environ.get("CELERY_BACKEND"),
+        broker=os.environ.get("CELERY_BROKER"),
         ignore_result=False,
-        task_ignore_result=False,
-        #include=[f'{app.import_name}.search_control']
+        task_ignore_result=False
     )
 
     celery.conf.update(app.config)
