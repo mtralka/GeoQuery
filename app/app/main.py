@@ -24,9 +24,9 @@ from .utilities import create_unique_id
 
 main = Blueprint("main", __name__)
 
-main.secret_key = "SECRETKEY"
-WTF_CSRF_SECRET_KEY = "CSRFSECRET"
-RESULTS_PATH =  "/app/response"
+main.secret_key = os.environ.get("MAIN_SECRET_KEY")
+WTF_CSRF_SECRET_KEY = os.environ.get("WTF_CSRF_SECRET_KEY")
+RESULTS_PATH = os.environ.get("RESULTS_PATH")
 
 
 @main.route("/")

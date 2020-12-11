@@ -11,6 +11,8 @@ services:
     - "redis"
     volumes:
       - ./app:/app
+    env_file: 
+      - .env
   redis:
     image: "redis:6.0.9"
     ports:
@@ -24,4 +26,6 @@ services:
       - .:/app
     depends_on: 
        - "redis"
+    env_file: 
+      - .env
 
