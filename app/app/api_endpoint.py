@@ -25,7 +25,7 @@ RESULTS_PATH = os.environ.get("RESULTS_PATH")
 @login_required
 def map(task_id, file_type):
 
-    acceptable_files = ['geojson', 'csv']
+    acceptable_files = ["geojson", "csv"]
 
     if file_type in acceptable_files:
 
@@ -50,6 +50,7 @@ def map(task_id, file_type):
             abort(404)
     else:
         abort(404)
+
 
 @api_endpoint.route("/info/<task_id>", methods=["GET"])
 @login_required
