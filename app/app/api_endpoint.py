@@ -62,6 +62,7 @@ def csv(task_id):
         str(task.execution_time),
         "master.csv",
     )
+    print(os.path.abspath(path))
     attachment_filename = f"results_{str(int(task.execution_time))}.csv"
 
     try:
@@ -125,7 +126,7 @@ def get_results(task_id):
     try:
         with open(path, "r", encoding="utf8") as file:
             results = json.load(file)
-            print(results)
+            
     except FileNotFoundError:
         abort(404)
 
