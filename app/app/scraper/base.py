@@ -19,7 +19,7 @@ class Base:
     def make_files(self, csv=True, geojson=True, pickle=False):
 
         file_path = os.path.join("response", str(self.user), str(self.start_time))
-        
+
         if not os.path.exists(file_path):
             os.makedirs(file_path)
 

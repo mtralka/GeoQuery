@@ -1,4 +1,3 @@
-
 import json
 import os
 
@@ -22,61 +21,35 @@ RESULTS_PATH = os.environ.get("RESULTS_PATH")
 """ send geojson attatchment """
 
 
-@api_endpoint.route("/results/<task_id>/geojson")
+@api_endpoint.route("/results/<task_id>/<file_type>")
 @login_required
-def map(task_id):
+def map(task_id, file_type):
 
-    task = Query.query.filter_by(friendly_id=task_id).first()
+    acceptable_files = ['geojson', 'csv']
 
-    path = os.path.join(
-        RESULTS_PATH,
-        str(task.user_id),
-        str(task.execution_time),
-        "master.geojson",
-    )
-    attachment_filename = f"results_{str(int(task.execution_time))}"
+    if file_type in acceptable_files:
 
-    try:
-        return send_file(
-            path,
-            as_attachment=True,
-            mimetype="json",
-            attachment_filename=attachment_filename,
+        task = Query.query.filter_by(friendly_id=task_id).first()
+
+        path = os.path.join(
+            RESULTS_PATH,
+            str(task.user_id),
+            str(task.execution_time),
+            f"master.{file_type}",
         )
-    except FileNotFoundError:
+
+        attachment_filename = f"results_{str(int(task.execution_time))}.{file_type}"
+
+        try:
+            return send_file(
+                path,
+                as_attachment=True,
+                attachment_filename=attachment_filename,
+            )
+        except FileNotFoundError:
+            abort(404)
+    else:
         abort(404)
-
-
-""" send csv attatchment """
-
-
-@api_endpoint.route("/results/<task_id>/csv")
-@login_required
-def csv(task_id):
-
-    task = Query.query.filter_by(friendly_id=task_id).first()
-
-    path = os.path.join(
-        RESULTS_PATH,
-        str(task.user_id),
-        str(task.execution_time),
-        "master.csv",
-    )
-    print(os.path.abspath(path))
-    attachment_filename = f"results_{str(int(task.execution_time))}.csv"
-
-    try:
-        return send_file(
-            path,
-            as_attachment=True,
-            attachment_filename=attachment_filename,
-        )
-    except FileNotFoundError:
-        abort(404)
-
-
-""" endpoint for task info """
-
 
 @api_endpoint.route("/info/<task_id>", methods=["GET"])
 @login_required
@@ -126,7 +99,7 @@ def get_results(task_id):
     try:
         with open(path, "r", encoding="utf8") as file:
             results = json.load(file)
-            
+
     except FileNotFoundError:
         abort(404)
 

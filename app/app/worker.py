@@ -12,7 +12,7 @@ def create_celery(app):
         backend=os.environ.get("CELERY_BACKEND"),
         broker=os.environ.get("CELERY_BROKER"),
         ignore_result=False,
-        task_ignore_result=False
+        task_ignore_result=False,
     )
 
     celery.conf.update(app.config)

@@ -9,7 +9,9 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 celery = Celery(
-    __name__, broker=os.environ.get("CELERY_BROKER"), backend=os.environ.get("CELERY_BACKEND")
+    __name__,
+    broker=os.environ.get("CELERY_BROKER"),
+    backend=os.environ.get("CELERY_BACKEND"),
 )
 
 
@@ -18,6 +20,7 @@ def create_app():
 
     app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     # CELERY INIT
     celery.conf.update(app.config)
