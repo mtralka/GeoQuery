@@ -19,4 +19,4 @@ celerybeat-schedule.*
 *.sqlite
 web-map-draft.html
 testing/
-app/static/*
+app\app\static\css\tailwind.css
