@@ -1,16 +1,12 @@
 from datetime import datetime
-import json
 import os
 import time
 
 from flask import Blueprint
-from flask import abort
 from flask import flash
-from flask import jsonify
 from flask import redirect
 from flask import render_template
 from flask import request
-from flask import send_file
 from flask import url_for
 from flask_login import current_user
 from flask_login import login_required
@@ -113,119 +109,6 @@ def status_dash(task_id):
         started=started,
         title="Results",
     )
-
-
-""" send geojson attatchment """
-
-
-@main.route("/results/<task_id>/geojson")
-@login_required
-def map(task_id):
-
-    task = Query.query.filter_by(friendly_id=task_id).first()
-
-    path = os.path.join(
-        RESULTS_PATH,
-        str(task.user_id),
-        str(task.execution_time),
-        "master.geojson",
-    )
-    attachment_filename = f"results_{str(int(task.execution_time))}"
-
-    try:
-        return send_file(
-            path,
-            as_attachment=True,
-            mimetype="json",
-            attachment_filename=attachment_filename,
-        )
-    except FileNotFoundError:
-        abort(404)
-
-
-""" send csv attatchment """
-
-
-@main.route("/results/<task_id>/csv")
-@login_required
-def csv(task_id):
-
-    task = Query.query.filter_by(friendly_id=task_id).first()
-
-    path = os.path.join(
-        RESULTS_PATH,
-        str(task.user_id),
-        str(task.execution_time),
-        "master.csv",
-    )
-    attachment_filename = f"results_{str(int(task.execution_time))}.csv"
-
-    try:
-        return send_file(
-            path,
-            as_attachment=True,
-            attachment_filename=attachment_filename,
-        )
-    except FileNotFoundError:
-        abort(404)
-
-
-""" endpoint for task info """
-
-
-@main.route("/info/<task_id>", methods=["GET"])
-@login_required
-def status_endpoint(task_id):
-
-    friendly = Query.query.filter_by(friendly_id=task_id).first()
-
-    task = new_search.AsyncResult(friendly.id)
-
-    if task.state == "PENDING":
-        response = {
-            "state": task.state,
-            "current": "waiting",
-            "total": "waiting",
-            "status": "waiting",
-        }
-    elif task.state != "FAILURE":
-        response = {
-            "state": task.state,
-            "current": task.info.get("current"),
-            "total": task.info.get("total"),
-            "status": task.info.get("status"),
-        }
-    else:
-        # catch all
-        response = {
-            "state": task.state,
-            "current": task.info.get("current"),
-            "total": task.info.get("total"),
-            "status": str(task.info),
-        }
-    return jsonify(response)
-
-
-""" return geojson of results for leaflet """
-
-
-@main.route("/info/<task_id>/results", methods=["GET"])
-@login_required
-def get_results(task_id):
-
-    task = Query.query.filter_by(friendly_id=task_id).first()
-
-    path = os.path.join(
-        RESULTS_PATH, str(task.user_id), str(task.execution_time), "master.geojson"
-    )
-    try:
-        with open(path, "r", encoding="utf8") as file:
-            results = json.load(file)
-            print(results)
-    except FileNotFoundError:
-        abort(404)
-
-    return results
 
 
 @main.errorhandler(404)
