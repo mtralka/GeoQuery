@@ -18,7 +18,7 @@ WTF_CSRF_SECRET_KEY = os.environ.get("WTF_CSRF_SECRET_KEY")
 RESULTS_PATH = os.environ.get("RESULTS_PATH")
 
 
-""" send geojson attatchment """
+""" send file attatchments (csv / geojson) """
 
 
 @api_endpoint.route("/results/<task_id>/<file_type>")
@@ -50,6 +50,9 @@ def map(task_id, file_type):
             abort(404)
     else:
         abort(404)
+
+
+""" provide task status updates """
 
 
 @api_endpoint.route("/info/<task_id>", methods=["GET"])
