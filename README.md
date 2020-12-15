@@ -13,6 +13,8 @@
 
  Currently, GeoQuery is in an early Beta mode with active Flickr integration and a solid codebase. Addition of further API's to come.
 
+ **Web example:** [geoquery.tralka.xyz](https://geoquery.tralka.xyz)
+
 **Task**|**Description**|**Status**|**Finished**
 :-----:|:-----:|:-----:|:-----:
 FB Integration| |not started| :heavy_minus_sign:
@@ -22,9 +24,9 @@ scheduled searches | |not started| :heavy_minus_sign:
 email alerts | |not started| :heavy_minus_sign:
 task searchbar | |not started| :heavy_minus_sign:
 
-#### Docker
+#### Docker Deployment
 
-*Docker deployment is functional but unoptimized*
+*Docker deployment functional but unoptimized*
 
 ##### Pre-reqs
 
@@ -50,7 +52,11 @@ task searchbar | |not started| :heavy_minus_sign:
 
 - access GeoQuery on port 80
 
-#### Examples
+#### Example Data Usage
+
+[Markov Mobility](example_markov_mobility\Pipeline.html)
+
+#### Program Interface
 
 *Current as of 12/6 - subject to change*
 
