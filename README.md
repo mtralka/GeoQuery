@@ -5,7 +5,7 @@
 ![Code_Grade](https://www.code-inspector.com/project/16749/status/svg) ![Code_Quality_Score](https://www.code-inspector.com/project/16749/score/svg) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) <br/>
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) ![GitHub language count](https://img.shields.io/github/languages/count/mtralka/GeoQuery) [![Generic badge](https://img.shields.io/badge/Status-Development-orange.svg)](https://shields.io/)
 
-#### **Objective**
+#### Objective
 
  GeoQuery aims to address the global data equity issue. To do this, GeoQuery will serve as an online platform to facilitate cross-service spatio-temporal searches and analysis. This will empower communities of all technical backgrounds to easily interact with and leverage real-world datasets.
 
