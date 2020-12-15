@@ -22,6 +22,33 @@ scheduled searches | |not started| :heavy_minus_sign:
 email alerts | |not started| :heavy_minus_sign:
 task searchbar | |not started| :heavy_minus_sign:
 
+#### Docker
+
+*Docker deployment is functional but unoptimized*
+
+##### Pre-reqs
+
+- Docker
+- Docker-compose
+
+##### How to
+
+- Clone the GeoQuery repo (dockerhub image coming soon)
+- Navigate to GeoQuery root
+- personalize and rename .env.example --> .env
+- Build docker image
+
+  ```
+    docker-compose build
+  ```
+
+- Run
+
+  ```
+    docker-compose up -d
+  ```
+
+- access GeoQuery on port 80
 
 #### Examples
 
