@@ -9,6 +9,7 @@ services:
       - "80:80"
     depends_on: 
     - "redis"
+    - "model"
     volumes:
       - ./app:/app
     working_dir: /app
@@ -27,5 +28,14 @@ services:
       - .:/app
     depends_on: 
        - "redis"
+    env_file: 
+      - .env
+  model: # create sql model (development)
+    build:
+      context: "."
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    command: python init_model.py
     env_file: 
       - .env
