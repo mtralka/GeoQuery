@@ -11,7 +11,7 @@
 
 ### Project Status
 
- Currently, GeoQuery is in an early Beta mode with active Flickr integration and a solid codebase. Addition of further API's to come.
+ Currently, GeoQuery is in an early operational alpha mode with active Flickr integration and a solid codebase. Addition of further API's to come.
 
 ### Web example
  
