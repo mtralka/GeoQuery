@@ -14,7 +14,7 @@
  Currently, GeoQuery is in an early operational alpha mode with active Flickr integration and a solid codebase. Addition of further API's to come.
 
 ### Web example
- 
+
 [geoquery.tralka.xyz](https://geoquery.tralka.xyz)
 
 ### TODO
@@ -32,15 +32,20 @@ task searchbar | |not started| :heavy_minus_sign:
 
 #### Docker deployment functional but unoptimized
 
-##### Pre-reqs
+#### Pre-reqs
 
 - Docker
 - Docker-compose
 
-##### How to
+#### How to
 
 - Clone the GeoQuery repo (dockerhub image coming soon)
 - Navigate to GeoQuery root
+
+  ```
+    cd path/to/GeoQuery
+  ```
+
 - personalize and rename .env.example --> .env
 - Build docker image
 
@@ -69,10 +74,10 @@ reference [geoquery.tralka.xyz](https://geoquery.tralka.xyz) for interactive dem
 - [CSV results](example/exampleCSV.csv)
 - [GeoJSON results](example/exampleGeoJSON.geojson)
 
- <a href="url"><img src="example/resultsPage.PNG" align="center" height="400" width="" ></a><br/>
+ <a href="url"><img src="example/resultsPage.PNG" height="400" width="" ></a><br/>
 *status of results page*
 
- <a href="url"><img src="example/searchPage.PNG" align="center" height="400" width="" ></a><br/>
+ <a href="url"><img src="example/searchPage.PNG" height="400" width="" ></a><br/>
  *status of search page*
 
 ### How to Cite
