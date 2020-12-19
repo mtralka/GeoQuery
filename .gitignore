@@ -18,5 +18,4 @@ admin/
 celerybeat-schedule.*
 *.sqlite
 testing/
-*tailwind.css
 .vscode
